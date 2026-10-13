@@ -85,7 +85,7 @@ ol,ul{list-style:none}
 /* ---------- top bar ---------- */
 .bar{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--bar);display:flex;align-items:center;gap:24px;padding-inline:var(--m);background:linear-gradient(var(--night),rgba(13,11,9,.88));border-bottom:1px solid var(--line);transition:transform .35s var(--ease)}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
-.brand__mark{width:40px;height:26px;color:var(--bone)}
+.brand__logo{height:34px;width:auto;aspect-ratio:2016/1072;color:var(--bone);display:block;flex:none}
 .brand__name{font:700 17px/1 var(--display);letter-spacing:.01em;display:flex;flex-direction:column;gap:3px}
 .brand__name span{font-weight:500;color:var(--dim);letter-spacing:.01em;font-size:14px}
 .nav{margin-left:auto}
@@ -667,6 +667,8 @@ html:not(.js) .grease-circle path{stroke-dasharray:none}
 
 /* --- финал: конечные титры --- */
 .credits{background:#060504;padding-top:clamp(88px,11vw,180px);text-align:center;border-top:1px solid var(--line)}
+.credits__mark{margin:clamp(40px,5vw,72px) auto 0;line-height:0}
+.credits__logo{display:block;margin-inline:auto;width:clamp(180px,22vw,300px);height:auto;color:var(--bone);filter:drop-shadow(0 0 22px rgba(228,87,46,.18))}
 .credits__list{display:grid;gap:clamp(22px,2.4vw,34px);max-width:980px;margin-inline:auto}
 .credits__row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(18px,2.4vw,40px);align-items:baseline;--i:0}
 .credits__row dt{text-align:right;font:500 italic clamp(19px,1.6vw,26px)/1.2 var(--display);color:var(--bone-2)}
