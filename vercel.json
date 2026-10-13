@@ -1,0 +1,25 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "headers": [
+    { "source": "/(.*)", "headers": [
+      { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+    ]},
+    { "source": "/assets/fonts/(.*)", "headers": [
+      { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+      { "key": "Access-Control-Allow-Origin", "value": "*" }
+    ]},
+    { "source": "/assets/(img|video)/(.*)", "headers": [
+      { "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }
+    ]},
+    { "source": "/assets/(css|js)/(.*)", "headers": [
+      { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+    ]},
+    { "source": "/assets/(favicon.svg|favicon-32.png|apple-touch-icon.png)", "headers": [
+      { "key": "Cache-Control", "value": "public, max-age=86400" }
+    ]}
+  ]
+}
