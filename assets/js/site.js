@@ -6,6 +6,8 @@
   var mqReduce=window.matchMedia('(prefers-reduced-motion: reduce)');
   function mkStore(t){return {get:function(k){try{return window[t].getItem(k)}catch(e){return null}},set:function(k,v){try{window[t].setItem(k,v)}catch(e){}},del:function(k){try{window[t].removeItem(k)}catch(e){}}};}
   var local=mkStore('localStorage'), session=mkStore('sessionStorage');
+  var D=window.AO_I18N||{ui:{ru:{}},meta:{ru:{}},edl:{}}, LANG=root.getAttribute('lang')||'ru';
+  function T(k){ var u=D.ui[LANG]||{}; return (k in u)?u[k]:(D.ui.ru[k]||k); }
   local.del('ao-motion'); local.del('ao-ph');           // старые версии хранили выбор навсегда
 
   /* ---------- motion state ----------
@@ -23,9 +25,9 @@
       root.classList.add('motion-resume'); clearTimeout(resumeTimer);
       resumeTimer=setTimeout(function(){root.classList.remove('motion-resume')},750);
     }
-    root.setAttribute('data-motion',motionOn?'on':'off');
-    if(mBtn){mBtn.setAttribute('aria-pressed',String(!motionOn));mBtn.setAttribute('aria-label',motionOn?'Остановить движение':'Включить движение');}
-    if(mLabel) mLabel.textContent = motionOn?'Пауза':'Движение';
+    root.setAttribute('data-motion',motionOn?'on':'off'); if(window.__aoTvSync) window.__aoTvSync(); if(window.__aoHeroSync) window.__aoHeroSync(); if(window.__aoReelsSync) window.__aoReelsSync();
+    if(mBtn){mBtn.setAttribute('aria-pressed',String(!motionOn));mBtn.setAttribute('aria-label',motionOn?T('motion_off'):T('motion_on'));}
+    if(mLabel) mLabel.textContent = motionOn?T('pause'):T('play');
     var lv=document.querySelector('[data-loop]');
     if(lv){ if(motionOn && lv.dataset.visible==='1') playSafe(lv); else lv.pause(); }
     /* пауза больше не снимает --push: кадр замирает в текущем масштабе */
@@ -60,7 +62,7 @@
   var barCta=document.querySelector('[data-bar-cta]');
   var heroCta=document.querySelector('.hero__actions .btn');
   var contact=document.getElementById('contact');
-  var quiet=[document.getElementById('terms'),document.getElementById('start')].filter(Boolean);
+  var quiet=[document.getElementById('prices'),document.getElementById('faq')].filter(Boolean);
   var films=document.getElementById('films');   // у фильмотеки свои кнопки: ни липкой, ни кнопки в шапке
   var mqMobile=window.matchMedia('(max-width: 700px)');
   var stickyOn=null;
@@ -123,16 +125,14 @@
      reduced motion / пауза до появления блока: сразу финальные значения. Пауза во время прокрутки = стоп-кадр. */
   var odoEls=[].slice.call(document.querySelectorAll('[data-odo] dd')).filter(function(dd){return !dd.closest('.record__tag')});
   odoEls.forEach(function(dd,idx){
-    var txt=dd.textContent.trim(); if(!/\d/.test(txt)) return;
-    var vis=document.createElement('span'); vis.className='odo'; vis.setAttribute('aria-hidden','true');
+    var txt=(dd.getAttribute('data-value')||dd.textContent).trim(); if(!/\d/.test(txt)) return;
+    var vis=document.createElement('span'); vis.className='odo'; vis.setAttribute('aria-hidden','true'); vis.setAttribute('translate','no');
     var di=0;
     txt.split('').forEach(function(ch){
-      if(!/\d/.test(ch)){ var t=document.createElement('span'); t.textContent=ch; vis.appendChild(t); return; }
+      if(!/\d/.test(ch)){ var t=document.createElement('span'); t.className='odo__sep'; t.setAttribute('data-ch',ch); vis.appendChild(t); return; }
       var d=+ch, n=10+d+(di%2?0:10);           // 1–2 полных оборота + до нужной цифры
       var col=document.createElement('span'); col.className='odo__d';
-      var strip=document.createElement('span'); strip.className='odo__s';
-      var h=''; for(var k=0;k<=n;k++) h+='<span>'+(k%10)+'</span>';
-      strip.innerHTML=h;
+      var strip=document.createElement('span'); strip.className='odo__s';   /* цифры ленты рисует CSS (::before), в DOM-тексте их нет */
       strip.style.setProperty('--n',n); strip.style.setProperty('--dur',(n/16).toFixed(2)+'s'); strip.style.setProperty('--delay',(idx*.18+di*.08).toFixed(2)+'s');
       col.style.setProperty('--dur',(n/16).toFixed(2)+'s'); col.style.setProperty('--delay',(idx*.18+di*.08).toFixed(2)+'s');
       col.appendChild(strip); vis.appendChild(col); di++;
@@ -235,30 +235,31 @@
   if(menuBtn&&nav){
     menuBtn.addEventListener('click',function(){
       var open=menuBtn.getAttribute('aria-expanded')!=='true';
-      menuBtn.setAttribute('aria-expanded',String(open)); nav.classList.toggle('is-open',open);
-      menuBtn.querySelector('.sr').textContent=open?'Закрыть меню':'Меню';
+      menuBtn.setAttribute('aria-expanded',String(open)); nav.classList.toggle('is-open',open); root.classList.toggle('nav-open',open);
+      menuBtn.querySelector('.sr').textContent=open?T('menu_close'):T('menu');
     });
-    nav.addEventListener('click',function(e){ if(e.target.closest('a')){ menuBtn.setAttribute('aria-expanded','false'); nav.classList.remove('is-open'); menuBtn.querySelector('.sr').textContent='Меню'; } });
+    nav.addEventListener('click',function(e){ if(e.target.closest('a')){ menuBtn.setAttribute('aria-expanded','false'); nav.classList.remove('is-open'); root.classList.remove('nav-open'); menuBtn.querySelector('.sr').textContent=T('menu'); } });
     document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&nav.classList.contains('is-open')){ menuBtn.click(); menuBtn.focus(); } });
   }
 
   /* ---------- current section in nav ---------- */
-  var links={}; document.querySelectorAll('.nav a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
-  if('IntersectionObserver' in window){
-    var navIO=new IntersectionObserver(function(es){
-      es.forEach(function(e){ var a=links[e.target.id]; if(!a||!e.isIntersecting) return;
-        Object.keys(links).forEach(function(k){links[k].removeAttribute('aria-current')}); a.setAttribute('aria-current','true');
-      });
-    },{rootMargin:'-45% 0px -50% 0px'});
-    document.querySelectorAll('[data-scene]').forEach(function(s){navIO.observe(s)});
-  }
+  /* v13: подсветка считается по позиции прокрутки, а не по событиям IO — на герое и в разделах без пункта меню подсветки нет */
+  var links={}; document.querySelectorAll('.nav a:not(.btn)').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  var scenes=[].slice.call(document.querySelectorAll('[data-scene]')), navTick=false, navCur=null;
+  function navSync(){ navTick=false; var line=innerHeight*.45, id=null;
+    for(var i=0;i<scenes.length;i++){ var r=scenes[i].getBoundingClientRect(); if(r.top<=line&&r.bottom>line){ id=scenes[i].id; break; } }
+    if(window.scrollY<innerHeight*.5) id=null;
+    var a=id&&links[id]||null; if(a===navCur) return; navCur=a;
+    Object.keys(links).forEach(function(k){links[k].removeAttribute('aria-current')}); if(a) a.setAttribute('aria-current','true'); }
+  addEventListener('scroll',function(){ if(!navTick){ navTick=true; requestAnimationFrame(navSync); } },{passive:true});
+  addEventListener('resize',navSync); navSync();
 
   /* ---------- copy message ---------- */
   var copyBtn=document.querySelector('[data-copy]'), msg=document.querySelector('[data-msg]');
   if(copyBtn&&msg){
     copyBtn.addEventListener('click',function(){
       var text=msg.textContent.trim();
-      function done(){copyBtn.textContent='Скопировано'; setTimeout(function(){copyBtn.textContent='Скопировать'},1800);}
+      function done(){copyBtn.textContent=T('copied'); setTimeout(function(){copyBtn.textContent=T('copy')},1800);}
       if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(text).then(done,fallback); } else fallback();
       function fallback(){ var r=document.createRange(); r.selectNodeContents(msg); var s=getSelection(); s.removeAllRanges(); s.addRange(r); try{document.execCommand('copy');done();}catch(e){} }
     });
@@ -273,11 +274,277 @@
   function applyPh(show){
     body.classList.toggle('ph-hidden',!show);
     phEls.forEach(function(el){ if(show) el.removeAttribute('inert'); else el.setAttribute('inert',''); });
-    if(phBtn){ phBtn.setAttribute('aria-pressed',String(!show)); phBtn.innerHTML='Заглушки: <b>'+(show?'видны':'скрыты')+'</b>'; phBtn.setAttribute('aria-label',show?'Скрыть заглушки (чистый показ)':'Показать заглушки'); }
+    if(phBtn){ phBtn.setAttribute('aria-pressed',String(!show)); phBtn.innerHTML=T('ph_btn')+': <b>'+(show?T('ph_shown'):T('ph_hidden'))+'</b>'; phBtn.setAttribute('aria-label',show?T('ph_hide_aria'):T('ph_show_aria')); }
     setStarts();
   }
-  applyPh(!/(^|[?&#])clean\b/.test(location.search+location.hash));
-  if(phBtn) phBtn.addEventListener('click',function(){ applyPh(body.classList.contains('ph-hidden')); });
+  var phShow=!/(^|[?&#])clean\b/.test(location.search+location.hash);
+  applyPh(phShow);
+  if(phBtn) phBtn.addEventListener('click',function(){ phShow=body.classList.contains('ph-hidden'); applyPh(phShow); });
+
+  /* ---------- языки RU / EN / HY ----------
+     Порядок выбора: ?lang= → localStorage → navigator.language (решено inline-скриптом в <head>).
+     RU-тексты разметки снимаются из DOM один раз; EN и HY — из AO_I18N. */
+  var RU={}, RUA={};
+  var i18nEls=[].slice.call(document.querySelectorAll('[data-i18n]'));
+  var i18nAttrEls=[].slice.call(document.querySelectorAll('[data-i18n-attr]'));
+  i18nEls.forEach(function(el){ var k=el.getAttribute('data-i18n'); if(!(k in RU)) RU[k]=el.innerHTML; el.__ru=el.innerHTML; });
+  i18nAttrEls.forEach(function(el){ el.__ruA={}; el.getAttribute('data-i18n-attr').split(',').forEach(function(p){ var a=p.split(':'); el.__ruA[a[0]]=el.getAttribute(a[0])||''; }); });
+  var edlCells=[].slice.call(document.querySelectorAll('.edl__op,.edl__res,.edl__how,.edl__ev i'));
+  edlCells.forEach(function(td){ td.__ru=td.textContent; });
+  var dates=[].slice.call(document.querySelectorAll('.edl__date'));
+  dates.forEach(function(td){ td.__ru=td.textContent; });
+  function S(k){ if(LANG==='ru') return RU[k]!=null?RU[k]:T(k); var d=D[LANG]||{}; return (k in d)?d[k]:(RU[k]!=null?RU[k]:T(k)); }
+  function plain(html){ var t=document.createElement('div'); t.innerHTML=html; return t.textContent.replace(/\s+/g,' ').trim(); }
+  function fmtNum(n){ try{ return new Intl.NumberFormat(D.meta[LANG].num,{maximumFractionDigits:0}).format(n).replace(/[\u202f,]/g, LANG==='en'?',':'\u00a0'); }catch(e){ return String(n); } }
+  function fmtDate(s){ var m=s.match(/(\d\d)\.(\d\d)\.(\d{4})/); if(!m) return s; if(LANG==='en'){ try{ return new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(new Date(+m[3],+m[2]-1,+m[1])); }catch(e){} } return s; }
+  function cssStr(v){ return '"'+String(v).replace(/"/g,'\\"')+'"'; }
+  function waHref(el){ var key=el.getAttribute('data-wa'), txt=T(key); if(LANG==='ru'&&key==='wa_hello') txt=plain(RU.wa_hello||txt);
+    var pk=el.getAttribute('data-wa-pkg'); if(pk) txt=txt.replace('{p}',plain(S(pk)));
+    return 'https://wa.me/79891291118?text='+encodeURIComponent(txt); }
+  var langBtns=[].slice.call(document.querySelectorAll('[data-lang]'));
+  function applyLang(l){
+    LANG=l; root.setAttribute('lang',l);
+    i18nEls.forEach(function(el){ var k=el.getAttribute('data-i18n'); var v=(l==='ru')?el.__ru:S(k); if(el.innerHTML!==v) el.innerHTML=v; });
+    i18nAttrEls.forEach(function(el){ el.getAttribute('data-i18n-attr').split(',').forEach(function(p){ var a=p.split(':'); var v=(l==='ru')?el.__ruA[a[0]]:plain(S(a[1])); el.setAttribute(a[0],v); }); });
+    var map=(D.edl&&D.edl[l])||{};
+    edlCells.forEach(function(td){ td.textContent=(l==='ru')?td.__ru:(map[td.__ru]||td.__ru); });
+    dates.forEach(function(td){ td.textContent=fmtDate(td.__ru); });
+    document.querySelectorAll('.ph:not([data-i18n])').forEach(function(e){ e.textContent=T('ph'); });
+    document.querySelectorAll('.vf').forEach(function(e){ e.textContent=T('vf'); });
+    var cur=D.meta[l].cur;
+    document.querySelectorAll('[data-amd]').forEach(function(e){ e.textContent=fmtNum(+e.getAttribute('data-amd')); });
+    document.querySelectorAll('[data-amd-inline]').forEach(function(e){ e.textContent=fmtNum(+e.getAttribute('data-amd-inline'))+'\u00a0'+cur; });
+    document.querySelectorAll('[data-wa]').forEach(function(a){ a.href=waHref(a); });
+    /* строки, которые раньше жили в CSS content: */
+    [['--t-soon','t_soon'],['--t-record','t_record'],['--t-review','t_review'],['--t-price','t_price'],['--t-tbc','t_tbc'],['--t-films','t_films'],['--t-open','t_open'],['--t-close','t_close']].forEach(function(p){ root.style.setProperty(p[0],cssStr(T(p[1]))); });
+    var m=D.meta[l]; document.title=m.title;
+    var set=function(sel,attr,v){ var e=document.querySelector(sel); if(e) e.setAttribute(attr,v); };
+    set('meta[name="description"]','content',m.desc); set('meta[property="og:title"]','content',m.title); set('meta[property="og:description"]','content',m.desc); set('meta[property="og:locale"]','content',m.locale);
+    langBtns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.getAttribute('data-lang')===l)); });
+    if(copyBtn) copyBtn.textContent=T('copy');
+    if(menuBtn) menuBtn.querySelector('.sr').textContent=(menuBtn.getAttribute('aria-expanded')==='true')?T('menu_close'):T('menu');
+    applyMotion(); applyPh(phShow); applyTheme(); if(window.__aoCar) window.__aoCar.relabel();
+    setStarts();
+  }
+  langBtns.forEach(function(b){ b.addEventListener('click',function(){ var l=b.getAttribute('data-lang'); local.set('ao-lang',l);
+    if(/[?&]lang=/.test(location.search) && history.replaceState){ history.replaceState(null,'',location.pathname+location.search.replace(/([?&])lang=(ru|en|hy)&?/,'$1').replace(/[?&]$/,'')+location.hash); }
+    applyLang(l); }); });
+
+  /* ---------- тема: тёмная по умолчанию, prefers-color-scheme, выбор в localStorage ---------- */
+  var thBtn=document.querySelector('[data-theme-toggle]'), thLabel=document.querySelector('[data-theme-label]');
+  var mqLight=window.matchMedia('(prefers-color-scheme: light)');
+  function applyTheme(){ var t=root.getAttribute('data-theme')==='light'?'light':'dark';
+    if(thBtn){ thBtn.setAttribute('aria-pressed',String(t==='light')); thBtn.setAttribute('title',t==='light'?T('theme_dark'):T('theme_light')); }
+    if(thLabel) thLabel.textContent=t==='light'?T('theme_dark'):T('theme_light');
+    var mc=document.querySelector('meta[name="theme-color"]'); if(mc) mc.setAttribute('content',t==='light'?'#efe7d8':'#0d0b09'); }
+  if(thBtn) thBtn.addEventListener('click',function(){ var t=root.getAttribute('data-theme')==='light'?'dark':'light'; root.setAttribute('data-theme',t); local.set('ao-theme',t); applyTheme(); });
+  function onScheme(){ var saved=local.get('ao-theme'); if(saved==='light'||saved==='dark') return; root.setAttribute('data-theme',mqLight.matches?'light':'dark'); applyTheme(); }
+  if(mqLight.addEventListener) mqLight.addEventListener('change',onScheme); else if(mqLight.addListener) mqLight.addListener(onScheme);
+
+  /* ---------- цены (v12): плёночная карусель v10 с контентом v11; открывается на «12 занятий», фон — ролик активного кадра в родной скорости ---------- */
+  (function(){
+    var car=document.querySelector('[data-carousel]'); if(!car) return;
+    var track=car.querySelector('[data-track]'), cards=[].slice.call(track.querySelectorAll('.pk__card'));
+    var dotsBox=car.querySelector('[data-dots]'), count=car.querySelector('[data-count]');
+    var prev=car.querySelector('[data-prev]'), next=car.querySelector('[data-next]');
+    var active=-1, dots=[];
+    cards.forEach(function(c,i){ var b=document.createElement('button'); b.type='button'; b.className='pk__dot';
+      b.addEventListener('click',function(){ go(i); }); dotsBox.appendChild(b); dots.push(b); });
+    function reduced(){ return !motionOn; }
+    function center(c){ return c.offsetLeft + c.offsetWidth/2 - track.clientWidth/2; }
+    function go(i,instant){ i=Math.max(0,Math.min(cards.length-1,i));
+      if(!reduced() && !instant && i!==active){ car.classList.remove('is-advance'); void car.offsetWidth; car.classList.add('is-advance'); }
+      track.scrollTo({left:center(cards[i]),behavior:(reduced()||instant)?'auto':'smooth'}); setActive(i); }
+    function setActive(i){ if(i===active) return; active=i;
+      cards.forEach(function(c,k){ c.classList.toggle('is-active',k===i); c.setAttribute('aria-label',T('slide').replace('{i}',k+1).replace('{n}',cards.length)+': '+plain(c.querySelector('.pk__name').innerHTML));
+        var cta=c.querySelector('.pk__cta'); if(cta) cta.tabIndex = (k===i)?0:-1; });
+      dots.forEach(function(d,k){ d.setAttribute('aria-current',k===i?'true':'false'); });
+      if(count) count.textContent=(i+1)+' / '+cards.length;
+      if(prev) prev.disabled=(i===0); if(next) next.disabled=(i===cards.length-1);  tvChange(i); }
+    var st=0; track.addEventListener('scroll',function(){ clearTimeout(st); st=setTimeout(function(){
+      var best=0,bd=1e9,mid=track.scrollLeft+track.clientWidth/2;
+      cards.forEach(function(c,k){ var d=Math.abs(c.offsetLeft+c.offsetWidth/2-mid); if(d<bd){bd=d;best=k;} }); setActive(best); },60); },{passive:true});
+    if(prev) prev.addEventListener('click',function(){ go(active-1); });
+    if(next) next.addEventListener('click',function(){ go(active+1); });
+    track.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){ e.preventDefault(); go(active+1); } else if(e.key==='ArrowLeft'){ e.preventDefault(); go(active-1); }
+      else if(e.key==='Home'){ e.preventDefault(); go(0); } else if(e.key==='End'){ e.preventDefault(); go(cards.length-1); } });
+    /* клик по соседнему кадру — подтянуть его в центр */
+    cards.forEach(function(c,k){ c.addEventListener('click',function(e){ if(k!==active && !e.target.closest('a')){ go(k); } }); });
+
+    /* ---------- живой фон раздела цен: ролик пакета за плёнкой, кроссфейд при смене ---------- */
+    /* Фоны пакетов. Чтобы добавить ролик — одна строка: имя файла в assets/video/bg/ (нужны NAME.mp4 и NAME.webp).
+       Пакеты берут ролики по кругу: пакет 1 — первый ролик, пакет 2 — второй и т. д.
+       v10: у всех трёх карточек ролик задан в data-clip (группы — fight-a, 12 занятий — punch-b, видеокурс — focus-a).
+       Ролики заранее замедлены в 2 раза, без блюра; аналоговый ТВ-вид — в CSS (см. CHANGELOG v8). Запасной: walkout-b. */
+    var BG_CLIPS=['focus-a','fight-a','punch-b','walkout-a','focus-b','punch-a','fight-b'], BG_RATE=1;
+    cards.forEach(function(c,k){ var n=BG_CLIPS[k%BG_CLIPS.length]; if(!c.getAttribute('data-clip')){ c.setAttribute('data-clip','assets/video/bg/'+n+'.mp4'); c.setAttribute('data-poster','assets/video/bg/'+n+'.webp'); } });
+    var bgBox=document.querySelector('[data-pkbg]'), vids=bgBox?[].slice.call(bgBox.querySelectorAll('video')):[], cur=0, inView=false, seen=false, shownK=-1;
+    function tvChange(i){ if(!bgBox||!seen) return; show(i); }
+    function setSrc(v,src,live){ if(live){ if(v.getAttribute('src')!==src) v.setAttribute('src',src); }
+      else if(v.getAttribute('src')&&v.getAttribute('src')!==src){ v.removeAttribute('src'); v.load(); } }   // v13: на паузе — постер этого пакета, а не стоп-кадр чужого ролика
+    function show(i,quiet){ var card=cards[i]; if(!card) return;
+      var src=card.getAttribute('data-clip'), poster=card.getAttribute('data-poster'), live=inView&&motionOn;
+      var v=vids[cur];
+      if(i!==shownK){ shownK=i; cur=1-cur; var nv=vids[cur];
+        nv.setAttribute('poster',poster);
+        setSrc(nv,src,live);
+        nv.classList.add('is-on'); v.classList.remove('is-on');
+        if(motionOn&&!quiet&&!reduced()){ bgBox.classList.remove('is-static'); void bgBox.offsetWidth; bgBox.classList.add('is-static'); }
+        v.pause(); v=nv; }
+      if(live){ if(v.getAttribute('src')!==src) v.setAttribute('src',src); v.defaultPlaybackRate=v.playbackRate=BG_RATE; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+      else { v.pause(); setSrc(v,src,false); } }
+    function sync(){ if(!seen||active<0) return; shownK=-2; cur=1-cur; show(active,true); }   // v13: без «помех» при возобновлении/входе в кадр
+    if(bgBox){
+      bgBox.addEventListener('animationend',function(e){ if(e.animationName==='pk-static') bgBox.classList.remove('is-static'); });
+      if('IntersectionObserver' in window){ new IntersectionObserver(function(es){ es.forEach(function(e){ inView=e.isIntersecting; if(inView) seen=true; if(seen){ if(inView) sync(); else vids.forEach(function(v){v.pause();}); } }); },{rootMargin:'100px 0px'}).observe(bgBox.parentNode); }
+      else { inView=seen=true; } }
+    window.__aoTvSync=function(){ if(!motionOn) vids.forEach(function(v){v.pause();}); sync(); };
+    car.addEventListener('animationend',function(){ car.classList.remove('is-advance'); });
+    var pop=cards.findIndex?cards.findIndex(function(c){return c.classList.contains('is-pop')}):2;
+    window.__aoCar={relabel:function(){ var a=active; active=-1; setActive(a<0?pop:a);
+      dots.forEach(function(d,k){ d.setAttribute('aria-label',T('dot').replace('{i}',k+1).replace('{name}',plain(cards[k].querySelector('.pk__name').innerHTML))); }); }};
+    window.__aoCar.relabel();
+    function init(){ go(pop<0?0:pop,true); }
+    if(document.readyState==='complete') init(); else addEventListener('load',init);
+    addEventListener('resize',function(){ if(active>=0) track.scrollTo({left:center(cards[active])}); });
+  })();
+  /* ---------- v13: «Голоса из зала» — сторис ----------
+     Данные: одна запись = один отзыв. Текстовые поля — ключ i18n ('s1_q') или объект {ru,en,hy}.
+     poster — картинка обложки (без неё — тёмный постер с большой буквой имени); video — ролик (необязателен):
+     в ряду идёт беззвучным превью (если движение включено), в просмотрщике — со звуком и контролами.
+     nums — до двух цифр [значение, ключ подписи]. ph:true — пометка [заглушка]. */
+  var REVIEWS=window.AO_REVIEWS||[
+    {name:'s1_n',meta:'s1_s',quote:'s1_q',result:'s1_hl',poster:'assets/img/rv-gym.webp',ph:true,
+     details:{goal:'s1_a2',doubt:'s1_b',first:'s1_c2',res:'s1_d2'},nums:[['20','sn_w'],['38','sn_s']]},
+    {name:'s3_n',meta:'s3_s',quote:'s3_q',result:'s3_hl',poster:'assets/video/bg/focus-a.webp',video:'assets/video/bg/focus-a.mp4',ph:true,
+     details:{goal:'s3_a2',doubt:'s3_b',first:'s3_c2',res:'s3_d2'},nums:[['52','sn_w'],['96','sn_s']]},
+    {name:'s2_n',meta:'s2_s',quote:'s2_q',result:'s2_hl',poster:'assets/img/rv-mat.webp',ph:true,
+     details:{goal:'s2_a2',doubt:'s2_b',first:'s2_c2',res:'s2_d2'},nums:[['32','sn_w'],['60','sn_s']]},
+    {name:'s4_n',meta:'s4_s',quote:'s4_q',result:'s4_hl',ph:true,
+     details:{goal:'s4_a2',doubt:'s4_b',first:'s4_c2',res:'s4_d2'},nums:[['12','sn_w'],['24','sn_s']]}
+  ];
+  (function(){
+    var row=document.querySelector('[data-reels]'), dlg=document.querySelector('[data-rvv]'); if(!row||!dlg) return;
+    if(dlg.parentNode!==body) body.appendChild(dlg);           // вне секций с transform/inert
+    function tx(v){ if(v==null) return ''; if(typeof v==='object') return v[LANG]||v.ru||''; return plain(S(v)); }
+    function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+    function initial(r){ return (tx(r.name).trim()[0]||'').toUpperCase(); }
+    var phTag='<span class="ph">'+esc(T('ph'))+'</span>';
+    /* ряд карточек */
+    var cards=REVIEWS.map(function(r,i){
+      var li=document.createElement('li'); li.className='rcard'+(r.video?' rcard--video':'')+(r.poster?'':' rcard--blank');
+      li.innerHTML='<button class="rcard__btn" type="button"><span class="rcard__cover" aria-hidden="true">'+
+        (r.poster?'<img src="'+r.poster+'" alt="" loading="lazy" decoding="async" width="540" height="960">':'<span class="rcard__init"></span>')+
+        '</span>'+
+        '<span class="rcard__txt"><span class="rcard__who"></span><span class="rcard__q"></span><span class="rcard__chip"></span></span></button>';
+      row.appendChild(li);
+      li.querySelector('button').addEventListener('click',function(){ open(i,li.querySelector('button')); });
+      return li; });
+    function fill(){
+      cards.forEach(function(li,i){ var r=REVIEWS[i];
+        li.querySelector('.rcard__who').innerHTML='<b>'+esc(tx(r.name))+'</b>'+(r.ph?' '+'<span class="ph">'+esc(T('ph'))+'</span>':'');
+        li.querySelector('.rcard__q').textContent='«'+tx(r.quote)+'»';
+        li.querySelector('.rcard__chip').textContent=tx(r.result);
+        var ini=li.querySelector('.rcard__init'); if(ini) ini.textContent=initial(r);
+        li.querySelector('button').setAttribute('aria-label',T('rv_open').replace('{name}',tx(r.name))+(r.video?' ('+T('rv_vid')+')':'')+'. '+tx(r.quote)); });
+      if(cur>=0) render(); }
+    /* превью-видео в карточках: только когда движение включено и карточка видна */
+    var vis={};
+    function previews(){ cards.forEach(function(li,i){ var r=REVIEWS[i]; if(!r.video) return;
+      var v=li.querySelector('video.rcard__vid'), want=motionOn&&vis[i]&&!dlg.open;
+      if(want){ if(!v){ v=document.createElement('video'); v.className='rcard__vid'; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('aria-hidden','true'); v.preload='none'; v.src=r.video;
+          v.addEventListener('playing',function(){ v.classList.add('is-on'); }); li.querySelector('.rcard__cover').appendChild(v); }
+        var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+      else if(v){ v.pause(); if(!motionOn) v.classList.remove('is-on'); } }); }
+    if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ vis[cards.indexOf(e.target)]=e.isIntersecting; }); previews(); },{rootMargin:'100px'}); cards.forEach(function(c){ io.observe(c); }); }
+    /* просмотрщик */
+    var q=function(s){ return dlg.querySelector(s); };
+    var bars=q('[data-rvv-bars]'), media=q('[data-rvv-media]'), stage=q('[data-rvv-stage]'), more=q('[data-rvv-more]'), moreBtn=q('[data-rvv-morebtn]');
+    var cur=-1, opener=null, t0=0, elapsed=0, raf=0, held=false, DUR=6000;
+    bars.innerHTML=REVIEWS.map(function(){ return '<span><i></i></span>'; }).join('');
+    var barEls=[].slice.call(bars.children);
+    function setBar(i,f){ barEls[i].firstChild.style.transform='scaleX('+Math.max(0,Math.min(1,f))+')'; }
+    function auto(){ return motionOn; }
+    function stopTimer(){ cancelAnimationFrame(raf); raf=0; }
+    function loop(){ var r=REVIEWS[cur]; if(!r) return;
+      if(r.video){ var v=media.querySelector('video'); if(v&&v.duration) setBar(cur,v.currentTime/v.duration); }
+      else if(!held && more.hidden && auto()){ var now=performance.now(); elapsed+=now-t0; t0=now; setBar(cur,elapsed/DUR); if(elapsed>=DUR){ next(); return; } }
+      else t0=performance.now();
+      raf=requestAnimationFrame(loop); }
+    function render(){ var r=REVIEWS[cur];
+      q('[data-rvv-name]').textContent=tx(r.name); q('[data-rvv-meta]').innerHTML=esc(tx(r.meta))+(r.ph?' <span class="ph">'+esc(T('ph'))+'</span>':'');
+      var av=q('[data-rvv-av]'); av.textContent=initial(r);
+      q('[data-rvv-q]').textContent='«'+tx(r.quote)+'»'; q('[data-rvv-res]').textContent=tx(r.result);
+      var d=r.details||{};
+      more.innerHTML='<dl>'+[['st_goal','goal'],['st_doubt','doubt'],['st_first','first'],['st_res','res']].filter(function(p){return d[p[1]];}).map(function(p){ return '<div><dt>'+esc(tx(p[0]))+'</dt><dd>'+esc(tx(d[p[1]]))+'</dd></div>'; }).join('')+'</dl>'+
+        ((r.nums&&r.nums.length)?'<ul class="rvv__nums">'+r.nums.slice(0,2).map(function(n){ return '<li><b translate="no">'+esc(n[0])+'</b><span>'+esc(tx(n[1]))+'</span></li>'; }).join('')+'</ul>':'');
+      moreBtn.querySelector('span').textContent=more.hidden?T('rv_more'):T('rv_less');
+      stage.setAttribute('aria-label',T('rv_count').replace('{i}',cur+1).replace('{n}',REVIEWS.length));
+      q('[data-rvv-prev]').disabled=cur===0; }
+    function show(i){ var r=REVIEWS[i]; if(!r) return; cur=i; stopTimer(); elapsed=0; t0=performance.now();
+      more.hidden=true; moreBtn.setAttribute('aria-expanded','false'); stage.classList.remove('is-more');
+      barEls.forEach(function(b,k){ setBar(k,k<i?1:0); });
+      media.innerHTML=''; stage.classList.toggle('is-video',!!r.video);
+      if(r.video){ var v=document.createElement('video'); v.className='rvv__video'; v.controls=true; v.playsInline=true; v.setAttribute('playsinline',''); v.preload='auto'; if(r.poster) v.poster=r.poster; v.src=r.video;
+        v.addEventListener('ended',function(){ setBar(cur,1); if(auto()) next(); });
+        media.appendChild(v); if(auto()){ var p=v.play(); if(p&&p.catch) p.catch(function(){ v.muted=true; var p2=v.play(); if(p2&&p2.catch) p2.catch(function(){}); }); } }
+      else if(r.poster){ media.innerHTML='<img src="'+r.poster+'" alt="">'; }
+      else { media.innerHTML='<span class="rvv__init">'+esc(initial(r))+'</span>'; }
+      if(!auto()&&!r.video) setBar(i,1);
+      render(); raf=requestAnimationFrame(loop); }
+    function next(){ if(cur<REVIEWS.length-1) show(cur+1); else close(); }
+    function prev(){ if(cur>0) show(cur-1); else show(0); }
+    function open(i,from){ opener=from||document.activeElement; previews(); 
+      if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+      root.classList.add('rvv-open'); show(i); previews(); q('[data-rvv-close]').focus(); }
+    function close(){ stopTimer(); var v=media.querySelector('video'); if(v) v.pause(); media.innerHTML=''; cur=-1;
+      if(dlg.open){ if(dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
+      root.classList.remove('rvv-open'); previews(); if(opener&&opener.focus) opener.focus(); }
+    dlg.addEventListener('cancel',function(e){ e.preventDefault(); close(); });       // Esc
+    dlg.addEventListener('click',function(e){ if(e.target===dlg) close(); });          // клик по затемнению
+    q('[data-rvv-close]').addEventListener('click',close);
+    q('[data-rvv-prev]').addEventListener('click',prev); q('[data-rvv-next]').addEventListener('click',next);
+    moreBtn.addEventListener('click',function(){ var o=more.hidden; more.hidden=!o; stage.classList.toggle('is-more',o); moreBtn.setAttribute('aria-expanded',String(o)); moreBtn.querySelector('span').textContent=o?T('rv_less'):T('rv_more'); });
+    dlg.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){ e.preventDefault(); next(); } else if(e.key==='ArrowLeft'){ e.preventDefault(); prev(); }
+      else if(e.key==='Tab'){ var f=[].filter.call(dlg.querySelectorAll('button,video[controls],[href],[tabindex]:not([tabindex="-1"])'),function(el){ return !el.disabled&&el.offsetParent!==null; });
+        if(!f.length) return; var a=f[0], z=f[f.length-1];
+        if(e.shiftKey&&document.activeElement===a){ e.preventDefault(); z.focus(); } else if(!e.shiftKey&&document.activeElement===z){ e.preventDefault(); a.focus(); } } });
+    /* тап по половинам, свайпы, удержание = пауза */
+    var tap=q('[data-rvv-tap]'), sx=0, sy=0, st=0, down=false;
+    stage.addEventListener('pointerdown',function(e){ if(e.target.closest('button,video,.rvv__body')) return; down=true; sx=e.clientX; sy=e.clientY; st=Date.now(); held=true; });
+    stage.addEventListener('pointerup',function(e){ if(!down) return; down=false; held=false; t0=performance.now();
+      var dx=e.clientX-sx, dy=e.clientY-sy;
+      if(dy>80&&Math.abs(dy)>Math.abs(dx)){ close(); return; }
+      if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){ if(dx<0) next(); else prev(); return; }
+      if(Math.abs(dx)<10&&Math.abs(dy)<10&&Date.now()-st<500){ var b=stage.getBoundingClientRect(); if(e.clientX-b.left>b.width/2) next(); else prev(); } });
+    stage.addEventListener('pointercancel',function(){ down=false; held=false; });
+    /* язык и движение */
+    var C=window.__aoCar||{relabel:function(){}}, o=C.relabel; C.relabel=function(){ o.apply(C,arguments); fill(); }; window.__aoCar=C;
+    window.__aoReelsSync=function(){ previews(); if(cur>=0&&!motionOn){ var r=REVIEWS[cur]; if(!r.video) setBar(cur,1); } };
+    fill();
+  })();
+  /* ---------- живой герой (v9) ----------
+     Ролик пользователя поверх фото героя: то же кадрирование, фото — постер и запасной вариант.
+     Пинг-понг (вперёд + назад) зашит в файл, поэтому loop бесшовный. Десктоп 1600w, мобильный — кроп под мобильную раскладку.
+     Пауза / reduced motion — только фото: видео не грузится или останавливается и гаснет. */
+  (function(){
+    var v=document.querySelector('[data-hero-video]'); if(!v) return;
+    var mq=window.matchMedia('(max-width: 900px)'), vis=true, ready=false;
+    function want(){ return v.getAttribute(mq.matches?'data-src-m':'data-src-d'); }
+    function sync(){
+      if(motionOn && vis && ready){ var s=want(); if(v.getAttribute('src')!==s){ v.classList.remove('is-on'); v.setAttribute('src',s); }
+        v.muted=true; v.defaultPlaybackRate=v.playbackRate=1; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+      else { v.pause(); if(!motionOn) v.classList.remove('is-on'); } }
+    v.addEventListener('playing',function(){ if(motionOn) v.classList.add('is-on'); });
+    if('IntersectionObserver' in window) new IntersectionObserver(function(es){ vis=es[0].isIntersecting; sync(); }).observe(v.parentNode);
+    if(mq.addEventListener) mq.addEventListener('change',sync);
+    /* после проявки фото (2,4 с), чтобы не перебить анимацию героя */
+    setTimeout(function(){ ready=true; sync(); }, 1600);
+    window.__aoHeroSync=sync;
+  })();
+  applyLang(LANG);
 
   /* ---------- fonts: запасной вариант для file:// ----------
      Chromium грузит woff2 по относительному пути и из file://. Если браузер шрифт не отдал

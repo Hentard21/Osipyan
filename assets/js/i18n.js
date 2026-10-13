@@ -1,0 +1,245 @@
+/* Словарь RU / EN / HY. Обычный JS-объект: работает и из file://.
+   RU-тексты разметки берутся прямо из index.html при загрузке (там они и правятся);
+   здесь RU есть только для строк из JS и CSS. EN и HY — полные переводы, требуют вычитки носителем.
+   Плёночные термины едины во всех языках: Сц./Scene/Տեսարան, Дубль/Take/Դուբլ, Склейка/Splice/Սոսնձում,
+   Кадр/Frame/Կադր, Монтажный лист/Edit log/Մոնտաժային թերթ, Вызывной лист/Call sheet/Կանչի թերթ, Титры/Credits/Տիտրեր. */
+window.AO_I18N = {
+meta:{
+  ru:{title:'Аркадий Осипян, боец и тренер ММА в Ереване',desc:'Аркадий Осипян, профессиональный боец и тренер ММА. Персональные тренировки в Ереване, групповые занятия скоро.',locale:'ru_RU',num:'ru-RU',cur:'драм'},
+  en:{title:'Arkadii Osipyan, MMA fighter and coach in Yerevan',desc:'Arkadii Osipyan, professional MMA fighter and coach. Private training in Yerevan; group classes coming soon.',locale:'en_US',num:'en-US',cur:'AMD'},
+  hy:{title:'Արկադի Օսիպյան, MMA մարտիկ և մարզիչ Երևանում',desc:'Արկադի Օսիպյան, պրոֆեսիոնալ MMA մարտիկ և մարզիչ։ Անհատական մարզումներ Երևանում, խմբայինը՝ շուտով։',locale:'hy_AM',num:'hy-AM',cur:'դրամ'}
+},
+/* строки из site.js и из CSS content: (через custom properties) */
+ui:{
+  ru:{ph:'[заглушка]',vf:'[сверить]',pause:'Пауза',play:'Движение',motion_off:'Остановить движение',motion_on:'Включить движение',menu:'Меню',menu_close:'Закрыть меню',copy:'Скопировать',copied:'Скопировано',ph_btn:'Заглушки',ph_shown:'видны',ph_hidden:'скрыты',ph_hide_aria:'Скрыть заглушки (чистый показ)',ph_show_aria:'Показать заглушки',theme_light:'Светлая тема',theme_dark:'Тёмная тема',
+      t_soon:'скоро',t_record:'рекорд уточняется',t_review:'отзыв скоро',t_price:'цена уточняется',t_tbc:'уточняется',t_films:'в работе',t_open:'Открыть',t_close:'Свернуть',slide:'{i} из {n}',dot:'Пакет {i}: {name}',
+      wa_hello:'Здравствуйте! Хочу на тренировку ММА к Аркадию Осипяну.',wa_pkg:'Здравствуйте! Хочу пакет «{p}» у Аркадия Осипяна. Подскажите свободное время?',dot:"Формат {i}: {name}",wa_wl:'Здравствуйте! Запишите меня в лист ожидания: «{p}».',wa_first:"Здравствуйте! Хочу пакет из 12 персональных тренировок у Аркадия Осипяна и записаться на первое занятие. Когда есть время?"
+},
+  en:{ph:'[placeholder]',vf:'[to verify]',pause:'Pause',play:'Motion',motion_off:'Stop motion',motion_on:'Resume motion',menu:'Menu',menu_close:'Close menu',copy:'Copy',copied:'Copied',ph_btn:'Placeholders',ph_shown:'shown',ph_hidden:'hidden',ph_hide_aria:'Hide placeholders (clean preview)',ph_show_aria:'Show placeholders',theme_light:'Light theme',theme_dark:'Dark theme',
+      t_soon:'coming soon',t_record:'record to be confirmed',t_review:'review coming soon',t_price:'price to be confirmed',t_tbc:'to be confirmed',t_films:'in the works',t_open:'Open',t_close:'Collapse',slide:'{i} of {n}',dot:'Package {i}: {name}',
+      wa_hello:'Hi! I’d like to train MMA with Arkadii Osipyan.',wa_pkg:'Hi! I’d like the “{p}” package with Arkadii Osipyan. When are you free?',dot:"Format {i}: {name}",wa_wl:'Hi! Please add me to the waitlist for “{p}”.',wa_first:"Hi! I’d like the 12-session private pack with Arkadii Osipyan and to book my first session. When are you free?"
+},
+  hy:{ph:'[նախնական]',vf:'[ստուգել]',pause:'Դադար',play:'Շարժում',motion_off:'Կանգնեցնել շարժումը',motion_on:'Միացնել շարժումը',menu:'Ընտրացանկ',menu_close:'Փակել ընտրացանկը',copy:'Պատճենել',copied:'Պատճենված է',ph_btn:'Նախնականներ',ph_shown:'երևում են',ph_hidden:'թաքցված են',ph_hide_aria:'Թաքցնել նախնականները (մաքուր ցուցադրում)',ph_show_aria:'Ցույց տալ նախնականները',theme_light:'Բաց թեմա',theme_dark:'Մուգ թեմա',
+      t_soon:'շուտով',t_record:'ռեկորդը ճշտվում է',t_review:'կարծիքը շուտով',t_price:'գինը ճշտվում է',t_tbc:'ճշտվում է',t_films:'պատրաստվում է',t_open:'Բացել',t_close:'Ծալել',slide:'{i}-ը {n}-ից',dot:'Փաթեթ {i}՝ {name}',
+      wa_hello:'Բարև ձեզ։ Ուզում եմ MMA մարզվել Արկադի Օսիպյանի մոտ։',wa_pkg:'Բարև ձեզ։ Ուզում եմ «{p}» փաթեթը Արկադի Օսիպյանի մոտ։ Ե՞րբ կա ազատ ժամ։',dot:"Ձևաչափ {i}՝ {name}",wa_wl:'Բարև ձեզ։ Գրանցեք ինձ սպասման ցուցակում՝ «{p}»։',wa_first:"Բարև ձեզ։ Ուզում եմ 12 անհատական մարզումների փաթեթը Արկադի Օսիպյանի մոտ և գրանցվել առաջին պարապմունքին։ Ե՞րբ կա ազատ ժամ։"
+}
+},
+/* монтажный лист: имена соперников, итоги, методы */
+edl:{
+  en:{'Победа':'Win','Поражение':'Loss','Технический нокаут':'TKO','Технический нокаут, отказ угла':'TKO (corner stoppage)','Раздельное решение':'Split decision','Единогласное решение':'Unanimous decision','Удушение сзади':'Rear-naked choke','Удушение «анаконда»':'Anaconda choke','титул':'title','защита':'defence',
+    'Станислав Нанаев':'Stanislav Nanaev','Амиран Дзнеладзе':'Amiran Dzneladze','Арсений Азамат':'Arseniy Azamat','Мгер Мерджанян':'Mher Merjanyan','Мехди Байдулаев':'Mekhdi Baydulaev','Джамбулат Селимханов':'Dzhambulat Selimkhanov','Альберд Жапуев':'Alberd Zhapuev','Давлатманд Чупонов':'Davlatmand Chuponov','Матеуш Рембецкий':'Mateusz Rębecki','Глеб Хабибуллин':'Gleb Khabibullin','Адам Ацаев':'Adam Atsaev','Юсуп Адилханов':'Yusup Adilkhanov','Фазлиддин Мадрахимов':'Fazliddin Madrakhimov','Никита Гомзяков':'Nikita Gomzyakov','Филипп Косырев':'Filipp Kosyrev','Али Хейбати':'Ali Heibati','Илья Мельников':'Ilya Melnikov','Максим Широян':'Maksim Shiroyan'},
+  hy:{'Победа':'Հաղթանակ','Поражение':'Պարտություն','Технический нокаут':'Տեխնիկական նոկաուտ','Технический нокаут, отказ угла':'Տեխ. նոկաուտ, անկյունը դադարեցրեց','Раздельное решение':'Մրցավարների բաժանված որոշում','Единогласное решение':'Մրցավարների միաձայն որոշում','Удушение сзади':'Խեղդում թիկունքից','Удушение «анаконда»':'«Անակոնդա» խեղդում','титул':'տիտղոս','защита':'պաշտպանություն',
+    'Станислав Нанаев':'Ստանիսլավ Նանաև','Амиран Дзнеладзе':'Ամիրան Ձնելաձե','Арсений Азамат':'Արսենի Ազամատ','Мгер Мерджанян':'Մհեր Մերջանյան','Мехди Байдулаев':'Մեհդի Բայդուլաև','Джамбулат Селимханов':'Ջամբուլատ Սելիմխանով','Альберд Жапуев':'Ալբերդ Ժապուև','Давлатманд Чупонов':'Դավլաթմանդ Չուպոնով','Матеуш Рембецкий':'Մատեուշ Ռեմբեցկի','Глеб Хабибуллин':'Գլեբ Խաբիբուլին','Адам Ацаев':'Ադամ Ացաև','Юсуп Адилханов':'Յուսուպ Ադիլխանով','Фазлиддин Мадрахимов':'Ֆազլիդին Մադրախիմով','Никита Гомзяков':'Նիկիտա Գոմզյակով','Филипп Косырев':'Ֆիլիպ Կոսիրև','Али Хейбати':'Ալի Հեյբաթի','Илья Мельников':'Իլյա Մելնիկով','Максим Широян':'Մաքսիմ Շիրոյան'}
+},
+en:{
+s1_q:'I thought they’d put me straight into sparring. We started with stance.',s2_q:'I train at my own pace, and it works.',s3_q:'He didn’t break my wrestling, he built striking on top of it.',st_more:'Story',of_group_n:'Group classes',of_group_m:'Small group · 90 minutes',of_soon_p:'Opening soon',of_group_u:'Price and schedule at launch',of_group_i1:'A group of the same level',of_group_i2:'Technique, pad rounds, wrestling',of_group_i3:'A fixed schedule',of_group_w:'Those who want rhythm and company.',wl_cta:'Join the waitlist',soon_badge:'Soon',of_first:'First intake',of_solo_n:'Private training, 12&nbsp;sessions',old_price:'Regular price:',of_solo_u:'for the whole pack of 12 sessions',of_solo_i3:'A 12-session plan with progress check-ins',of_video_n:'Video course',of_video_m:'10 short lessons · watch at home',from:'from',of_video_u:'indicative, for the whole course',of_video_i1:'Stance, footwork, jab-cross',of_video_i2:'Defence and takedown defence',of_video_i3:'Getting up, taking the back, rear-naked choke',of_video_w:'Those who want to drill the basics between sessions or start at home.',pr_lead3:'One pack is open now: private training. Group classes and the video course are coming soon.',fs_price_t:'Price',fs_price_in:'Included in the 12-session pack',fs_cta2:'Book your first session',s_group2:'Group classes, coming soon',rules_2b:'The 12-session pack is paid before the first session and is valid for 8 weeks.',car_aria3:'Offers',pr_title3:'Prices',sch_cap3:'Training schedule',
+skip:'Skip to content',brand_aria:'Arkadii Osipyan, back to top',brand_name:'Arkadii',brand_sub:'MMA in Yerevan',nav_aria:'Sections',lang_aria:'Language',
+nav_for:'Who it’s for',nav_method:'Method',nav_career:'Career',nav_prices:'Prices',nav_faq:'FAQ',nav_contact:'Contact',cta_write:'Message',cta_write_ark:'Message Arkadii',
+hero_alt:'Arkadii Osipyan by the cage before a fight, in profile. A camera operator on the left.',hero_eyebrow:'MMA fighter and coach in Yerevan',name_full:'Arkadii Osipyan',name_1:'Arkadii',name_2:'Osipyan',
+hero_lead:'A pro fighter’s experience, in&nbsp;your training.',hero_sub:'Former Hardcore MMA champion',hero_sub_more:'. Featherweight, southpaw.',watch:'Watch a session',
+sc:'Sc.',sl_hero:'Before the walkout',sl_archive:'Archive footage',take:'Take',splice:'Splice',sl_for:'Who it’s for',sl_casting:'Casting',
+for_title:'Training<br>for you',for_lead:'No experience needed. Sparring and fights only when you decide you’re ready.',
+r1_t:'From zero',r1_p:'Never trained before. We start with stance, footwork and breathing. No sparring.',
+r2_t:'To get fit',r2_p:'You want stamina, strength and a clear head. Stepping into the cage is optional.',
+r3_t:'First fight',r3_p:'You have the basics and want to compete. Fight camp, rounds at fight pace, and a corner on fight night.',
+r4_t:'Women',r4_p:'Same training, your own pace. Partners matched by weight and level; nobody pushes you into sparring.',
+roles_note:'Profiles are a draft, to be confirmed with Arkadii.',coach_alt:'Arkadii with students in the gym',coach_cap:'Photo to come: Arkadii setting a beginner’s stance',
+first_t:'Your first session',first_len:'60 minutes',tl1:'Getting to know you: goals, experience, old injuries.',tl2:'Warm-up and stance.',tl3:'Footwork and distance.',tl4:'Pad work, your first combination.',tl5:'Debrief and a plan for the first month.',
+bring:'Bring: comfortable kit, water, a mouthguard.',gear:'Gloves for the first session are provided at the gym.',
+sl_training:'Training',tr_title:'Thirty<br>seconds<br>of work',tr_lead:'Pad work. Archive footage, no sound. Watch the feet and the distance.',tr_open:'Open full screen',
+loop_aria:'Clip from archive footage: pad work, no sound',open_aria:'Open the training footage full screen',frag:'Clip',reel_cap:'Archive. 9:16, 30 s.',stills_aria:'Frames from the footage',from_04:'Play from 0:04',from_16:'Play from 0:16',from_25:'Play from 0:25',
+sl_method:'How he coaches',sl_close:'Close-up',back_alt:'Arkadii from behind in a Lion Heart Team shirt reading Arkadii Osipyan, gloves on',back_cap:'Name on the back. Work ahead.',
+m_title:'Stance.<br>Strike.<br>Head.',own_words:'In his own words',own_q:'“This is where Arkadii will say how he teaches: where a beginner starts, what he demands, what earns his praise.”',own_f:'To record with Arkadii',
+m_note:'The wording below is a draft. To be agreed with Arkadii.',
+p1_t:'Stance first',p1_p:'Without it a punch is just a swing. The first weeks are about feet, balance and distance.',
+p2_t:'Every round gets a debrief',p2_p:'What worked, what didn’t. Short and to the point.',
+p3_t:'Your pace',p3_p:'The load fits your level. The standards are the same for everyone.',
+p4_t:'Fighting is optional',p4_p:'Train for yourself, or build up to your first walk into the cage.',
+sl_career:'Career',sl_acts:'Cut in three acts',c_title:'First came<br>the fights',c_lead:'He chose martial arts himself, at&nbsp;17.',c_profile:'Southpaw, featherweight, up&nbsp;to&nbsp;66&nbsp;kg. Fights for Armenia and Russia.',
+rec_pro:'Pro record',rec_fin:'Finishes',rec_stop:'Stoppage losses',rec_note_t:'Note',rec_note:'All 8 losses by decision.',
+act1_n:'Round I',act1:'Beginnings',act2_n:'Round II',act2:'The cage',act3_n:'Round III',act3:'The corner',
+young_alt:'Young Arkadii Osipyan, professional photo shoot',f1_t:'Pro debut',f1_p:'Battle on the Kuban 3, 4&nbsp;December. Won by TKO. As an amateur he had already won the Southern Federal District titles in MMA and grappling.',
+walk_alt:'Walkout to the cage: Arkadii in front, his team behind him with the Armenian flag',f2_t:'Under the flag',f2_p:'GFC&nbsp;13: TKO in the second round. Armenia behind him, the team at his side.',
+aca_alt:'Exchange of strikes in the ACA cage',f3_t:'The ACA cage',f3_p:'Three submissions in a row. An anaconda choke in round one at ACA&nbsp;119, another choke at ACA&nbsp;127.',
+vic_alt:'The referee raises Arkadii’s hand after a fight',f4_t:'Hand raised',f4_p:'ACA Young Eagles&nbsp;15. A rear-naked choke in round three started the streak.',
+belt_alt:'Arkadii Osipyan with the belt in the gym',f5_t:'Hardcore MMA belt',f5_p:'Two five-round title fights, FEN&nbsp;37 and AMC Fight Nights&nbsp;115, went to the judges. The third he finished himself: HFC&nbsp;60, rear-naked choke, round 4, 3:10.',
+team_alt:'Arkadii with belts and teammates in the gym',now:'Now',f6_t:'In the corner',f6_v:'HFC&nbsp;90, 2024: stopped Ali Heibati in round one.',f6_p:'Now he also works the corner. Coaching in Yerevan.',
+from_int:'From interviews',q_cut:'“I tried it once, it was a brutal weight cut, just insane… I realised that’s not my weight.”',q_cut_f:'On cutting to 63&nbsp;kg',
+q_con:'“I nearly always signed for one fight at a time… I think about my career further ahead, not about the money here and now.”',q_con_f:'On contracts',
+edl_t:'All fights',edl_meta:'18 fights',edl_cap:'All of Arkadii Osipyan’s professional fights in order',th_date:'Date',th_ev:'Event',th_op:'Opponent',th_res:'Result',th_how:'Method',th_rt:'Round, time',
+edl_note:'Finishes: 5 TKOs, 4 submissions. Every loss went to the judges.',
+sl_terms:'Terms',sl_call:'Call sheet',pr_lead:'Swipe through the packages: each one shows the price, what’s included and who it’s for. The button opens WhatsApp with the package already named.',
+car_role:'carousel',car_slide:'package',car_prev:'Previous package',car_next:'Next package',step:'Step',pop:'most popular',who:'For',pk_cta:'Choose in WhatsApp',cur:'AMD',pk_single_m:'One-on-one · 60 minutes',pk_single_w:'Beginners, and anyone who wants to sharpen specific technique.',
+pk_single_i1:'The coach’s full attention, only on you',pk_single_i2:'A programme built around your goal',
+sch_t:'Schedule',d_mwf:'Mon, Wed, Fri',d_tt:'Tue, Thu',d_sat:'Sat',s_pers:'Private, by appointment',
+lang_t:'Session language',lang_p:'Russian, Armenian. English on request.',place_t:'Location',place_p:'The One Gym, Yerevan.<br>Exact address and entrance to be confirmed.',gym_alt:'The gym: equipment by the window',gym_cap:'stand-in photo: entrance and gym',map_open:'Open in Google Maps',
+v_title:'Voices<br>from the gym',v_note:'All reviews below are samples. Replace with real ones, with students’ permission.',
+q1:'“Came in from zero and overweight. Three months later I lasted a full round — and stayed on my feet.”',q1_n:'Artyom',q1_s:'2 years in the gym',
+q2:'“He sees the mistake before you make it. And explains it in one word.”',q2_n:'Lilit',q2_s:'8 months',
+q3:'“No shouting. Calm, tough, to the point.”',q3_n:'Davit',q3_s:'preparing for his first fight',
+q5:'“I train to stay fit. Nobody drags me into sparring until I want to.”',q5_n:'Maria',q5_s:'6 months',
+faq_title:'Before<br>you&nbsp;come',faq_note:'Answers are a draft, to be confirmed with Arkadii.',
+fq1:'What’s the minimum age?',fa1:'Adults from 16. Younger teens after a talk with their parents. No upper limit: the load is set to suit you.',
+fq2:'I have an injury. Can I train?',fa2:'Mention it in your first message. We work around it, and after a recent injury only with a doctor’s clearance.',
+fq3:'Will I get hit? Is sparring required?',fa3:'No. The first months are technique, pads and bag. Sparring is optional, controlled, and with a partner at your level.',
+fq4:'What if I don’t have any gear?',fa4:'Shorts or track pants, a T-shirt, water. Get a mouthguard later; gloves for the first session are provided at the gym.',
+fq5:'How do I pay?',fa5:'Cash or bank transfer in drams. A package is paid before its first session. No online payment on the site yet.',
+fq6:'What language are sessions in?',fa6:'Russian and Armenian. Technique and round counts work in any language.',
+sl_out:'Your walkout',ct_title:'Your<br>first<br>round',st1_t:'Message',st1:'one message, wherever suits you',st2_t:'Tell us about yourself',st2:'experience, goal, times that work',st3_t:'Show up',st3:'kit, water, mouthguard',
+reply:'We reply within 2&nbsp;hours, 10:00–21:00. Arkadii or the gym admin will answer.',ch_wa:'Message on WhatsApp',ch_tg:'Message on Telegram',ch_ig:'Message on Instagram',msg_l:'Ready-made message',wa_hello:'Hi! I’d like to train MMA with Arkadii Osipyan.',
+sign_cap:'flourish: a sketch, not Arkadii’s signature',contact_alt:'Arkadii Osipyan in stance in the cage, looking at the camera',
+start_alt:'Arkadii Osipyan in the gym, leaning on the ring ropes',st_out:'available now',
+cr_t:'About this site',cr_coach:'Coach',cr_cast:'Student',cr_you:'you',cr_loc:'City',cr_yer:'Yerevan',cr_site:'Website',cr_gift:'a gift from a student',cr_link:'Contact',and:'and',cr_end:'End of part one',to_top:'Back to top',
+player_aria:'Archive training footage: pad work, 30 seconds, no sound',player_t:'Pad work. Archive, no sound',close:'Close',
+cta_first:"Book a first session",nav_coach:"Coach",nav_first:"First session",for_lead2:"No experience needed. Arkadii sets the pace and load for you; sparring and fights only if you decide.",r1_p2:"Never trained before. We start with stance, footwork and breathing.",r2_p2:"Stamina, strength and a clear head. You never have to step into the cage.",r3_t2:"With experience",r3_p2:"You’ve done boxing, wrestling or MMA. We clean up technique, rounds at fight pace and, if you want, prep for a first fight.",teach_t:"How he teaches",te1_t:"Shows",te1:"One combination, slowly: where the punch starts and where the feet go.",te2_t:"Spots",te2:"You drop your hand after the jab. He stops the round and shows you where you opened up.",te3_t:"Fixes",te3:"Three slow reps, then at pace. It works, we move on.",teach_note:"Draft example. Needs a clip of Arkadii correcting a student’s mistake.",sl_coach:"Why Arkadii",ml1_p:"HFC 60: rear-naked choke in round 4. Two five-round title fights before that went to the judges, and he came back for the belt.",ml2_t:"ACA run",ml2_p:"Three submission wins in a row in one of the strongest leagues: Young Eagles 15, ACA 119 and ACA 127.",ml3_t:"Never stopped",ml3_p:"18 pro fights. Nobody has ever finished him: every loss went to the judges.",ap_t:"How he runs a session",ap2_t:"Pro-level technique",ap2_p:"The load fits your level, but the technique standard is the same as in his own camp. No shouting.",ap3_t:"A plan, not a set of drills",ap3_p:"After the first session you get a one-month plan. Every 4 weeks we check what has changed.",story_t:"Full story and every fight",story_m:"2016 to now · 18 fights",fs_title:"What happens<br>the first time",fs_len_t:"Length",fs_price_t:"Price",fs_fmt_t:"Format",fs_fmt:"1-on-1 with Arkadii",fs_bring_t:"Bring",fs_bring:"comfortable kit and water.",rules_t:"Payment and rescheduling",rules_1:"Cash or card transfer, in drams. No online payment on the site.",rules_3:"Free rescheduling with 12 hours’ notice. Later than that, the session counts.",v_note2:"The stories below show the format. Replace with real ones, with students’ permission.",st_came:"Came with",st_fear:"Was afraid",st_first:"First sessions",st_now:"What changed",s1_n:"Artyom, 34",s1_s:"from zero · 5 months",s1_a:"Office job, extra weight, never set foot in a gym.",s1_b:"Being thrown into sparring straight away and embarrassed.",s1_c:"Stance, footwork, pads. No sparring until he asked for it himself.",s1_d:"Down 7 kg, lasts three rounds on pads, trains twice a week.",s2_n:"Lilit, 27",s2_s:"for fitness · 8 months",s2_a:"After running she wanted training that makes you think.",s2_b:"Being the only woman among men and not taken seriously.",s2_c:"A small group of her level, a partner of her weight. Her pace.",s2_d:"Stamina and confidence. Light sparring once a week, by choice.",s3_n:"Davit, 22",s3_s:"with experience · 1 year",s3_a:"Freestyle wrestling at school, wanted to try MMA.",s3_b:"That striking would take years to learn from scratch.",s3_c:"Arkadii kept his wrestling and built striking around it: a combination, then a takedown.",s3_d:"Preparing for his first amateur fight.",ch_also:"If WhatsApp doesn’t suit you:",car_prev:"Previous format",car_next:"Next format",car_slide:"format"
+},
+hy:{
+s1_q:'Կարծում էի՝ միանգամից սպարինգ կդնեն։ Սկսեցինք կեցվածքից։',s2_q:'Մարզվում եմ իմ տեմպով, և դա աշխատում է։',s3_q:'Ըմբշամարտս չկոտրեց, հարվածները կառուցեց դրա վրա։',st_more:'Պատմություն',of_group_n:'Խմբային պարապմունքներ',of_group_m:'Փոքր խումբ · 90 րոպե',of_soon_p:'Շուտով կբացվի',of_group_u:'Գինը և գրաֆիկը՝ մեկնարկին',of_group_i1:'Նույն մակարդակի խումբ',of_group_i2:'Տեխնիկա, ռաունդներ թաթերով, ըմբշամարտ',of_group_i3:'Մշտական գրաֆիկ',of_group_w:'Նրանց, ովքեր ուզում են ռիթմ և ընկերակցություն։',wl_cta:'Սպասման ցուցակ',soon_badge:'Շուտով',of_first:'Առաջին հավաքագրում',of_solo_n:'Անհատական մարզումներ, 12&nbsp;պարապմունք',old_price:'Սովորական գին՝',of_solo_u:'ամբողջ 12 պարապմունքի փաթեթի համար',of_solo_i3:'12 պարապմունքի պլան և առաջընթացի չափումներ',of_video_n:'Տեսադասընթաց',of_video_m:'10 կարճ դաս · դիտել տանը',from:'սկսած',of_video_u:'մոտավոր, ամբողջ դասընթացի համար',of_video_i1:'Կեցվածք, տեղաշարժ, ջեբ-քրոս',of_video_i2:'Պաշտպանություն և պաշտպանություն ոտքերին անցումից',of_video_i3:'Վեր կենալ գետնից, մեջքը և խեղդում հետևից',of_video_w:'Նրանց, ովքեր ուզում են կրկնել հիմքերը մարզումների միջև կամ սկսել տանը։',pr_lead3:'Հիմա բաց է մեկ փաթեթ՝ անհատական մարզումներ։ Խմբերը և տեսադասընթացը՝ շուտով։',fs_price_t:'Արժեք',fs_price_in:'Ներառված է 12 պարապմունքի փաթեթում',fs_cta2:'Գրանցվել առաջին պարապմունքին',s_group2:'Խմբային՝ շուտով',rules_2b:'12 պարապմունքի փաթեթը վճարվում է առաջին պարապմունքից առաջ և գործում է 8 շաբաթ։',car_aria3:'Առաջարկներ',pr_title3:'Գներ',sch_cap3:'Մարզումների գրաֆիկ',
+skip:'Անցնել բովանդակությանը',brand_aria:'Արկադի Օսիպյան, դեպի սկիզբ',brand_name:'Արկադի',brand_sub:'MMA Երևանում',nav_aria:'Բաժիններ',lang_aria:'Լեզու',
+nav_for:'Ում համար',nav_method:'Մեթոդ',nav_career:'Կարիերա',nav_prices:'Գներ',nav_faq:'Հարցեր',nav_contact:'Կապ',cta_write:'Գրել',cta_write_ark:'Գրել Արկադիին',
+hero_alt:'Արկադի Օսիպյանը վանդակի մոտ մենամարտից առաջ, պրոֆիլով։ Ձախում՝ օպերատորը տեսախցիկով։',hero_eyebrow:'MMA մարտիկ և մարզիչ Երևանում',name_full:'Արկադի Օսիպյան',name_1:'Արկադի',name_2:'Օսիպյան',
+hero_lead:'Պրոֆեսիոնալ մարտիկի փորձը՝ քո մարզումում։',hero_sub:'Hardcore MMA-ի նախկին չեմպիոն',hero_sub_more:'։ Կիսաթեթև քաշ, ձախլիկ։',watch:'Դիտել մարզումը',
+sc:'Տես.',sl_hero:'Ելքից առաջ',sl_archive:'Արխիվային կադր',take:'Դուբլ',splice:'Սոսնձում',sl_for:'Ում համար',sl_casting:'Քասթինգ',
+for_title:'Մարզումներ<br>քեզ համար',for_lead:'Փորձ պետք չէ։ Սպարինգ և մենամարտեր՝ միայն երբ ինքդ որոշես։',
+r1_t:'Զրոյից',r1_p:'Երբեք չես մարզվել։ Սկսում ենք կեցվածքից, քայլերից և շնչառությունից, առանց սպարինգի։',
+r2_t:'Մարզավիճակի համար',r2_p:'Ուզում ես դիմացկունություն, ուժ և սառը գլուխ։ Վանդակ մտնել պարտադիր չէ։',
+r3_t:'Առաջին մենամարտին',r3_p:'Հիմքը կա, ուզում ես վանդակ։ Հավաք, ռաունդներ մենամարտի տեմպով և անկյուն մրցաշարի օրը։',
+r4_t:'Աղջիկներ',r4_p:'Նույն մարզումները՝ քո տեմպով։ Զուգընկեր՝ ըստ քաշի և մակարդակի, ոչ ոք քեզ սպարինգի չի քաշում։',
+roles_note:'Պրոֆիլները սևագիր են, ճշտել Արկադիի հետ։',coach_alt:'Արկադին աշակերտների հետ դահլիճում',coach_cap:'Այստեղ կլինի լուսանկար՝ Արկադին սկսնակին կեցվածք է դնում',
+first_t:'Առաջին պարապմունքը',first_len:'60 րոպե',tl1:'Ծանոթություն՝ նպատակ, փորձ, հին վնասվածքներ։',tl2:'Տաքացում և կեցվածք։',tl3:'Քայլեր և հեռավորություն։',tl4:'Հարվածներ թաթերին, առաջին կապակցում։',tl5:'Վերլուծություն և առաջին ամսվա պլան։',
+bring:'Հետդ վերցրու՝ հարմար մարզահագուստ, ջուր, կապա։',gear:'Առաջին պարապմունքի ձեռնոցները կտան դահլիճում։',
+sl_training:'Մարզում',tr_title:'Երեսուն<br>վայրկյան<br>աշխատանք',tr_lead:'Աշխատանք թաթերով։ Արխիվային ձայնագրություն առանց ձայնի։ Նայիր ոտքերին և հեռավորությանը։',tr_open:'Բացել ամբողջ էկրանով',
+loop_aria:'Հատված արխիվային տեսագրությունից՝ աշխատանք թաթերով, առանց ձայնի',open_aria:'Բացել մարզման տեսագրությունը ամբողջ էկրանով',frag:'Հատված',reel_cap:'Արխիվ։ 9:16, 30 վ։',stills_aria:'Կադրեր տեսագրությունից',from_04:'Միացնել 0:04-ից',from_16:'Միացնել 0:16-ից',from_25:'Միացնել 0:25-ից',
+sl_method:'Ինչպես է մարզում',sl_close:'Խոշոր պլան',back_alt:'Արկադին թիկունքից՝ Lion Heart Team շապիկով, Arkadii Osipyan գրությամբ, ձեռնոցներով',back_cap:'Անունը թիկունքին։ Աշխատանքը՝ առջևում։',
+m_title:'Կեցվածք։<br>Հարված։<br>Գլուխ։',own_words:'Իր խոսքերով',own_q:'«Այստեղ կլինեն Արկադիի խոսքերը այն մասին, թե ինչպես է սովորեցնում՝ որտեղից է սկսում սկսնակի հետ, ինչ է պահանջում, ինչի համար է գովում»։',own_f:'Ձայնագրել Արկադիի հետ',
+m_note:'Ստորև ձևակերպումները դեռ սևագիր են։ Համաձայնեցնել Արկադիի հետ։',
+p1_t:'Նախ՝ կեցվածքը',p1_p:'Առանց դրա հարվածը պարզապես թափահարում է։ Առաջին շաբաթները՝ ոտքեր, հավասարակշռություն, հեռավորություն։',
+p2_t:'Ամեն ռաունդ՝ վերլուծությամբ',p2_p:'Ինչն ստացվեց, ինչը՝ ոչ։ Կարճ և ըստ էության։',
+p3_t:'Տեմպը՝ քոնը',p3_p:'Ծանրաբեռնվածությունը՝ ըստ մակարդակի։ Պահանջները՝ բոլորի համար նույնը։',
+p4_t:'Մենամարտը պարտադիր չէ',p4_p:'Կարելի է մարզվել քեզ համար։ Կարելի է՝ մինչև առաջին ելքը վանդակ։',
+sl_career:'Կարիերա',sl_acts:'Մոնտաժ երեք գործողությամբ',c_title:'Սկզբում<br>մենամարտերն էին',c_lead:'Մարտարվեստ եկավ ինքը, 17 տարեկանում։',c_profile:'Ձախլիկ, կիսաթեթև քաշ, մինչև 66 կգ։ Հանդես է գալիս Հայաստանի և Ռուսաստանի անունից։',
+rec_pro:'Պրոֆեսիոնալ ռեկորդ',rec_fin:'Վաղաժամ հաղթանակ',rec_stop:'Վաղաժամ պարտություն',rec_note_t:'Ծանոթություն',rec_note:'Բոլոր 8 պարտությունները՝ մրցավարների որոշմամբ։',
+act1_n:'Ռաունդ I',act1:'Սկիզբ',act2_n:'Ռաունդ II',act2:'Վանդակ',act3_n:'Ռաունդ III',act3:'Անկյուն',
+young_alt:'Երիտասարդ Արկադի Օսիպյանը, պրոֆեսիոնալ լուսանկարահանում',f1_t:'Առաջին պրո մենամարտը',f1_p:'Battle on the Kuban 3, դեկտեմբերի 4։ Հաղթանակ տեխնիկական նոկաուտով։ Դեռ սիրողական ժամանակ դարձել էր Ռուսաստանի Հարավային օկրուգի չեմպիոն MMA-ում և գրեփլինգում։',
+walk_alt:'Ելք դեպի վանդակ՝ Արկադին առջևում, հետևում թիմը Հայաստանի դրոշով',f2_t:'Դրոշի ներքո',f2_p:'GFC 13՝ տեխնիկական նոկաուտ երկրորդ ռաունդում։ Հայաստանը՝ թիկունքում, թիմը՝ կողքին։',
+aca_alt:'Հարվածների փոխանակում ACA լիգայի վանդակում',f3_t:'ACA-ի վանդակը',f3_p:'Երեք հանձնում անընդմեջ։ ACA 119-ում «անակոնդա» առաջին ռաունդում, ACA 127-ում՝ կրկին խեղդում։',
+vic_alt:'Մրցավարը բարձրացնում է Արկադիի ձեռքը մենամարտից հետո',f4_t:'Ձեռքը վեր',f4_p:'ACA Young Eagles 15։ Խեղդում թիկունքից երրորդ ռաունդում, որով սկսվեց շարքը։',
+belt_alt:'Արկադի Օսիպյանը գոտիով դահլիճում',f5_t:'Hardcore MMA-ի գոտին',f5_p:'Երկու հինգ ռաունդանոց տիտղոսային մենամարտ՝ FEN 37 և AMC Fight Nights 115, որոշեցին մրցավարները։ Երրորդն ինքն ավարտեց՝ HFC 60, խեղդում թիկունքից, 4-րդ ռաունդ, 3:10։',
+team_alt:'Արկադին գոտիներով և թիմակիցների հետ դահլիճում',now:'Հիմա',f6_t:'Մարզչի անկյունը',f6_v:'HFC 90, 2024՝ կանգնեցրեց Ալի Հեյբաթիին առաջին ռաունդում։',f6_p:'Հիմա նա նաև անկյունում է։ Մարզում է Երևանում։',
+from_int:'Հարցազրույցներից',q_cut:'«Մեկ անգամ փորձեցի, շատ ծանր քաշի իջեցում էր, ուղղակի սարսափ… Հասկացա, որ դա իմ քաշը չէ»։',q_cut_f:'63 կգ-ի քաշի իջեցման մասին',
+q_con:'«Գրեթե միշտ պայմանագիր էի կնքում միայն մեկ մենամարտի համար… Մտածում եմ հետագա կարիերայի, ոչ թե այստեղ և հիմա վաստակելու մասին»։',q_con_f:'Պայմանագրերի մասին',
+edl_t:'Բոլոր մենամարտերը',edl_meta:'18 մենամարտ',edl_cap:'Արկադի Օսիպյանի բոլոր պրոֆեսիոնալ մենամարտերը հերթականությամբ',th_date:'Ամսաթիվ',th_ev:'Մրցաշար',th_op:'Մրցակից',th_res:'Արդյունք',th_how:'Եղանակ',th_rt:'Ռաունդ, ժամ',
+edl_note:'Վաղաժամ՝ 5 տեխնիկական նոկաուտ, 4 հանձնում։ Պարտությունները՝ միայն որոշմամբ։',
+sl_terms:'Պայմաններ',sl_call:'Կանչի թերթ',pr_lead:'Թերթիր փաթեթները՝ ամեն մեկում գինն է, ինչ է ներառված և ում համար է։ Կոճակն անմիջապես բացում է WhatsApp-ը՝ փաթեթի անունով։',
+car_role:'կարուսել',car_slide:'փաթեթ',car_prev:'Նախորդ փաթեթը',car_next:'Հաջորդ փաթեթը',step:'Քայլ',pop:'ամենապահանջված',who:'Ում',pk_cta:'Ընտրել WhatsApp-ում',cur:'դրամ',pk_single_m:'Մեկը մեկին · 60 րոպե',pk_single_w:'Սկսնակներին և նրանց, ովքեր ուզում են կետային կատարելագործել տեխնիկան։',
+pk_single_i1:'Մարզչի ողջ ժամանակը՝ միայն քեզ',pk_single_i2:'Ծրագիր՝ քո նպատակի համար',
+sch_t:'Գրաֆիկ',d_mwf:'Երկ, չրք, ուրբ',d_tt:'Երք, հնգ',d_sat:'Շբթ',s_pers:'Անհատական, նախնական գրանցմամբ',
+lang_t:'Պարապմունքների լեզուն',lang_p:'Ռուսերեն, հայերեն։',place_t:'Վայրը',place_p:'The One Gym, Երևան։<br>Ճշգրիտ հասցեն և մուտքը՝ ճշտել։',gym_alt:'Դահլիճ՝ մարզասարքեր պատուհանի մոտ',gym_cap:'փոխարինող լուսանկար՝ մուտք և դահլիճ',map_open:'Բացել Google Maps-ում',
+v_title:'Ձայներ<br>դահլիճից',v_note:'Ստորև բոլոր կարծիքները օրինակ են։ Փոխարինել իրականով՝ աշակերտների թույլտվությամբ։',
+q1:'«Եկա զրոյից և ավելորդ քաշով։ Երեք ամիս անց ամբողջ ռաունդ դիմացա ու ոտքի վրա մնացի»։',q1_n:'Արտյոմ',q1_s:'2 տարի դահլիճում',
+q2:'«Նա սխալը տեսնում է նախքան դու կանես։ Ու բացատրում է մեկ բառով»։',q2_n:'Լիլիթ',q2_s:'8 ամիս',
+q3:'«Ոչ մի գոռգոռոց։ Հանգիստ, կոշտ, ըստ էության»։',q3_n:'Դավիթ',q3_s:'պատրաստվում է առաջին մենամարտին',
+q5:'«Գալիս եմ մարզավիճակի համար։ Ոչ ոք ինձ սպարինգի չի քաշում, քանի դեռ ինքս չեմ ուզում»։',q5_n:'Մարիա',q5_s:'6 ամիս',
+faq_title:'Հարցեր<br>մինչ դահլիճ',faq_note:'Պատասխանները սևագիր են, ճշտել Արկադիի հետ։',
+fq1:'Քանի՞ տարեկանից կարելի է',fa1:'Մեծահասակներ՝ 16 տարեկանից։ Ավելի փոքր դեռահասներին՝ ծնողների հետ զրույցից հետո։ Վերին սահման չկա՝ ծանրաբեռնվածությունն ընտրում ենք քեզ համար։',
+fq2:'Վնասվածք ունեմ։ Կարո՞ղ եմ մարզվել',fa2:'Ասա դրա մասին առաջին հաղորդագրությունում։ Աշխատում ենք շրջանցելով խնդրահարույց տեղը, իսկ թարմ վնասվածքից հետո՝ միայն բժշկի թույլտվությամբ։',
+fq3:'Կխփե՞ն։ Սպարինգը պարտադի՞ր է',fa3:'Ոչ։ Առաջին ամիսները՝ տեխնիկա, թաթեր և տանձիկ։ Սպարինգը՝ միայն ցանկությամբ, վերահսկվող տեմպով և քո մակարդակի զուգընկերոջ հետ։',
+fq4:'Ի՞նչ վերցնել, եթե մարզահագուստ չունեմ',fa4:'Շորտեր կամ սպորտային տաբատ, շապիկ, ջուր։ Կապան կգնես հետո, առաջին պարապմունքի ձեռնոցները կտան դահլիճում։',
+fq5:'Ինչպե՞ս վճարել',fa5:'Կանխիկ կամ քարտին փոխանցումով, դրամով։ Փաթեթը վճարվում է նրա առաջին պարապմունքից առաջ։ Կայքում առցանց վճարում դեռ չկա։',
+fq6:'Ո՞ր լեզվով են պարապմունքները',fa6:'Ռուսերեն և հայերեն։ Տեխնիկան և ռաունդների հաշիվը հասկանալի են ցանկացած լեզվով։',
+sl_out:'Քո ելքը',ct_title:'Քո<br>առաջին<br>ռաունդը',st1_t:'Գրիր',st1:'մեկ հաղորդագրություն, որտեղ հարմար է',st2_t:'Պատմիր քո մասին',st2:'փորձ, նպատակ, հարմար ժամ',st3_t:'Արի',st3:'մարզահագուստ, ջուր, կապա',
+reply:'Պատասխանում ենք 2 ժամվա ընթացքում, 10:00–21:00։ Կգրի Արկադին կամ դահլիճի ադմինիստրատորը։',ch_wa:'Գրել WhatsApp-ում',ch_tg:'Գրել Telegram-ում',ch_ig:'Գրել Instagram-ում',msg_l:'Պատրաստի հաղորդագրություն',wa_hello:'Բարև ձեզ։ Ուզում եմ MMA մարզվել Արկադի Օսիպյանի մոտ։',
+sign_cap:'ստորագրություն՝ էսքիզ, ոչ Արկադիի իրական ստորագրությունը',contact_alt:'Արկադի Օսիպյանը կեցվածքով վանդակում, նայում է տեսախցիկին',
+start_alt:'Արկադի Օսիպյանը դահլիճում՝ հենված ռինգի պարաններին',st_out:'արդեն հասանելի է',
+cr_t:'Կայքի մասին',cr_coach:'Մարզիչ',cr_cast:'Աշակերտ',cr_you:'դու',cr_loc:'Քաղաք',cr_yer:'Երևան',cr_site:'Կայք',cr_gift:'նվեր աշակերտից',cr_link:'Կապ',and:'և',cr_end:'Առաջին մասի վերջ',to_top:'Վերև',
+player_aria:'Արխիվային մարզման տեսագրություն՝ աշխատանք թաթերով, 30 վայրկյան, առանց ձայնի',player_t:'Աշխատանք թաթերով։ Արխիվ, առանց ձայնի',close:'Փակել',
+cta_first:"Քննարկել առաջին պարապմունքը",nav_coach:"Մարզիչ",nav_first:"Առաջին պարապմունք",for_lead2:"Փորձ պետք չէ։ Տեմպը և ծանրաբեռնվածությունը Արկադին ընտրում է քեզ համար, սպարինգ և մենամարտեր՝ միայն քո որոշմամբ։",r1_p2:"Երբեք չես մարզվել։ Սկսում ենք կեցվածքից, քայլերից և շնչառությունից։",r2_p2:"Դիմացկունություն, ուժ և սթափ գլուխ։ Վանդակ մտնել պետք չէ։",r3_t2:"Փորձով",r3_p2:"Եղել է բռնցքամարտ, ըմբշամարտ կամ MMA։ Մաքրում ենք տեխնիկան, ռաունդներ մենամարտի տեմպով, ցանկության դեպքում՝ նախապատրաստում առաջին մենամարտին։",teach_t:"Ինչպես է նա սովորեցնում",te1_t:"Ցույց է տալիս",te1:"Մեկ կոմբինացիա, դանդաղ՝ որտեղից է գալիս հարվածը և ուր են գնում ոտքերը։",te2_t:"Նկատում է",te2:"Ջեբից հետո իջեցնում ես ձեռքը։ Նա կանգնեցնում է ռաունդը և ցույց տալիս, որտեղ բացվեցիր։",te3_t:"Ուղղում է",te3:"Երեք դանդաղ կրկնություն, հետո տեմպով։ Ստացվեց՝ առաջ ենք գնում։",teach_note:"Օրինակը սևագիր է։ Պետք է տեսանյութ, որտեղ Արկադին ուղղում է աշակերտի սխալը։",sl_coach:"Ինչու Արկադին",ml1_p:"HFC 60՝ խեղդում թիկունքից 4-րդ ռաունդում։ Մինչ այդ երկու հնգառաունդանի տիտղոսային մենամարտ ավարտվեցին մրցավարների որոշմամբ, և նա վերադարձավ գոտու համար։",ml2_t:"Շարք ACA-ում",ml2_p:"Երեք անընդմեջ հաղթանակ ցավոտ հնարքով ամենաուժեղ լիգաներից մեկում՝ Young Eagles 15, ACA 119 և ACA 127։",ml3_t:"Ոչ մի վաղաժամ պարտություն",ml3_p:"18 պրոֆեսիոնալ մենամարտ։ Նրան երբեք չեն կանգնեցրել. բոլոր պարտությունները՝ մրցավարների որոշմամբ։",ap_t:"Ինչպես է նա անցկացնում մարզումը",ap2_t:"Տեխնիկա՝ ինչպես պրոֆիների մոտ",ap2_p:"Ծանրաբեռնվածությունը՝ քո մակարդակով, իսկ տեխնիկայի պահանջները նույնն են, ինչ իր ճամբարում։ Առանց գոռգոռոցի։",ap3_t:"Պլան, ոչ թե վարժությունների հավաքածու",ap3_p:"Առաջին պարապմունքից հետո՝ պլան մեկ ամսով։ Յուրաքանչյուր 4 շաբաթը մեկ նայում ենք, թե ինչ է փոխվել։",story_t:"Ամբողջ պատմությունը և բոլոր մենամարտերը",story_m:"2016 — այսօր · 18 մենամարտ",fs_title:"Ինչ կլինի<br>առաջին անգամ",fs_len_t:"Տևողություն",fs_price_t:"Արժեք",fs_fmt_t:"Ձևաչափ",fs_fmt:"1-ը 1-ի Արկադիի հետ",fs_bring_t:"Վերցրու",fs_bring:"հարմար մարզահագուստ և ջուր։",rules_t:"Վճարում և տեղափոխում",rules_1:"Կանխիկ կամ քարտին փոխանցումով, դրամով։ Կայքում առցանց վճարում չկա։",rules_3:"Տեղափոխումն անվճար է, եթե զգուշացնես 12 ժամ առաջ։ Ավելի ուշ՝ պարապմունքը հաշվվում է։",v_note2:"Ստորև պատմությունները ձևաչափի օրինակ են։ Փոխարինել իրականով՝ աշակերտների թույլտվությամբ։",st_came:"Եկավ",st_fear:"Վախենում էր",st_first:"Առաջին պարապմունքները",st_now:"Ինչ փոխվեց",s1_n:"Արտյոմ, 34",s1_s:"զրոյից · 5 ամիս",s1_a:"Գրասենյակային աշխատանք, ավելորդ քաշ, ոչ մի օր դահլիճում։",s1_b:"Որ անմիջապես սպարինգի կդնեն, և ամոթ կլինի։",s1_c:"Կեցվածք, քայլեր, թաթեր։ Սպարինգ չեղավ, մինչև ինքը չխնդրեց։",s1_d:"Մինուս 7 կգ, երեք ռաունդ դիմանում է թաթերի վրա, գալիս է շաբաթը երկու անգամ։",s2_n:"Լիլիթ, 27",s2_s:"մարզավիճակի համար · 8 ամիս",s2_a:"Վազքից հետո ուզում էր ծանրաբեռնվածություն, որտեղ գլխով ես մտածում։",s2_b:"Որ տղամարդկանց մեջ մենակ կլինի, և լուրջ չեն ընդունի։",s2_c:"Նույն մակարդակի փոքր խումբ, քաշով համապատասխան զուգընկեր։ Տեմպը՝ իրենը։",s2_d:"Դիմացկունություն և վստահություն։ Թեթև սպարինգ շաբաթը մեկ՝ ցանկությամբ։",s3_n:"Դավիթ, 22",s3_s:"փորձով · 1 տարի",s3_a:"Ազատ ոճի ըմբշամարտ դպրոցում, ուզում էր փորձել MMA։",s3_b:"Որ հարվածները զրոյից սովորելը տարիներ կտևի։",s3_c:"Արկադին պահեց նրա ըմբշամարտը և հարվածային տեխնիկան կառուցեց դրա շուրջ՝ կոմբինացիա, հետո անցում։",s3_d:"Պատրաստվում է իր առաջին սիրողական մենամարտին։",ch_also:"Եթե WhatsApp-ը հարմար չէ՝",car_prev:"Նախորդ ձևաչափը",car_next:"Հաջորդ ձևաչափը",car_slide:"ձևաչափ"
+}
+};
+
+/* ---------- v11: цены (главный пакет + «скоро»), бесплатное знакомство, Место, истории (фото/видео) ---------- */
+(function(D){
+  function add(l,o){ for(var k in o) D[l][k]=o[k]; }
+  var U=D.ui;
+  for(var k in {ru:1,en:1,hy:1}) U[k]=U[k]||{};
+  U.ru.wa_free='Здравствуйте! Хочу записаться на бесплатное первое занятие-знакомство к Аркадию Осипяну.';
+  U.ru.wa_launch='Здравствуйте! Сообщите мне, пожалуйста, о запуске: «{p}».';
+  U.en.wa_free='Hi! I’d like to book the free first get-to-know-you session with Arkadii Osipyan.';
+  U.en.wa_launch='Hi! Please let me know when “{p}” launches.';
+  U.hy.wa_free='Բարև ձեզ։ Ուզում եմ գրանցվել Արկադի Օսիպյանի մոտ անվճար առաջին ծանոթական պարապմունքին։';
+  U.hy.wa_launch='Բարև ձեզ։ Խնդրում եմ տեղեկացնել մեկնարկի մասին՝ «{p}»։';
+  add('en',{
+    ml3_t2:'18 pro fights',ml3_p2:'9 wins inside the distance: 5 TKOs and 4 submissions. Nobody has ever stopped him.',edl_note2:'Finishes: 5 TKOs, 4 submissions.',
+    bring:'comfortable sports kit, water and a towel. You’ll need a mouthguard later.',
+    bring_faq:'For the first session: comfortable sports kit, water and a towel. You’ll need a mouthguard later, once you start partner work.',
+    st3c:'to the free intro: kit, water, towel',rules_gym:'Gym entry is included in the price.',
+    reel_todo:'An episode will be filmed: the student makes a mistake → Arkadii explains → the student tries again. For now this is archive pad work.',
+    pl_pre:'Where the training happens',pl_city:'Yerevan',pl_country:'Armenia',pl_addr_t:'Address',pl_addr:'The One Gym, Yerevan. Street and number to be confirmed',
+    pl_in_t:'Entrance',pl_in:'From the courtyard, by the gym sign. Tell reception you’re here for Arkadii',pl_h_t:'Hours',pl_h:'Mon–Sat, 10:00–21:00. Private sessions by appointment',pl_route:'Get directions',
+    st_photo:'student photo',rv_play:'Watch',rv_cap:'video review, 30–60 s',rv_aria:'Story format',rv_photo:'Photo',rv_video:'Video',
+    s1_hl:'−7 kg, 3 rounds on pads',s2_hl:'5 rounds non-stop',s3_hl:'1st amateur tournament: a win',
+    sn_w:'weeks',sn_s:'sessions',sn_kg:'kg',sn_r:'rounds on pads',sn_sp:'sparring rounds',
+    st_goal:'Goal',st_doubt:'Doubts',st_first:'First sessions',st_res:'Result',
+    s1_a2:'Lose weight after years at a desk and set foot in a gym for the first time.',s2_a2:'Training after running where you have to use your head.',s3_a2:'Add striking to school freestyle wrestling and try MMA.',
+    s1_c2:'Stance, footwork, pads. No sparring until he asked for it himself.',s2_c2:'One-on-one, at her own pace. A partner of her weight came later.',s3_c2:'Arkadii kept his wrestling and built striking around it: a combination, then a takedown.',
+    s1_d2:'Down 7 kg, lasts three rounds on pads, trains twice a week.',s2_d2:'Stamina and confidence. Light sparring once a week, by choice.',s3_d2:'First amateur tournament: a decision win.',
+    vs1:'students have trained at the gym',vs2:'average rating',vs3:'stay after the first month',vs4:'years coaching',
+    pk_cond:'First-intake price: for the first 10 students or until 30 November.',free_line:'The first session is a free get-to-know-you session. You pay for the pack only if you decide to continue.',
+    launch_cta:'Notify me at launch',fs_free:'Free: get-to-know-you session',fs_cta3:'Book the free intro session',
+    rules_2c:'The 12-session pack is paid after the free intro, if you decide to continue, and is valid for 8 weeks.',
+    fq5:'Is the first session paid?',fa5:'No. The first session is a free get-to-know-you: goal, experience, stance, a first combination. You pay for the 12-session pack only if you decide to continue.'
+  });
+  add('hy',{
+    ml3_t2:'18 պրոֆեսիոնալ մենամարտ',ml3_p2:'9 վաղաժամ հաղթանակ՝ 5 տեխնիկական նոկաուտ և 4 ցավոտ հնարք։ Նրան երբեք չեն կանգնեցրել։',edl_note2:'Վաղաժամ՝ 5 տեխնիկական նոկաուտ, 4 ցավոտ հնարք։',
+    bring:'հարմար սպորտային հագուստ, ջուր և սրբիչ։ Կապան պետք կգա ավելի ուշ։',
+    bring_faq:'Առաջին պարապմունքին՝ հարմար սպորտային հագուստ, ջուր և սրբիչ։ Կապան պետք կգա ավելի ուշ, երբ սկսեք զույգերով աշխատել։',
+    st3c:'անվճար ծանոթությանը՝ հագուստ, ջուր, սրբիչ',rules_gym:'Դահլիճի այցելությունը ներառված է արժեքի մեջ։',
+    reel_todo:'Կնկարահանվի դրվագ՝ աշակերտը սխալվում է → Արկադին բացատրում է → աշակերտը նորից է փորձում։ Առայժմ այստեղ թաթերի վրա աշխատանքի արխիվն է։',
+    pl_pre:'Այստեղ են անցնում մարզումները',pl_city:'Երևան',pl_country:'Հայաստան',pl_addr_t:'Հասցե',pl_addr:'The One Gym, Երևան։ Փողոցը և տունը՝ ճշտել',
+    pl_in_t:'Մուտք',pl_in:'Բակից, դահլիճի ցուցանակի մոտ։ Ընդունարանում ասա, որ Արկադիի մոտ ես',pl_h_t:'Ժամեր',pl_h:'Երկ–Շբթ, 10:00–21:00։ Անհատականը՝ նախնական գրանցմամբ',pl_route:'Կառուցել երթուղի',
+    st_photo:'աշակերտի լուսանկար',rv_play:'Դիտել',rv_cap:'տեսակարծիք, 30–60 վ',rv_aria:'Պատմությունների ձևաչափ',rv_photo:'Լուսանկար',rv_video:'Տեսանյութ',
+    s1_hl:'−7 կգ, 3 ռաունդ թաթերի վրա',s2_hl:'5 ռաունդ առանց կանգառի',s3_hl:'1-ին սիրողական մրցաշար՝ հաղթանակ',
+    sn_w:'շաբաթ',sn_s:'պարապմունք',sn_kg:'կգ',sn_r:'ռաունդ թաթերի վրա',sn_sp:'սպարինգի ռաունդ',
+    st_goal:'Նպատակ',st_doubt:'Կասկածներ',st_first:'Առաջին պարապմունքները',st_res:'Արդյունք',
+    s1_a2:'Գրասենյակից հետո նիհարել և առաջին անգամ գալ դահլիճ։',s2_a2:'Վազքից հետո ծանրաբեռնվածություն, որտեղ պետք է գլխով մտածել։',s3_a2:'Դպրոցական ազատ ըմբշամարտին ավելացնել հարվածներ և փորձել MMA։',
+    s1_c2:'Կեցվածք, քայլեր, թաթեր։ Սպարինգ չեղավ, մինչև ինքը չխնդրեց։',s2_c2:'Անհատական, իր տեմպով։ Քաշով համապատասխան զուգընկերը հայտնվեց ավելի ուշ։',s3_c2:'Արկադին պահեց նրա ըմբշամարտը և հարվածային տեխնիկան կառուցեց դրա շուրջ՝ կոմբինացիա, հետո անցում։',
+    s1_d2:'Մինուս 7 կգ, երեք ռաունդ դիմանում է թաթերի վրա, գալիս է շաբաթը երկու անգամ։',s2_d2:'Դիմացկունություն և վստահություն։ Թեթև սպարինգ շաբաթը մեկ՝ ցանկությամբ։',s3_d2:'Առաջին սիրողական մրցաշար՝ հաղթանակ որոշմամբ։',
+    vs1:'աշակերտ է մարզվել դահլիճում',vs2:'միջին գնահատական',vs3:'մնում են առաջին ամսից հետո',vs4:'տարի մարզում է',
+    pk_cond:'Առաջին հավաքի գինը՝ առաջին 10 աշակերտի համար կամ մինչև նոյեմբերի 30-ը։',free_line:'Առաջին պարապմունքը անվճար ծանոթություն է։ Փաթեթը վճարում ես, միայն եթե որոշես շարունակել։',
+    launch_cta:'Տեղեկացնել մեկնարկի մասին',fs_free:'Անվճար՝ ծանոթություն',fs_cta3:'Գրանցվել անվճար ծանոթության',
+    rules_2c:'12 պարապմունքի փաթեթը վճարվում է անվճար ծանոթությունից հետո, եթե որոշես շարունակել, և գործում է 8 շաբաթ։',
+    fq5:'Առաջին պարապմունքը վճարովի՞ է',fa5:'Ոչ։ Առաջին պարապմունքը անվճար ծանոթություն է՝ նպատակ, փորձ, կեցվածք, առաջին կոմբինացիա։ 12 պարապմունքի փաթեթը վճարում ես, միայն եթե որոշես շարունակել։'
+  });
+  /* v13: истории в формате сторис. RU для отзывов живёт здесь (разметка карточек строится из данных в site.js). */
+  var R=D.ui.ru; var ruR={s1_n:'Артём, 34',s1_s:'с нуля · 5 месяцев',s1_q:'Думал, сразу поставят в спарринг. А начали со стойки.',s1_hl:'−7 кг, 3 раунда на лапах',
+    s1_a2:'Сбросить вес после офиса и впервые прийти в зал.',s1_b:'Что сразу поставят в спарринг и будет стыдно.',s1_c2:'Стойка, шаги, лапы. Спарринга не было, пока сам не попросил.',s1_d2:'Минус 7 кг, держит три раунда на лапах, ходит дважды в неделю.',
+    s2_n:'Лилит, 27',s2_s:'для формы · 8 месяцев',s2_q:'Тренируюсь в своём темпе, и это работает.',s2_hl:'5 раундов без остановки',
+    s2_a2:'Нагрузка после бега, где нужно думать головой.',s2_b:'Что будет одна среди мужчин и её не воспримут всерьёз.',s2_c2:'Персонально, в её темпе. Партнёр по весу появился позже.',s2_d2:'Выносливость и уверенность. Лёгкий спарринг раз в неделю, по желанию.',
+    s3_n:'Давид, 22',s3_s:'с опытом · 1 год',s3_q:'Борьбу не сломали, а достроили удары.',s3_hl:'1-й любительский турнир: победа',
+    s3_a2:'Добавить удары к школьной вольной борьбе и попробовать ММА.',s3_b:'Что удары придётся учить с нуля годами.',s3_c2:'Аркадий оставил его борьбу и строил ударку вокруг неё: связка, затем проход.',s3_d2:'Первый любительский турнир: победа решением.',
+    s4_n:'Гор, 41',s4_s:'для здоровья · 3 месяца',s4_q:'В 41 думал, что поздно. Оказалось, нет.',s4_hl:'Спина не болит, 2 раза в неделю',
+    s4_a2:'Вернуть подвижность и форму после сорока, без травм.',s4_b:'Что возраст и старая травма спины не позволят.',s4_c2:'Разминка, стойка, работа на лапах без прыжков. Нагрузку добавляли постепенно.',s4_d2:'Спина не беспокоит, минус 5 кг, тренируется дважды в неделю.',
+    sn_w:'недель',sn_s:'занятий',st_goal:'Цель',st_doubt:'Сомнения',st_first:'Первые занятия',st_res:'Результат',
+    rv_open:'Открыть историю: {name}',rv_vid:'видео',rv_row:'Истории учеников',rv_dlg:'История ученика',rv_prev:'Предыдущая история',rv_next:'Следующая история',rv_close:'Закрыть',rv_more:'Подробнее',rv_less:'Свернуть',rv_count:'История {i} из {n}'};
+  for(var k in ruR) R[k]=ruR[k];
+  add('en',{s4_n:'Gor, 41',s4_s:'for health · 3 months',s4_q:'At 41 I thought it was too late. It wasn’t.',s4_hl:'No back pain, twice a week',
+    s4_a2:'Get mobility and fitness back after forty, without injuries.',s4_b:'That age and an old back injury would get in the way.',s4_c2:'Warm-up, stance, pad work without jumps. Load was added gradually.',s4_d2:'Back no longer bothers him, down 5 kg, trains twice a week.',
+    rv_open:'Open story: {name}',rv_vid:'video',rv_row:'Student stories',rv_dlg:'Student story',rv_prev:'Previous story',rv_next:'Next story',rv_close:'Close',rv_more:'More',rv_less:'Less',rv_count:'Story {i} of {n}'});
+  add('hy',{s4_n:'Գոռ, 41',s4_s:'առողջության համար · 3 ամիս',s4_q:'41-ում կարծում էի՝ ուշ է։ Պարզվեց՝ ոչ։',s4_hl:'Մեջքը չի ցավում, շաբաթը 2 անգամ',
+    s4_a2:'Քառասունից հետո վերադարձնել շարժունությունն ու մարզավիճակը՝ առանց վնասվածքների։',s4_b:'Որ տարիքը և մեջքի հին վնասվածքը թույլ չեն տա։',s4_c2:'Տաքացում, կեցվածք, աշխատանք թաթերով՝ առանց ցատկերի։ Ծանրաբեռնվածությունը ավելացվեց աստիճանաբար։',s4_d2:'Մեջքը չի անհանգստացնում, մինուս 5 կգ, մարզվում է շաբաթը երկու անգամ։',
+    rv_open:'Բացել պատմությունը՝ {name}',rv_vid:'տեսանյութ',rv_row:'Աշակերտների պատմություններ',rv_dlg:'Աշակերտի պատմություն',rv_prev:'Նախորդ պատմությունը',rv_next:'Հաջորդ պատմությունը',rv_close:'Փակել',rv_more:'Մանրամասն',rv_less:'Ծալել',rv_count:'Պատմություն {i}՝ {n}-ից'});
+  /* v13: реальные данные (контакт, адрес) и условия первого занятия без «бесплатно» */
+  D.ui.ru.wa_free='Здравствуйте! Хочу обсудить первое занятие у Аркадия Осипяна.';
+  D.ui.en.wa_free='Hi! I’d like to discuss a first session with Arkadii Osipyan.';
+  D.ui.hy.wa_free='Բարև ձեզ։ Ուզում եմ քննարկել առաջին պարապմունքը Արկադի Օսիպյանի մոտ։';
+  add('en',{fs_free:'First-session terms are discussed',free_line:'First session: terms are discussed when you book.',fs_cta3:'Discuss a first session',
+    rules_2c:'The 12-session pack is valid for 8 weeks.',rules_gym:'Gym entry is paid separately and is not included in the training price.',st3c:'to the first session: kit, water, towel',
+    fq5:'How much is the first session?',fa5:'First-session terms are discussed when you book: message Arkadii and he’ll explain. Gym entry is paid separately.',
+    pl_addr:'The One Gym, Azatutyan Ave 24/15, Yerevan',pl_h:'Check opening hours when you book'});
+  add('hy',{fs_free:'Առաջին պարապմունքի պայմանները քննարկվում են',free_line:'Առաջին պարապմունք՝ պայմանները քննարկվում են գրանցվելիս։',fs_cta3:'Քննարկել առաջին պարապմունքը',
+    rules_2c:'12 պարապմունքի փաթեթը գործում է 8 շաբաթ։',rules_gym:'Դահլիճի մուտքը վճարվում է առանձին և ներառված չէ մարզումների արժեքի մեջ։',st3c:'առաջին պարապմունքին՝ հագուստ, ջուր, սրբիչ',
+    fq5:'Որքա՞ն արժե առաջին պարապմունքը',fa5:'Առաջին պարապմունքի պայմանները քննարկվում են գրանցվելիս՝ գրիր Արկադիին, և նա կբացատրի։ Դահլիճի մուտքը վճարվում է առանձին։',
+    pl_addr:'The One Gym, Ազատության պող. 24/15, Երևան',pl_h:'Աշխատանքային ժամերը ճշտեք գրանցվելիս'});
+  add('en',{gym_alt:'The One Gym: strength machines',gym_alt2:'The One Gym entrance from the street',gym_alt3:'The One Gym logo on the wall',gym_cap:'The One Gym, Azatutyan Ave 24/15. Photos: Yandex Maps',pl_h:'Mon–Fri 7:00–23:00, Sat–Sun 9:00–22:00. Private sessions by appointment'});
+  add('hy',{gym_alt:'The One Gym՝ ուժային մարզասարքեր',gym_alt2:'The One Gym-ի մուտքը փողոցից',gym_alt3:'The One Gym-ի լոգոն պատին',gym_cap:'The One Gym, Ազատության պող. 24/15։ Լուսանկարներ՝ Յանդեքս Քարտեզներ',pl_h:'Երկ–Ուրբ 7:00–23:00, Շբթ–Կիր 9:00–22:00։ Անհատականը՝ նախնական գրանցմամբ'});
+})(window.AO_I18N);

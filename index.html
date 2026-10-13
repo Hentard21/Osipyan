@@ -1,21 +1,26 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Аркадий Осипян, боец и тренер ММА в Ереване</title>
-<meta name="description" content="Аркадий Осипян, профессиональный боец и тренер ММА. Персональные и групповые тренировки в Ереване.">
+<meta name="description" content="Аркадий Осипян, профессиональный боец и тренер ММА. Персональные тренировки в Ереване, групповые занятия скоро.">
 <meta name="theme-color" content="#0d0b09">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="alternate" hreflang="ru" href="https://osipyan.vercel.app/?lang=ru">
+<link rel="alternate" hreflang="en" href="https://osipyan.vercel.app/?lang=en">
+<link rel="alternate" hreflang="hy" href="https://osipyan.vercel.app/?lang=hy">
 <meta property="og:url" content="https://osipyan.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="hy_AM">
 <meta property="og:site_name" content="Аркадий Осипян">
 <meta property="og:title" content="Аркадий Осипян, боец и тренер ММА в Ереване">
-<meta property="og:description" content="Опыт профессионального бойца в твоей тренировке. Персональные и групповые занятия ММА в Ереване.">
+<meta property="og:description" content="Опыт профессионального бойца в твоей тренировке. Пакет из 12 персональных тренировок ММА в Ереване.">
 <meta property="og:image" content="https://osipyan.vercel.app/assets/img/og-1200.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -24,15 +29,22 @@
 <meta name="twitter:image" content="https://osipyan.vercel.app/assets/img/og-1200.jpg">
 <script>
 document.documentElement.classList.add('js');
-/* preload главного начертания только по http(s): через file:// preload с crossorigin падает с CORS-ошибкой, а сам @font-face грузится */
+/* тема и язык до первой отрисовки: без вспышки */
+(function(){var d=document.documentElement,t=null,l=null;try{t=localStorage.getItem('ao-theme');l=localStorage.getItem('ao-lang')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}d.setAttribute('data-theme',t);
+var q=(location.search.match(/[?&]lang=(ru|en|hy)\b/)||[])[1];if(!q){q=(l==='ru'||l==='en'||l==='hy')?l:null}
+if(!q){var n=((navigator.languages&&navigator.languages[0])||navigator.language||'ru').toLowerCase();q=n.indexOf('hy')===0?'hy':(n.indexOf('ru')===0?'ru':(/^(be|uk|kk)/.test(n)?'ru':'en'))}d.setAttribute('lang',q);})();
 if(location.protocol!=='file:'){var l=document.createElement('link');l.rel='preload';l.as='font';l.type='font/woff2';l.crossOrigin='anonymous';l.href='assets/fonts/sofia-sans-xcond.woff2';document.head.appendChild(l);}
 </script>
+<link rel="preload" as="image" href="assets/img/hero-m-1000.webp" type="image/webp" media="(max-width: 900px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero-1440.webp" imagesrcset="assets/img/hero-1440.webp 1440w, assets/img/hero-2400.webp 2400w" imagesizes="100vw" type="image/webp" media="(min-width: 901px)" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-<a class="skip" href="#main">К содержанию</a>
+<a class="skip" href="#main" data-i18n="skip">К содержанию</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="vhs" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%"><feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/><feOffset in="r" dx="2" result="r2"/><feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/><feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 .03  0 0 0 1 0" result="b"/><feOffset in="b" dx="-2" result="b2"/><feBlend in="r2" in2="g" mode="screen" result="rg"/><feBlend in="rg" in2="b2" mode="screen"/></filter><filter id="cool" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values=".88"/><feComponentTransfer><feFuncR type="table" tableValues=".035 .97"/><feFuncG type="table" tableValues=".06 .985"/><feFuncB type="table" tableValues=".11 1"/></feComponentTransfer></filter>
   <defs>
     <!-- hand-drawn grease-pencil circle -->
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12.4c4.6-.2 10.2-.5 15.2-.3M14.3 6.6c1.8 1.9 3.4 3.6 5.2 5.6-1.9 1.7-3.6 3.5-5.4 5.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -45,139 +57,218 @@ if(location.protocol!=='file:'){var l=document.createElement('link');l.rel='prel
 </svg>
 
 <header class="bar" data-bar>
-  <a class="brand" href="#top" aria-label="Аркадий Осипян, в начало">
+  <a class="brand" href="#top" aria-label="Аркадий Осипян, в начало" data-i18n-attr="aria-label:brand_aria">
     <svg class="brand__logo" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewBox="0 0 2016 1072"><g transform="translate(0.000000,1072.000000) scale(0.100000,-0.100000)" fill="currentColor"><path d="M19695 10544 c-33 -7 -145 -22 -250 -34 -104 -11 -224 -27 -265 -35 -68 -13 -233 -34 -383 -50 -73 -7 -112 -26 -137 -68 -19 -31 -20 -57 -14 -1367 6 -1646 3 -1727 -70 -1775 -58 -38 -234 -65 -281 -43 -64 29 -59 -77 -66 1558 -4 1113 -9 1494 -18 1522 -24 75 -77 88 -233 59 -62 -11 -194 -30 -293 -41 -99 -11 -198 -24 -220 -30 -22 -5 -123 -19 -225 -30 -268 -31 -292 -38 -327 -103 -17 -30 -18 -66 -13 -517 7 -731 5 -1093 -9 -1545 -14 -442 -9 -1475 9 -2130 8 -265 8 -404 -1 -525 -21 -296 5 -2986 29 -3028 34 -60 66 -62 282 -22 58 11 173 26 255 35 83 9 200 24 260 35 61 11 173 26 250 35 214 23 224 28 244 115 7 30 11 559 11 1586 0 974 4 1560 10 1593 20 108 70 141 225 148 118 7 146 -4 166 -65 10 -29 13 -380 15 -1587 1 -1013 5 -1561 12 -1581 30 -95 67 -112 194 -90 51 8 167 22 258 31 200 18 303 32 393 51 37 7 140 21 230 30 92 9 174 22 190 31 58 30 55 -76 58 1893 5 2365 5 2409 0 3955 -2 978 0 1358 9 1466 19 234 -4 422 -59 482 -54 59 -113 69 -236 41z"/><path d="M16205 10074 c-16 -3 -124 -16 -240 -30 -115 -14 -239 -32 -275 -40 -36 -8 -164 -23 -285 -33 -121 -11 -258 -29 -305 -40 -95 -22 -209 -36 -415 -51 -77 -6 -185 -21 -240 -34 -55 -13 -140 -31 -188 -40 -177 -33 -403 -142 -488 -234 -104 -114 -151 -251 -169 -503 -6 -79 -15 -175 -21 -214 -13 -93 -13 -2451 0 -2645 10 -152 43 -306 83 -388 51 -108 170 -198 313 -241 122 -36 140 -70 107 -201 -53 -209 -132 -564 -146 -660 -9 -58 -25 -145 -36 -195 -11 -49 -29 -151 -41 -225 -11 -74 -29 -171 -40 -215 -10 -44 -23 -116 -29 -160 -11 -85 -65 -380 -107 -580 -13 -66 -31 -167 -39 -225 -8 -58 -26 -163 -40 -235 -14 -71 -35 -186 -45 -255 -11 -69 -28 -156 -39 -195 -25 -93 -90 -415 -90 -450 0 -44 29 -92 65 -109 44 -21 105 -20 255 4 69 12 284 41 478 65 226 28 365 50 387 61 60 28 76 61 96 207 11 73 26 155 34 183 8 28 23 111 34 185 11 74 31 184 45 244 13 61 30 155 36 210 6 55 22 150 35 210 32 151 33 153 49 300 9 72 24 168 35 215 11 47 28 135 37 195 9 61 26 151 39 200 13 50 31 147 40 215 9 69 31 188 49 265 19 77 39 165 45 196 20 96 51 116 66 42 4 -21 7 -623 6 -1339 -2 -899 1 -1313 8 -1341 17 -61 51 -87 114 -87 110 1 925 101 1021 126 133 34 152 175 113 843 -14 252 -15 394 -4 1375 13 1206 14 1686 2 2190 -11 511 -5 2531 10 2935 10 284 -17 435 -88 479 -22 14 -176 27 -232 20z m-1044 -1350 c56 -28 59 -46 70 -501 16 -601 8 -1366 -13 -1415 -36 -81 -167 -122 -235 -72 -82 60 -86 110 -81 1029 5 832 8 867 64 935 40 47 128 58 195 24z"/><path d="M12595 9580 c-151 -17 -384 -49 -505 -70 -30 -5 -107 -14 -170 -20 -63 -5 -171 -21 -240 -34 -72 -14 -199 -29 -300 -35 -104 -6 -226 -21 -300 -35 -69 -14 -188 -32 -265 -41 -77 -8 -162 -20 -190 -25 -27 -5 -104 -19 -170 -30 -75 -12 -129 -27 -145 -38 -53 -39 -52 -34 -49 -591 2 -284 3 -608 2 -721 -5 -545 -5 -4170 0 -4795 4 -422 2 -836 -4 -1021 -18 -541 -5 -638 93 -665 46 -12 298 10 473 41 61 11 191 29 290 40 360 40 422 56 462 117 20 31 21 69 15 1278 -9 1631 -3 5136 8 5189 22 107 72 150 175 151 69 0 109 -20 127 -63 20 -49 27 -961 20 -2662 -4 -905 -4 -1737 1 -1850 4 -113 6 -479 5 -815 -5 -1113 -5 -1116 15 -1152 29 -54 58 -67 135 -60 137 12 508 58 547 67 22 5 123 19 225 30 271 31 312 43 350 105 45 73 47 141 20 610 -6 113 -6 457 2 1025 9 630 9 1404 1 2940 -5 1147 -7 2186 -4 2310 11 454 9 546 -18 640 -28 98 -77 159 -146 180 -67 20 -284 21 -460 0z"/><path d="M9600 9180 c-58 -4 -195 -21 -305 -39 -238 -37 -440 -67 -514 -76 -151 -17 -181 -55 -212 -267 -11 -79 -29 -181 -39 -228 -10 -47 -26 -143 -34 -215 -16 -129 -37 -269 -101 -670 -19 -115 -39 -257 -45 -315 -6 -58 -24 -177 -40 -265 -16 -88 -36 -225 -45 -305 -9 -80 -24 -199 -35 -265 -10 -66 -23 -156 -29 -200 -17 -135 -39 -167 -60 -87 -18 70 -23 688 -12 1627 6 520 6 960 2 984 -15 74 -47 96 -139 95 -42 -1 -115 -9 -162 -17 -47 -9 -140 -21 -208 -27 -123 -10 -257 -28 -407 -55 -44 -7 -111 -17 -150 -20 -85 -8 -129 -26 -146 -57 -16 -29 -23 -5990 -8 -7033 11 -767 4 -717 90 -744 52 -17 305 5 441 38 43 11 144 24 225 30 196 15 286 27 373 52 141 39 156 56 171 190 5 52 21 148 34 214 13 66 32 176 40 245 9 69 29 193 45 275 15 83 31 184 35 225 3 41 19 158 35 260 67 428 111 714 130 845 69 458 111 612 146 538 15 -31 16 -677 4 -1665 -12 -1018 -14 -974 39 -999 35 -16 239 -13 343 6 255 45 326 56 453 65 146 10 293 40 333 66 53 35 50 -196 50 3804 0 3950 1 3867 -45 3928 -47 64 -87 73 -253 62z"/><path d="M5685 8660 c-82 -10 -190 -25 -240 -33 -49 -9 -124 -19 -165 -22 -162 -14 -369 -37 -450 -50 -47 -8 -159 -24 -250 -35 -91 -11 -194 -29 -230 -40 -36 -10 -103 -26 -150 -35 -136 -27 -273 -99 -369 -194 -160 -158 -206 -297 -222 -676 -26 -614 -26 -6130 0 -6345 43 -349 107 -470 305 -570 87 -44 87 -44 219 -48 103 -4 174 1 327 21 107 15 305 38 439 52 133 14 273 32 310 40 36 7 152 23 256 34 105 12 246 32 315 45 69 14 155 29 191 35 81 13 242 87 320 147 118 90 194 218 231 389 28 132 39 581 41 1635 1 698 -2 896 -12 937 -15 62 -52 99 -109 109 -32 6 -252 -17 -437 -46 -33 -5 -116 -16 -185 -25 -521 -62 -526 -64 -524 -290 11 -1079 2 -1582 -30 -1643 -55 -107 -204 -120 -261 -22 -36 64 -41 505 -34 3295 4 1563 7 1916 18 1945 52 135 217 164 277 49 25 -50 35 -291 34 -874 0 -302 -1 -599 -3 -660 -4 -192 37 -234 211 -214 43 5 129 14 192 20 63 5 135 15 159 20 24 5 160 23 303 39 278 32 310 40 351 89 48 58 48 54 48 1064 0 524 0 963 1 977 5 93 -23 454 -41 521 -49 192 -178 320 -363 364 -84 20 -284 18 -473 -5z"/><path d="M2290 8204 c-102 -8 -257 -27 -345 -44 -88 -17 -227 -37 -310 -45 -82 -8 -172 -20 -200 -25 -27 -5 -147 -21 -265 -35 -140 -17 -241 -34 -290 -50 -41 -13 -106 -31 -144 -40 -191 -43 -371 -186 -451 -359 -75 -162 -78 -196 -94 -986 -5 -256 -14 -629 -21 -830 -13 -376 -9 -793 10 -1200 8 -166 8 -390 -1 -855 -32 -1592 -8 -3032 52 -3225 76 -241 342 -382 644 -341 44 6 145 18 225 26 485 50 1035 121 1160 150 58 13 162 31 231 39 351 41 615 245 690 533 46 176 60 879 62 3123 2 1979 -6 3294 -21 3560 -19 322 -74 443 -247 547 -39 23 -90 47 -115 53 -71 18 -367 20 -570 4z m-500 -1309 c99 -51 102 -147 97 -2960 -5 -2167 -7 -2261 -48 -2337 -63 -114 -212 -116 -272 -4 -22 41 -22 41 -28 1406 -7 1821 6 3695 26 3766 32 113 139 174 225 129z"/></g></svg>
-    <span class="brand__name">Аркадий<span>ММА в Ереване</span></span>
+    <span class="brand__name"><span data-i18n="brand_name">Аркадий</span><span data-i18n="brand_sub">ММА в Ереване</span></span>
   </a>
-  <nav class="nav" id="nav" aria-label="Разделы">
+  <nav class="nav" id="nav" aria-label="Разделы" data-i18n-attr="aria-label:nav_aria">
     <ul>
-      <li><a href="#career">Карьера</a></li>
-      <li><a href="#method">Метод</a></li>
-      <li><a href="#training">Тренировка</a></li>
-      <li><a href="#terms">Условия</a></li>
-      <li><a href="#start">Как начать</a></li>
-      <li><a href="#films">Фильмотека</a></li>
+      <li><a href="#for" data-i18n="nav_for">Для кого</a></li>
+      <li><a href="#coach" data-i18n="nav_coach">Тренер</a></li>
+      <li><a href="#first" data-i18n="nav_first">Первое занятие</a></li>
+      <li><a href="#prices" data-i18n="nav_prices">Цены</a></li>
+      <li><a href="#faq" data-i18n="nav_faq">Вопросы</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Контакт</a></li>
+      <li class="nav__cta"><a class="btn" href="https://wa.me/79891291118" target="_blank" rel="noopener" data-wa="wa_hello"><svg class="ic"><use href="#i-wa"/></svg><span data-i18n="ch_wa">Написать в&nbsp;WhatsApp</span></a></li>
     </ul>
   </nav>
   <div class="bar__right">
+    <div class="langs" role="group" aria-label="Язык" data-i18n-attr="aria-label:lang_aria">
+      <button type="button" class="langs__b" data-lang="ru" lang="ru" aria-label="Русский">RU</button><button type="button" class="langs__b" data-lang="en" lang="en" aria-label="English">EN</button><button type="button" class="langs__b" data-lang="hy" lang="hy" aria-label="Հայերեն">ՀՅ</button>
+    </div>
+    <button class="theme" type="button" data-theme-toggle aria-pressed="false"><span class="theme__ic" aria-hidden="true"></span><span class="sr" data-theme-label>Светлая тема</span></button>
     <button class="motion" type="button" data-motion-toggle aria-pressed="false">
       <span class="motion__ic" aria-hidden="true"></span><span data-motion-label>Пауза</span>
     </button>
-    <a class="btn btn--small bar__cta" href="#contact" data-bar-cta>Написать</a>
+    <a class="btn btn--small bar__cta" href="#contact" data-bar-cta data-i18n="cta_write">Написать</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu>
-      <span class="sr">Меню</span><span class="menu-btn__lines" aria-hidden="true"></span>
+      <span class="sr" data-menu-label>Меню</span><span class="menu-btn__lines" aria-hidden="true"></span>
     </button>
   </div>
 </header>
 
 <main id="main">
 
-<!-- ================= СЦЕНА 01 · HERO ================= -->
+<!-- ================= СЦЕНА 01 · HERO (не трогать) ================= -->
 <section class="hero cine" id="top" data-scene aria-labelledby="hero-title">
   <div class="hero__frame">
     <picture class="hero__media" data-dolly="hero">
       <source media="(max-width: 900px)" srcset="assets/img/hero-m-1000.webp 1000w" sizes="100vw" type="image/webp">
-      <img src="assets/img/hero-1440.webp" srcset="assets/img/hero-1440.webp 1440w, assets/img/hero-2400.webp 2400w" sizes="100vw" width="2400" height="1600" alt="Аркадий Осипян у сетки перед боем, в профиль. Слева — оператор с камерой." fetchpriority="high" decoding="async">
+      <img src="assets/img/hero-1440.webp" srcset="assets/img/hero-1440.webp 1440w, assets/img/hero-2400.webp 2400w" sizes="100vw" width="2400" height="1600" alt="Аркадий Осипян у сетки перед боем, в профиль. Слева — оператор с камерой." data-i18n-attr="alt:hero_alt" fetchpriority="high" decoding="async">
     </picture>
+    <div class="hero__media hero__live" data-dolly="hero" aria-hidden="true"><video data-hero-video muted playsinline loop preload="none" disablepictureinpicture data-src-d="assets/video/hero/hero-1600.mp4" data-src-m="assets/video/hero/hero-m-640.mp4"></video><span class="hero__scan"></span></div>
     <div class="hero__shade" aria-hidden="true"></div>
     <div class="hero__bloom" aria-hidden="true"></div>
 
     <div class="hero__copy">
-      <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Боец и тренер ММА в Ереване</p>
-      <h1 class="hero__name" id="hero-title" aria-label="Аркадий Осипян">
-        <span class="develop" style="--d:0" aria-hidden="true">Аркадий</span>
-        <span class="develop" style="--d:1" aria-hidden="true">Осипян</span>
+      <p class="eyebrow"><span class="rule" aria-hidden="true"></span><span data-i18n="hero_eyebrow">Боец и тренер ММА в Ереване</span></p>
+      <h1 class="hero__name" id="hero-title" aria-label="Аркадий Осипян" data-i18n-attr="aria-label:name_full">
+        <span class="develop" style="--d:0" aria-hidden="true" data-i18n="name_1">Аркадий</span>
+        <span class="develop" style="--d:1" aria-hidden="true" data-i18n="name_2">Осипян</span>
       </h1>
-      <p class="hero__lead develop-soft">Опыт профессионального бойца — в&nbsp;твоей тренировке.</p>
-      <p class="hero__sub develop-soft" data-verify="hero-title">Экс-чемпион Hardcore MMA<span class="hero__sub-more">. Полулёгкий вес, левша.</span> <span class="vf">[сверить]</span></p>
+      <p class="hero__lead develop-soft" data-i18n="hero_lead">Опыт профессионального бойца — в&nbsp;твоей тренировке.</p>
+      <p class="hero__sub develop-soft" data-verify="hero-title"><span data-i18n="hero_sub">Экс-чемпион Hardcore MMA</span><span class="hero__sub-more" data-i18n="hero_sub_more">. Полулёгкий вес, левша.</span> <span class="vf">[сверить]</span></p>
       <div class="hero__actions develop-soft">
-        <a class="btn" href="#contact">Написать Аркадию</a>
-        <button class="link-play" type="button" data-open-video><svg class="ic"><use href="#i-play"/></svg><span>Смотреть тренировку</span><span class="tc-mini">0:30</span></button>
+        <a class="btn" href="#contact" data-i18n="cta_first">Обсудить первое занятие</a>
+        <button class="link-play" type="button" data-open-video><svg class="ic"><use href="#i-play"/></svg><span data-i18n="watch">Смотреть тренировку</span><span class="tc-mini">0:30</span></button>
       </div>
     </div>
   </div>
 
   <div class="slate slate--hero" aria-hidden="true">
     <span class="clap"></span>
-    <span class="slate__scene">Сц. 01</span>
-    <span class="slate__title">Перед выходом</span>
-    <span class="slate__meta">Архивный кадр</span>
-    <span class="slate__take">Дубль <b class="grease">1</b></span>
+    <span class="slate__scene"><span data-i18n="sc">Сц.</span> 01</span>
+    <span class="slate__title" data-i18n="sl_hero">Перед выходом</span>
+    <span class="slate__meta" data-i18n="sl_archive">Архивный кадр</span>
+    <span class="slate__take"><span data-i18n="take">Дубль</span> <b class="grease">1</b></span>
     <span class="slate__tc" data-tc-global>00:00:00:00</span>
   </div>
 </section>
 
-<!-- ================= СЦЕНА 02 · КАРЬЕРА ================= -->
-<section class="career cine" id="career" data-scene aria-labelledby="career-title">
-  <div class="splice" aria-hidden="true"><span>Склейка</span><i></i><span data-tc-start>00:00:00:00</span></div>
-  <div class="slate"><span class="clap" aria-hidden="true"></span><span class="slate__scene">Сц. 02</span><span class="slate__title">Карьера</span><span class="slate__take">Монтаж в трёх актах</span></div>
-
-  <div class="wrap career__head">
-    <h2 class="display" id="career-title">Сначала<br>были бои</h2>
-    <div class="career__intro">
-      <p class="lead">В единоборства пришёл сам, в&nbsp;17&nbsp;лет. <span data-verify="profile">Левша, полулёгкий вес, до&nbsp;66&nbsp;кг. Выступает за&nbsp;Армению и&nbsp;Россию.</span> <span class="vf">[сверить]</span></p>
-      <dl class="record" data-verify="record" data-odo>
-        <div><dt>Рекорд в&nbsp;профи</dt><dd>10–8</dd></div>
-        <div><dt>Финишей</dt><dd>9</dd></div>
-        <div><dt>Досрочных поражений</dt><dd>0</dd></div>
-        <div class="record__tag"><dt class="sr">Примечание</dt><dd>Все 8 поражений по&nbsp;решению судей. <span class="vf">[сверить]</span></dd></div>
-      </dl>
+<!-- ================= 2 · ТРЕНИРОВКА ДЛЯ МЕНЯ ================= -->
+<section class="cast cine" id="for" data-scene aria-labelledby="for-title">
+  <p class="kicker"><span data-i18n="sl_for">Для кого</span></p>
+  <div class="wrap cast__grid">
+    <div class="cast__main">
+      <h2 class="display" id="for-title" data-i18n="for_title">Тренировки<br>для тебя</h2>
+      <p class="lead" data-i18n="for_lead2">Опыт не нужен. Темп и нагрузку Аркадий подбирает под тебя, спарринг и бои — только когда ты сам решишь.</p>
+      <ul class="roles roles--3" data-placeholder="roles">
+        <li class="role"><span class="role__no">01</span><h3 data-i18n="r1_t">С нуля</h3><p data-i18n="r1_p2">Никогда не тренировался. Начинаем со стойки, шагов и дыхания.</p></li>
+        <li class="role"><span class="role__no">02</span><h3 data-i18n="r2_t">Для формы</h3><p data-i18n="r2_p2">Выносливость, сила и голова на плечах. В клетку выходить не нужно.</p></li>
+        <li class="role"><span class="role__no">03</span><h3 data-i18n="r3_t2">С опытом</h3><p data-i18n="r3_p2">Был бокс, борьба или ММА. Чистим технику, раунды в темпе боя, при желании — подготовка к первому выходу.</p></li>
+      </ul>
+      <p class="note-ph" data-placeholder="roles-note"><span class="ph">[заглушка]</span> <span data-i18n="roles_note">Профили — черновик, сверить с Аркадием.</span></p>
+    </div>
+    <div class="teach">
+      <div class="reel" data-cut>
+      <div class="reel__frame">
+        <video class="reel__video" data-loop muted playsinline loop preload="none" poster="assets/video/pads-poster.webp" aria-label="Фрагмент архивной записи: работа на лапах, без звука" data-i18n-attr="aria-label:loop_aria">
+          <source src="assets/video/pads-loop.mp4" type="video/mp4; codecs=avc1.64001f">
+          <source src="assets/video/pads-loop.webm" type="video/webm; codecs=vp9">
+        </video>
+        <button class="reel__open" type="button" data-open-video aria-label="Открыть запись тренировки на весь экран" data-i18n-attr="aria-label:open_aria"></button>
+        <span class="reel__rec" aria-hidden="true"><i></i><span data-i18n="frag">Фрагмент</span>&nbsp;0:12–0:18</span>
+        <span class="reel__tc" aria-hidden="true" data-loop-tc>00:00:12:00</span>
+      </div>
+      <p class="reel__cap" data-i18n="reel_cap">Архив. 9:16, 30 с.</p>
+      <p class="reel__todo" data-placeholder="teach-film"><span class="ph">[заглушка]</span> <span data-i18n="reel_todo">Будет снят эпизод: ученик ошибается → Аркадий объясняет → ученик пробует снова. Пока здесь архив на лапах.</span></p>
+    </div>
+      <div class="teach__body">
+        <h3 class="teach__t" data-i18n="teach_t">Как он учит</h3>
+        <ol class="teach__steps" data-placeholder="teach">
+          <li><b data-i18n="te1_t">Показывает</b><span data-i18n="te1">Одна связка, медленно: откуда идёт удар и куда встают ноги.</span></li>
+          <li><b data-i18n="te2_t">Замечает</b><span data-i18n="te2">Ты опускаешь руку после джеба — он останавливает раунд и показывает, где открылся.</span></li>
+          <li><b data-i18n="te3_t">Исправляет</b><span data-i18n="te3">Три повтора медленно, потом в темпе. Получилось — идём дальше.</span></li>
+        </ol>
+        <p class="note-ph" data-placeholder="teach-note"><span class="ph">[заглушка]</span> <span data-i18n="teach_note">Пример — черновик. Нужен ролик, где Аркадий исправляет ошибку ученика.</span></p>
+        <button class="btn btn--ghost" type="button" data-open-video><svg class="ic"><use href="#i-play"/></svg><span data-i18n="tr_open">Открыть на весь экран</span></button>
+      </div>
     </div>
   </div>
+</section>
 
+<!-- ================= 3 · ДОВЕРИЕ К ТРЕНЕРУ ================= -->
+<section class="coach cine" id="coach" data-scene aria-labelledby="coach-title">
+  <p class="kicker"><span data-i18n="sl_coach">Почему Аркадий</span></p>
+  <div class="wrap coach__head">
+    <h2 class="display" id="coach-title" data-i18n="c_title">Сначала<br>были бои</h2>
+    <p class="lead"><span data-verify="profile" data-i18n="c_profile">Левша, полулёгкий вес, до&nbsp;66&nbsp;кг. Выступает за&nbsp;Армению и&nbsp;Россию.</span> <span class="vf">[сверить]</span></p>
+  </div>
+  <ol class="wrap miles">
+    <li class="mile" data-verify="belt">
+      <figure class="mile__ph mile__ph--belt"><img src="assets/img/t-belt-900.webp" width="900" height="1092" alt="Аркадий Осипян с поясом в зале" data-i18n-attr="alt:belt_alt" loading="lazy" decoding="async"></figure>
+      <div class="mile__body"><p class="mile__y"><span class="cut__year">2023</span> <span class="vf">[сверить]</span></p><h3 data-i18n="f5_t">Пояс Hardcore MMA</h3><p data-i18n="ml1_p">HFC&nbsp;60: удушение сзади в&nbsp;4-м раунде. До этого два пятираундовых титульных боя ушли судьям, и&nbsp;он вернулся за&nbsp;поясом.</p></div>
+    </li>
+    <li class="mile" data-verify="aca-run">
+      <figure class="mile__ph mile__ph--aca"><img src="assets/img/t-aca-1100.webp" width="1100" height="1052" alt="Обмен ударами в клетке лиги ACA" data-i18n-attr="alt:aca_alt" loading="lazy" decoding="async"></figure>
+      <div class="mile__body"><p class="mile__y"><span class="cut__year">2020–21</span> <span class="vf">[сверить]</span></p><h3 data-i18n="ml2_t">Серия в&nbsp;ACA</h3><p data-i18n="ml2_p">Три победы сдачей подряд в&nbsp;одной из&nbsp;сильнейших лиг: Young Eagles&nbsp;15, ACA&nbsp;119 и&nbsp;ACA&nbsp;127.</p></div>
+    </li>
+    <li class="mile mile--rec">
+      <dl class="record" data-verify="record" data-odo>
+        <div><dt data-i18n="rec_pro">Рекорд в&nbsp;профи</dt><dd data-value="10–8">10–8</dd></div>
+        <div><dt data-i18n="rec_fin">Финишей</dt><dd data-value="9">9</dd></div>
+        <div><dt data-i18n="rec_stop">Досрочных поражений</dt><dd data-value="0">0</dd></div>
+      </dl>
+      <div class="mile__body"><h3 data-i18n="ml3_t2">18 боёв в&nbsp;профи</h3><p data-i18n="ml3_p2">9 побед досрочно: 5 технических нокаутов и&nbsp;4 сдачи. Его ни&nbsp;разу не остановили.</p></div>
+    </li>
+  </ol>
+  <div class="wrap approach">
+    <figure class="approach__photo">
+      <img src="assets/img/c-back-1200.webp" width="1200" height="1500" alt="Аркадий со спины в футболке Lion Heart Team с надписью Arkadii Osipyan, в перчатках" data-i18n-attr="alt:back_alt" loading="lazy" decoding="async">
+      <figcaption data-i18n="back_cap">Имя на спине. Работа впереди.</figcaption>
+    </figure>
+    <div class="approach__body">
+      <h3 class="approach__t" data-i18n="ap_t">Как он ведёт тренировку</h3>
+      <ol class="principles" data-placeholder="principles">
+        <li><h4 data-i18n="p2_t">Каждый раунд — с разбором</h4><p data-i18n="p2_p">Что сработало, что нет. Коротко и по делу.</p></li>
+        <li><h4 data-i18n="ap2_t">Техника как у профи</h4><p data-i18n="ap2_p">Нагрузка под твой уровень, а требования к технике те же, что в его лагере. Без крика.</p></li>
+        <li><h4 data-i18n="ap3_t">План, а не набор упражнений</h4><p data-i18n="ap3_p">После первого занятия — план на месяц. Каждые 4 недели смотрим, что изменилось.</p></li>
+      </ol>
+      <div class="said said--ph" data-placeholder="teaching-words">
+        <p class="said__label"><span data-i18n="own_words">Своими словами</span> <span class="ph">[заглушка]</span></p>
+        <blockquote class="said__q"><p data-i18n="own_q">«Здесь будут слова Аркадия о том, как он учит: с чего начинает новичка, что требует, за что хвалит».</p><footer data-i18n="own_f">Записать с Аркадием</footer></blockquote>
+      </div>
+      <p class="note-ph" data-placeholder="method-copy"><span class="ph">[заглушка]</span> <span data-i18n="m_note">Формулировки ниже пока черновик. Согласовать с Аркадием.</span></p>
+    </div>
+  </div>
+  <details class="story wrap" id="career">
+    <summary class="story__sum"><span class="story__t" data-i18n="story_t">Вся история и&nbsp;все бои</span><span class="story__meta" data-i18n="story_m">2016 — сейчас · 18 боёв</span><span class="edl__toggle" aria-hidden="true"></span></summary>
+    <div class="story__body">
+      <p class="lead"><span data-i18n="c_lead">В единоборства пришёл сам, в&nbsp;17&nbsp;лет.</span></p>
   <div class="acts wrap">
     <section class="act act--1" aria-labelledby="act-1">
-      <h3 class="act__label" id="act-1"><span>Акт I</span>Начало</h3>
+      <h3 class="act__label" id="act-1"><span data-i18n="act1_n">Раунд I</span><span class="act__name" data-i18n="act1">Начало</span></h3>
       <div class="act__frames">
         <figure class="frame" data-cut>
-          <div class="shot" data-dolly><img src="assets/img/t-young-900.webp" width="900" height="900" alt="Молодой Аркадий Осипян, профессиональная фотосессия" loading="lazy" decoding="async"></div>
-          <figcaption class="frame__cap" data-verify="debut"><span class="cut__year">2016</span> <span class="vf">[сверить]</span><h4>Первый бой в&nbsp;профи</h4><p>Battle on the Kuban 3, 4&nbsp;декабря. Победа техническим нокаутом. Ещё любителем стал чемпионом ЮФО по&nbsp;ММА и&nbsp;грэпплингу.</p></figcaption>
+          <div class="shot" data-dolly><img src="assets/img/t-young-900.webp" width="900" height="900" alt="Молодой Аркадий Осипян, профессиональная фотосессия" data-i18n-attr="alt:young_alt" loading="lazy" decoding="async"></div>
+          <figcaption class="frame__cap" data-verify="debut"><span class="cut__year">2016</span> <span class="vf">[сверить]</span><h4 data-i18n="f1_t">Первый бой в&nbsp;профи</h4><p data-i18n="f1_p">Battle on the Kuban 3, 4&nbsp;декабря. Победа техническим нокаутом. Ещё любителем стал чемпионом ЮФО по&nbsp;ММА и&nbsp;грэпплингу.</p></figcaption>
         </figure>
       </div>
     </section>
     <section class="act act--2" aria-labelledby="act-2">
-      <h3 class="act__label" id="act-2"><span>Акт II</span>Клетка</h3>
+      <h3 class="act__label" id="act-2"><span data-i18n="act2_n">Раунд II</span><span class="act__name" data-i18n="act2">Клетка</span></h3>
       <div class="act__frames">
         <figure class="frame frame--lead" data-cut>
-          <div class="shot" data-dolly><img src="assets/img/t-walkout-1100.webp" width="1100" height="1100" alt="Выход к клетке: Аркадий впереди, за ним команда с флагом Армении" loading="lazy" decoding="async"></div>
-          <figcaption class="frame__cap" data-verify="gfc13"><span class="cut__year">2019</span> <span class="vf">[сверить]</span><h4>Выход под флагом</h4><p>GFC&nbsp;13: технический нокаут во&nbsp;втором раунде. Армения за&nbsp;спиной, команда рядом.</p></figcaption>
+          <div class="shot" data-dolly><img src="assets/img/t-walkout-1100.webp" width="1100" height="1100" alt="Выход к клетке: Аркадий впереди, за ним команда с флагом Армении" data-i18n-attr="alt:walk_alt" loading="lazy" decoding="async"></div>
+          <figcaption class="frame__cap" data-verify="gfc13"><span class="cut__year">2019</span> <span class="vf">[сверить]</span><h4 data-i18n="f2_t">Выход под флагом</h4><p data-i18n="f2_p">GFC&nbsp;13: технический нокаут во&nbsp;втором раунде. Армения за&nbsp;спиной, команда рядом.</p></figcaption>
         </figure>
         <figure class="frame" data-cut>
-          <div class="shot" data-dolly><img src="assets/img/t-aca-1100.webp" width="1100" height="1052" alt="Обмен ударами в клетке лиги ACA" loading="lazy" decoding="async"></div>
-          <figcaption class="frame__cap" data-verify="aca-run"><span class="cut__year">2020–21</span> <span class="vf">[сверить]</span><h4>Клетка ACA</h4><p>Три сдачи подряд. На ACA&nbsp;119 «анаконда» в&nbsp;первом раунде, на ACA&nbsp;127 снова удушение.</p></figcaption>
+          <div class="shot" data-dolly><img src="assets/img/t-aca-1100.webp" width="1100" height="1052" alt="Обмен ударами в клетке лиги ACA" data-i18n-attr="alt:aca_alt" loading="lazy" decoding="async"></div>
+          <figcaption class="frame__cap" data-verify="aca-run"><span class="cut__year">2020–21</span> <span class="vf">[сверить]</span><h4 data-i18n="f3_t">Клетка ACA</h4><p data-i18n="f3_p">Три сдачи подряд. На ACA&nbsp;119 «анаконда» в&nbsp;первом раунде, на ACA&nbsp;127 снова удушение.</p></figcaption>
         </figure>
         <figure class="frame" data-cut>
-          <div class="shot" data-dolly><img src="assets/img/t-victory-1100.webp" width="1100" height="923" alt="Рефери поднимает руку Аркадия после боя" loading="lazy" decoding="async"></div>
-          <figcaption class="frame__cap" data-verify="aca-ye15"><span class="cut__year">2020</span> <span class="vf">[сверить]</span><h4>Рука вверх</h4><p>ACA Young Eagles&nbsp;15. Удушение сзади в&nbsp;третьем раунде, с&nbsp;него началась серия.</p></figcaption>
+          <div class="shot" data-dolly><img src="assets/img/t-victory-1100.webp" width="1100" height="923" alt="Рефери поднимает руку Аркадия после боя" data-i18n-attr="alt:vic_alt" loading="lazy" decoding="async"></div>
+          <figcaption class="frame__cap" data-verify="aca-ye15"><span class="cut__year">2020</span> <span class="vf">[сверить]</span><h4 data-i18n="f4_t">Рука вверх</h4><p data-i18n="f4_p">ACA Young Eagles&nbsp;15. Удушение сзади в&nbsp;третьем раунде, с&nbsp;него началась серия.</p></figcaption>
         </figure>
       </div>
     </section>
     <section class="act act--3" aria-labelledby="act-3">
-      <h3 class="act__label" id="act-3"><span>Акт III</span>Угол</h3>
+      <h3 class="act__label" id="act-3"><span data-i18n="act3_n">Раунд III</span><span class="act__name" data-i18n="act3">Угол</span></h3>
       <div class="act__frames">
         <figure class="frame frame--belt" data-cut>
-          <div class="shot" data-dolly><img src="assets/img/t-belt-900.webp" width="900" height="1092" alt="Аркадий Осипян с поясом в зале" loading="lazy" decoding="async"></div>
-          <figcaption class="frame__cap" data-verify="belt"><span class="cut__year">2023</span> <span class="vf">[сверить]</span><h4>Пояс Hardcore MMA</h4><p>Два титульных боя по&nbsp;пять раундов, FEN&nbsp;37 и&nbsp;AMC Fight Nights&nbsp;115, ушли судьям. Третий он закончил сам: HFC&nbsp;60, удушение сзади, 4-й раунд, 3:10.</p></figcaption>
+          <div class="shot" data-dolly><img src="assets/img/t-belt-900.webp" width="900" height="1092" alt="Аркадий Осипян с поясом в зале" data-i18n-attr="alt:belt_alt" loading="lazy" decoding="async"></div>
+          <figcaption class="frame__cap" data-verify="belt"><span class="cut__year">2023</span> <span class="vf">[сверить]</span><h4 data-i18n="f5_t">Пояс Hardcore MMA</h4><p data-i18n="f5_p">Два титульных боя по&nbsp;пять раундов, FEN&nbsp;37 и&nbsp;AMC Fight Nights&nbsp;115, ушли судьям. Третий он закончил сам: HFC&nbsp;60, удушение сзади, 4-й раунд, 3:10.</p></figcaption>
         </figure>
         <figure class="frame frame--team" data-cut>
-          <div class="shot" data-dolly><img src="assets/img/t-team-1100.webp" width="1100" height="1100" alt="Аркадий с поясами и товарищами по команде в зале" loading="lazy" decoding="async"></div>
-          <figcaption class="frame__cap"><span class="cut__year cut__year--now">Сейчас</span><h4>Угол тренера</h4><p><span data-verify="hfc90">HFC&nbsp;90, 2024: остановил Али Хейбати в&nbsp;первом раунде.</span> <span class="vf">[сверить]</span> Теперь он ещё и&nbsp;в&nbsp;углу. Тренирует в&nbsp;Ереване.</p></figcaption>
+          <div class="shot" data-dolly><img src="assets/img/t-team-1100.webp" width="1100" height="1100" alt="Аркадий с поясами и товарищами по команде в зале" data-i18n-attr="alt:team_alt" loading="lazy" decoding="async"></div>
+          <figcaption class="frame__cap"><span class="cut__year cut__year--now" data-i18n="now">Сейчас</span><h4 data-i18n="f6_t">Угол тренера</h4><p><span data-verify="hfc90" data-i18n="f6_v">HFC&nbsp;90, 2024: остановил Али Хейбати в&nbsp;первом раунде.</span> <span class="vf">[сверить]</span> <span data-i18n="f6_p">Теперь он ещё и&nbsp;в&nbsp;углу. Тренирует в&nbsp;Ереване.</span></p></figcaption>
         </figure>
       </div>
     </section>
   </div>
-  <div class="said said--career wrap" data-verify="quotes">
-    <p class="said__label">Из интервью <span class="vf">[сверить]</span></p>
-    <blockquote class="said__q"><p>«Я один раз попробовал, это была очень сложная сгонка, просто жесть… Понял, что это не мой вес».</p><footer>О сгонке до 63&nbsp;кг</footer></blockquote>
-    <blockquote class="said__q"><p>«Я практически всегда подписывал контракт только на один бой… Я думаю о дальнейшей карьере, а не про заработки здесь и сейчас».</p><footer>О контрактах</footer></blockquote>
-  </div>
-  <details class="edl wrap" data-verify="fights">
-    <summary class="edl__sum"><span class="edl__title">Монтажный лист</span><span class="edl__meta">18 боёв, 10–8</span> <span class="vf">[сверить]</span><span class="edl__toggle" aria-hidden="true"></span></summary>
-    <div class="edl__body">
-      <table class="edl__table">
-        <caption class="sr">Все профессиональные бои Аркадия Осипяна по порядку</caption>
-        <thead><tr><th scope="col">№</th><th scope="col">Дата</th><th scope="col">Турнир</th><th scope="col">Соперник</th><th scope="col">Итог</th><th scope="col">Метод</th><th scope="col">Раунд, время</th></tr></thead>
-        <tbody>
+  <div class="aftercut wrap">
+    <div class="said said--career" data-verify="quotes">
+      <p class="said__label"><span data-i18n="from_int">Из интервью</span> <span class="vf">[сверить]</span></p>
+      <blockquote class="said__q"><p data-i18n="q_cut">«Я один раз попробовал, это была очень сложная сгонка, просто жесть… Понял, что это не мой вес».</p><footer data-i18n="q_cut_f">О сгонке до 63&nbsp;кг</footer></blockquote>
+      <blockquote class="said__q"><p data-i18n="q_con">«Я практически всегда подписывал контракт только на один бой… Я думаю о дальнейшей карьере, а не про заработки здесь и сейчас».</p><footer data-i18n="q_con_f">О контрактах</footer></blockquote>
+    </div>
+    <details class="edl" data-verify="fights">
+      <summary class="edl__sum"><span class="edl__title" data-i18n="edl_t">Все бои</span><span class="edl__meta"><span data-i18n="edl_meta">18 боёв</span>, 10–8</span> <span class="vf">[сверить]</span><span class="edl__toggle" aria-hidden="true"></span></summary>
+      <div class="edl__body">
+        <table class="edl__table">
+          <caption class="sr" data-i18n="edl_cap">Все профессиональные бои Аркадия Осипяна по порядку</caption>
+          <thead><tr><th scope="col">№</th><th scope="col" data-i18n="th_date">Дата</th><th scope="col" data-i18n="th_ev">Турнир</th><th scope="col" data-i18n="th_op">Соперник</th><th scope="col" data-i18n="th_res">Итог</th><th scope="col" data-i18n="th_how">Метод</th><th scope="col" data-i18n="th_rt">Раунд, время</th></tr></thead>
+          <tbody>
           <tr class="edl__r edl__r--w"><td class="edl__no">001</td><td class="edl__date">04.12.2016</td><td class="edl__ev">Battle on the Kuban 3</td><td class="edl__op">Станислав Нанаев</td><td class="edl__res">Победа</td><td class="edl__how">Технический нокаут</td><td class="edl__rt">R2&nbsp;0:20</td></tr>
           <tr class="edl__r edl__r--l"><td class="edl__no">002</td><td class="edl__date">28.05.2017</td><td class="edl__ev">Battle on the Kuban 4</td><td class="edl__op">Амиран Дзнеладзе</td><td class="edl__res">Поражение</td><td class="edl__how">Раздельное решение</td><td class="edl__rt">R3&nbsp;5:00</td></tr>
           <tr class="edl__r edl__r--w"><td class="edl__no">003</td><td class="edl__date">11.11.2018</td><td class="edl__ev">MPF: 30 Years Later</td><td class="edl__op">Арсений Азамат</td><td class="edl__res">Победа</td><td class="edl__how">Технический нокаут, отказ угла</td><td class="edl__rt">R1&nbsp;5:00</td></tr>
@@ -197,292 +288,231 @@ if(location.protocol!=='file:'){var l=document.createElement('link');l.rel='prel
           <tr class="edl__r edl__r--l"><td class="edl__no">017</td><td class="edl__date">10.03.2025</td><td class="edl__ev">MMA Series 89</td><td class="edl__op">Илья Мельников</td><td class="edl__res">Поражение</td><td class="edl__how">Единогласное решение</td><td class="edl__rt">R3&nbsp;5:00</td></tr>
           <tr class="edl__r edl__r--l"><td class="edl__no">018</td><td class="edl__date">06.06.2026</td><td class="edl__ev">BetCity Fight Nights 138</td><td class="edl__op">Максим Широян</td><td class="edl__res">Поражение</td><td class="edl__how">Единогласное решение</td><td class="edl__rt">R3&nbsp;5:00</td></tr>
         </tbody>
-      </table>
-      <p class="edl__note">Досрочно: 5 технических нокаутов, 4 сдачи. Поражения только по&nbsp;решению.</p>
+        </table>
+        <p class="edl__note" data-i18n="edl_note2">Досрочно: 5 технических нокаутов, 4 сдачи.</p>
+      </div>
+    </details>
+  </div>
     </div>
   </details>
 </section>
 
-<!-- ================= СЦЕНА 03 · МЕТОД ================= -->
-<section class="method cine" id="method" data-scene aria-labelledby="method-title">
-  <div class="slate"><span class="clap" aria-hidden="true"></span><span class="slate__scene">Сц. 03</span><span class="slate__title">Как он тренирует</span><span class="slate__take">Крупный план</span></div>
-
-  <div class="wrap method__grid">
-    <figure class="method__photo shot" data-dolly data-cut>
-      <img src="assets/img/c-back-1200.webp" width="1200" height="1500" alt="Аркадий со спины в футболке Lion Heart Team с надписью Arkadii Osipyan, в перчатках" loading="lazy" decoding="async">
-      <figcaption>Имя на спине. Работа впереди.</figcaption>
-    </figure>
-    <div class="method__body">
-      <h2 class="display" id="method-title">Стойка.<br>Удар.<br>Голова.</h2>
-      <div class="said said--ph" data-placeholder="teaching-words">
-        <p class="said__label">Своими словами <span class="ph">[заглушка]</span></p>
-        <blockquote class="said__q"><p>«Здесь будут слова Аркадия о том, как он учит: с чего начинает новичка, что требует, за что хвалит».</p><footer>Записать с Аркадием</footer></blockquote>
-      </div>
-      <p class="note-ph" data-placeholder="method-copy"><span class="ph">[заглушка]</span> Формулировки ниже пока черновик. Согласовать с Аркадием.</p>
-      <ol class="principles" data-placeholder="principles">
-        <li><h3>Сначала стойка</h3><p>Без неё удар — просто взмах. Первые недели — ноги, баланс, дистанция.</p></li>
-        <li><h3>Каждый раунд — с разбором</h3><p>Что сработало, что нет. Коротко и по делу.</p></li>
-        <li><h3>Темп — твой</h3><p>Нагрузка — под уровень. Требования — одинаковые для всех.</p></li>
-        <li><h3>Бой не обязателен</h3><p>Можно тренироваться для себя. Можно — к первому выходу в клетку.</p></li>
+<!-- ================= 4 · ПЕРВОЕ ЗАНЯТИЕ ================= -->
+<section class="fs cine" id="first" data-scene aria-labelledby="first-title">
+  <p class="kicker"><span data-i18n="first_t">Первое занятие</span></p>
+  <div class="wrap fs__grid">
+    <div class="fs__main">
+      <h2 class="display" id="first-title" data-i18n="fs_title">Что будет<br>в&nbsp;первый раз</h2>
+      <dl class="fs__facts">
+        <div><dt data-i18n="fs_len_t">Длительность</dt><dd data-i18n="first_len">60 минут</dd></div>
+        <div><dt data-i18n="fs_price_t">Стоимость</dt><dd><span data-i18n="fs_free">Условия первого занятия обсуждаются</span></dd></div>
+        <div><dt data-i18n="fs_fmt_t">Формат</dt><dd data-i18n="fs_fmt">1 на 1 с Аркадием</dd></div>
+      </dl>
+      <ol class="tl" data-placeholder="first-lesson">
+        <li><span class="tl__tc">00:00</span><span data-i18n="tl1">Знакомство: цель, опыт, старые травмы.</span></li>
+        <li><span class="tl__tc">00:10</span><span data-i18n="tl2">Разминка и стойка.</span></li>
+        <li><span class="tl__tc">00:20</span><span data-i18n="tl3">Шаги и дистанция.</span></li>
+        <li><span class="tl__tc">00:35</span><span data-i18n="tl4">Удары на лапах, первая связка.</span></li>
+        <li><span class="tl__tc">00:50</span><span data-i18n="tl5">Разбор и план на первый месяц.</span></li>
       </ol>
+      <p class="first__free"><span data-i18n="free_line">Первое занятие: условия обсуждаются при записи.</span> <span class="ph">[заглушка]</span></p>
+      <p class="first__bring"><b data-i18n="fs_bring_t">С собой</b> <span data-i18n="bring">удобная спортивная форма, вода и&nbsp;полотенце. Капа понадобится позже.</span> <span data-placeholder="gear"><span data-i18n="gear">Перчатки на первое занятие дадут в зале.</span> <span class="ph">[заглушка]</span></span></p>
+      <a class="btn" href="https://wa.me/79891291118" target="_blank" rel="noopener" data-wa="wa_free"><svg class="ic"><use href="#i-wa"/></svg><span data-i18n="fs_cta3">Обсудить первое занятие</span></a>
     </div>
+    <figure class="fs__photo" data-placeholder="photo-coach">
+      <img src="assets/img/p-coach-900.webp" width="900" height="844" alt="Аркадий с учениками в зале" data-i18n-attr="alt:coach_alt" loading="lazy" decoding="async">
+      <figcaption><span class="ph">[заглушка]</span> <span data-i18n="coach_cap">Здесь будет фото: Аркадий ставит стойку новичку</span></figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- ================= СЦЕНА 04 · ТРЕНИРОВКА ================= -->
-<section class="training cine" id="training" data-scene aria-labelledby="training-title">
+<!-- ================= 5 · ФОРМАТЫ И УСЛОВИЯ (карусель форматов + живой ТВ-фон) ================= -->
+<section class="terms paper cine terms--live" id="prices" data-scene aria-labelledby="prices-title">
 
-  <div class="wrap training__grid">
-    <div class="training__copy">
-      <h2 class="display" id="training-title">Тридцать<br>секунд<br>работы</h2>
-      <p class="lead">Работа на лапах. Архивная запись без звука. Смотри на&nbsp;ноги и&nbsp;дистанцию.</p>
-      <button class="btn btn--ghost" type="button" data-open-video><svg class="ic"><use href="#i-play"/></svg>Открыть на весь экран</button>
-    </div>
-    <div class="reel" data-cut>
-      <div class="reel__frame">
-        <video class="reel__video" data-loop muted playsinline loop preload="none" poster="assets/video/pads-poster.webp" aria-label="Фрагмент архивной записи: работа на лапах, без звука">
-          <source src="assets/video/pads-loop.mp4" type="video/mp4; codecs=avc1.64001f">
-          <source src="assets/video/pads-loop.webm" type="video/webm; codecs=vp9">
-        </video>
-        <button class="reel__open" type="button" data-open-video aria-label="Открыть запись тренировки на весь экран"></button>
-        <span class="reel__rec" aria-hidden="true"><i></i>Фрагмент 0:12–0:18</span>
-        <span class="reel__tc" aria-hidden="true" data-loop-tc>00:00:12:00</span>
-      </div>
-      <p class="reel__cap">Архив. 9:16, 30 с.</p>
-    </div>
-    <ol class="stills" aria-label="Кадры из записи">
-      <li><button type="button" data-open-video data-t="4.2" aria-label="Открыть запись с 0:04"><img src="assets/img/still-1.webp" width="600" height="600" alt="" loading="lazy" decoding="async"><span>0:04</span></button></li>
-      <li><button type="button" data-open-video data-t="16.4" aria-label="Открыть запись с 0:16"><img src="assets/img/still-2.webp" width="600" height="600" alt="" loading="lazy" decoding="async"><span>0:16</span></button></li>
-      <li><button type="button" data-open-video data-t="25.6" aria-label="Открыть запись с 0:25"><img src="assets/img/still-3.webp" width="600" height="600" alt="" loading="lazy" decoding="async"><span>0:25</span></button></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ================= СЦЕНА 05 · УСЛОВИЯ (ВЫЗЫВНОЙ ЛИСТ) ================= -->
-<section class="terms paper" id="terms" data-scene aria-labelledby="terms-title">
-  <div class="splice splice--paper" aria-hidden="true"><span>Склейка</span><i></i><span data-tc-start>00:00:00:00</span></div>
-  <div class="slate slate--paper"><span class="clap" aria-hidden="true"></span><span class="slate__scene">Сц. 04</span><span class="slate__title">Условия</span><span class="slate__take">Вызывной лист</span></div>
+  <p class="kicker kicker--paper"><span data-i18n="sl_terms">Условия</span></p>
 
   <div class="wrap">
     <header class="terms__head">
-      <h2 class="display display--ink" id="terms-title">Форматы<br>и цены</h2>
-      <p class="lead lead--ink">Всё, что нужно знать до первого сообщения. <span class="ph" data-placeholder="terms-all">[заглушка] все цифры в этом блоке</span></p>
+      <h2 class="display display--ink" id="prices-title" data-i18n="pr_title3">Цены</h2>
+      <p class="lead lead--ink"><span data-i18n="pr_lead3">Сейчас открыт один пакет — персональные тренировки. Группы и видеокурс скоро.</span></p>
     </header>
+  </div>
 
-    <div class="sheet" role="table" aria-label="Форматы тренировок">
-      <div class="sheet__row sheet__row--head" role="row">
-        <span role="columnheader">Формат</span><span role="columnheader">Кому</span><span role="columnheader">Длительность</span><span role="columnheader">Стоимость</span>
-      </div>
-      <div class="sheet__row" role="row" data-placeholder="f1">
-        <span role="cell" class="sheet__name">Персональная<small>1 на 1 с Аркадием</small></span>
-        <span role="cell">Старт с нуля, точечная работа над техникой</span>
-        <span role="cell" class="num">60 мин</span>
-        <span role="cell" class="price">15 000<span class="cur">драм</span><small>за занятие</small></span>
-      </div>
-      <div class="sheet__row" role="row" data-placeholder="f2">
-        <span role="cell" class="sheet__name">Мини-группа<small>до 4 человек</small></span>
-        <span role="cell">Друзья, пары, один уровень</span>
-        <span role="cell" class="num">90 мин</span>
-        <span role="cell" class="price">8 000<span class="cur">драм</span><small>с человека</small></span>
-      </div>
-      <div class="sheet__row sheet__row--mark" role="row" data-placeholder="f3">
-        <span role="cell" class="sheet__name">Группа ММА<small>12 занятий в месяц</small></span>
-        <span role="cell">Регулярные тренировки, любой уровень</span>
-        <span role="cell" class="num">90 мин</span>
-        <span role="cell" class="price">35 000<span class="cur">драм</span><small>в месяц</small>
-          <svg class="grease-circle" viewBox="0 0 220 90" aria-hidden="true"><path d="M30 18c40-14 128-16 165 4 26 14 18 46-22 58-46 13-128 9-156-10C-5 54 4 31 40 16c18-7 46-11 70-11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-        </span>
-      </div>
-      <div class="sheet__row" role="row" data-placeholder="f4">
-        <span role="cell" class="sheet__name">Подготовка к бою<small>индивидуальный план</small></span>
-        <span role="cell">Тем, у кого назначен бой</span>
-        <span role="cell" class="num">8–12 недель</span>
-        <span role="cell" class="price">По договорённости</span>
-      </div>
+  <div class="pk" data-carousel>
+  <div class="pk-bg" aria-hidden="true" data-pkbg><video class="pk-bg__v is-on" muted playsinline loop preload="none" disablepictureinpicture></video><video class="pk-bg__v" muted playsinline loop preload="none" disablepictureinpicture></video><span class="pk-bg__shade"></span><span class="pk-bg__scan"></span><span class="pk-bg__noise"></span><span class="pk-bg__roll"></span><span class="pk-bg__static"></span><span class="pk-bg__leak"></span></div>
+    <div class="pk__strip" tabindex="0" role="region" aria-roledescription="карусель" aria-label="Предложения" data-i18n-attr="aria-roledescription:car_role,aria-label:car_aria3" data-track>
+<article class="pk__card pk__card--soon pk__card--mini" data-pk="group" data-clip="assets/video/bg/fight-a.mp4" data-poster="assets/video/bg/fight-a.webp" role="group" aria-roledescription="формат" data-i18n-attr="aria-roledescription:car_slide">
+        <div class="pk__frame">
+          <p class="pk__top"><span class="pk__no" translate="no">№ 01</span><span class="pk__pop pk__pop--soon" data-i18n="soon_badge">Скоро</span></p>
+          <h3 class="pk__name" data-i18n="of_group_n">Групповые занятия</h3>
+          <p class="pk__meta" data-i18n="of_group_m">Небольшая группа · 90 минут</p>
+          <p class="pk__price pk__price--soon"><span class="pk__soon" data-i18n="of_soon_p">Набор откроется скоро</span><small data-i18n="of_group_u">Цена и расписание — при запуске</small></p>
+          <a class="btn pk__cta" href="https://wa.me/79891291118" target="_blank" rel="noopener" data-wa="wa_launch" data-wa-pkg="of_group_n"><svg class="ic"><use href="#i-wa"/></svg><span data-i18n="launch_cta">Сообщить о запуске</span></a>
+        </div>
+      </article>
+<article class="pk__card pk__card--main is-pop is-active" data-pk="solo12" data-clip="assets/video/bg/punch-b.mp4" data-poster="assets/video/bg/punch-b.webp" role="group" aria-roledescription="формат" data-i18n-attr="aria-roledescription:car_slide">
+        <div class="pk__frame">
+          <p class="pk__top"><span class="pk__no" translate="no">№ 02</span><span class="pk__pop" data-i18n="of_first">Первый набор</span></p>
+          <h3 class="pk__name" data-i18n="of_solo_n">Персональные тренировки, 12&nbsp;занятий</h3>
+          <p class="pk__meta" data-i18n="pk_single_m">1 на 1 · 60 минут</p>
+          <p class="pk__price"><s class="pk__old"><span class="sr" data-i18n="old_price">Обычная цена:</span> <span class="pk__num" data-amd="45000">45 000</span> <span data-i18n="cur">драм</span></s><span class="pk__num" data-amd="35000">35 000</span><span class="pk__cur" data-i18n="cur">драм</span><small data-i18n="of_solo_u">за весь пакет из 12 занятий</small></p>
+          <p class="pk__cond" data-placeholder="pk-cond"><span data-i18n="pk_cond">Цена первого набора: для первых 10 учеников или до 30 ноября.</span> <span class="ph">[заглушка]</span></p>
+          <p class="pk__free"><span data-i18n="free_line">Первое занятие: условия обсуждаются при записи.</span> <span class="ph">[заглушка]</span></p>
+          <ul class="pk__inc"><li data-i18n="pk_single_i1">Всё время тренера — только тебе</li><li data-i18n="pk_single_i2">Программа под твою цель</li><li data-i18n="of_solo_i3">План на 12 занятий и замеры прогресса</li></ul>
+          <p class="pk__who"><b data-i18n="who">Кому</b> <span data-i18n="pk_single_w">Новичкам и тем, кто хочет точечно подтянуть технику.</span></p>
+          <a class="btn pk__cta" href="https://wa.me/79891291118" target="_blank" rel="noopener" data-wa="wa_pkg" data-wa-pkg="of_solo_n"><svg class="ic"><use href="#i-wa"/></svg><span data-i18n="pk_cta">Выбрать в WhatsApp</span></a>
+        </div>
+      </article>
+<article class="pk__card pk__card--soon pk__card--mini" data-pk="video" data-clip="assets/video/bg/focus-a.mp4" data-poster="assets/video/bg/focus-a.webp" role="group" aria-roledescription="формат" data-i18n-attr="aria-roledescription:car_slide">
+        <div class="pk__frame">
+          <p class="pk__top"><span class="pk__no" translate="no">№ 03</span><span class="pk__pop pk__pop--soon" data-i18n="soon_badge">Скоро</span></p>
+          <h3 class="pk__name" data-i18n="of_video_n">Видеокурс</h3>
+          <p class="pk__meta" data-i18n="of_video_m">10 коротких уроков · смотреть дома</p>
+          <p class="pk__price" data-placeholder="pk-video"><span class="pk__from" data-i18n="from">от</span><span class="pk__num" data-amd="15000">15 000</span><span class="pk__cur" data-i18n="cur">драм</span><span class="ph">[заглушка]</span><small data-i18n="of_video_u">ориентировочно, за весь курс</small></p>
+          <a class="btn pk__cta" href="https://wa.me/79891291118" target="_blank" rel="noopener" data-wa="wa_launch" data-wa-pkg="of_video_n"><svg class="ic"><use href="#i-wa"/></svg><span data-i18n="launch_cta">Сообщить о запуске</span></a>
+        </div>
+      </article>
     </div>
+    <div class="pk__ctrl wrap">
+      <button type="button" class="pk__arrow" data-prev aria-label="Предыдущий формат" data-i18n-attr="aria-label:car_prev"><svg class="ic" style="transform:scaleX(-1)"><use href="#i-arrow"/></svg></button>
+      <div class="pk__dots" data-dots></div>
+      <span class="pk__count" aria-live="polite" data-count>2 / 3</span>
+      <button type="button" class="pk__arrow" data-next aria-label="Следующий формат" data-i18n-attr="aria-label:car_next"><svg class="ic"><use href="#i-arrow"/></svg></button>
+    </div>
+  </div>
 
-    <div class="callsheet">
+  <div class="wrap">
+    <div class="callsheet callsheet--2">
       <div class="callsheet__cell" data-placeholder="schedule">
-        <h3>Расписание <span class="ph">[заглушка]</span></h3>
+        <h3><span data-i18n="sch_t">Расписание</span> <span class="ph">[заглушка]</span></h3>
         <table class="sched">
-          <caption class="sr">Расписание групповых и персональных тренировок</caption>
-          <tr><th scope="row">Пн, ср, пт</th><td>19:00–20:30</td><td>Группа ММА</td></tr>
-          <tr><th scope="row">Вт, чт</th><td>10:00–14:00</td><td>Персонально, по записи</td></tr>
-          <tr><th scope="row">Сб</th><td>12:00–13:30</td><td>Мини-группы</td></tr>
+          <caption class="sr" data-i18n="sch_cap3">Расписание тренировок</caption>
+          <tr><th scope="row" data-i18n="d_mwf">Пн, ср, пт</th><td>19:00–20:30</td><td data-i18n="s_group2">Групповые — скоро</td></tr>
+          <tr><th scope="row" data-i18n="d_tt">Вт, чт</th><td>10:00–14:00</td><td data-i18n="s_pers">Персонально, по записи</td></tr>
+          <tr><th scope="row" data-i18n="d_sat">Сб</th><td>12:00–13:30</td><td data-i18n="s_pers">Персонально, по записи</td></tr>
         </table>
+        <p class="sched__lang"><b data-i18n="lang_t">Язык занятий</b> <span data-i18n="lang_p">Русский, армянский.</span></p>
       </div>
-      <div class="callsheet__cell" data-placeholder="place">
-        <h3>Место <span class="ph">[заглушка]</span></h3>
-        <p>The One Gym, Ереван.<br>Адрес и вход уточнить.</p>
-      </div>
-      <div class="callsheet__cell" data-placeholder="lang">
-        <h3>Язык занятий <span class="ph">[заглушка]</span></h3>
-        <p>Русский, армянский.</p>
-      </div>
-      <div class="callsheet__cell callsheet__cell--hand" data-placeholder="trial">
-        <h3>Первое занятие <span class="ph">[заглушка]</span></h3>
-        <p class="hand-note">пробное — <b>бесплатно</b></p>
-        <svg class="hand-underline" viewBox="0 0 200 14" aria-hidden="true"><path d="M3 9c38-5 92-7 132-4 20 1 40 3 62 1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <div class="callsheet__cell" data-placeholder="rules">
+        <h3><span data-i18n="rules_t">Оплата и перенос</span> <span class="ph">[заглушка]</span></h3>
+        <ul class="rules">
+          <li data-i18n="rules_1">Наличными или переводом на карту, в драмах. Онлайн-оплаты на сайте нет.</li>
+          <li data-i18n="rules_2c">Пакет из 12 занятий действует 8 недель.</li>
+          <li><span data-i18n="rules_gym">Вход в зал оплачивается отдельно, в стоимость тренировок он не входит.</span></li>
+          <li data-i18n="rules_3">Перенос бесплатно, если предупредить за 12 часов. Позже — занятие засчитывается.</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= СЦЕНА 06 · КАК НАЧАТЬ (РАСКАДРОВКА) ================= -->
-<section class="start paper paper--2" id="start" data-scene aria-labelledby="start-title">
-  <div class="wrap">
-    <h2 class="display display--ink" id="start-title">Три кадра<br>до зала</h2>
-    <ol class="board">
-      <li class="board__panel" data-cut>
-        <div class="board__sketch" aria-hidden="true">
-          <svg viewBox="0 0 160 100"><path d="M62 18c11-1 24-1 35 0 3 .3 5 2 5 5 .4 18 .3 37 0 55-.1 3-2 5-5 5-12 .6-24 .5-35 0-3-.2-5-2-5-5-.4-18-.3-37 0-55 .1-3 2-5 5-5z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M68 34c8-.4 16-.6 24-.2M68 43c6-.3 12-.4 18-.1M68 52c8-.3 15-.3 21 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M73 74h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M112 30c6 4 9 10 9 17M118 22c9 6 14 15 14 26" fill="none" stroke="var(--tally)" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </div>
-        <span class="board__no">Кадр 1</span>
-        <h3>Напиши</h3>
-        <p>WhatsApp, Telegram или Instagram. Хватит одного сообщения.</p>
-      </li>
-      <li class="board__cutto" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></li>
-      <li class="board__panel" data-cut>
-        <div class="board__sketch" aria-hidden="true">
-          <svg viewBox="0 0 160 100"><path d="M46 36c0-8 6-14 13-14s13 6 13 14-6 14-13 14-13-6-13-14z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M28 86c2-17 14-28 31-28s29 11 31 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M98 20c12-1 25-1 37 0 3 .3 4 2 4 5 .2 7 .2 13 0 19 0 3-2 5-4 5-6 .3-12 .3-18 .1l-9 8 .5-8c-3-.1-7-.2-10-.4-3-.2-4-2-4-5-.2-6-.2-12 0-19 0-3 2-4.7 4-4.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M106 31h22M106 39h14" stroke="var(--tally)" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </div>
-        <span class="board__no">Кадр 2</span>
-        <h3>Расскажи о себе</h3>
-        <p>Опыт, цель, удобное время. Если опыта нет, так и напиши. Это нормально.</p>
-      </li>
-      <li class="board__cutto" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></li>
-      <li class="board__panel" data-cut>
-        <div class="board__sketch" aria-hidden="true">
-          <svg viewBox="0 0 160 100"><path d="M58 52c-2-14 1-28 14-32 12-4 27-2 33 9 4 8 4 18 1 26l-3 10c-1 4-4 7-8 7H73c-4 0-7-3-8-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M60 50c-6-1-10 3-10 8 0 6 5 9 11 8M82 40c6-1 13 0 17 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M68 72c9 1 19 1 28 0M70 72l-1 12c8 1 17 1 26 0l-1-12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M118 36l12-6M120 50h14M118 64l12 6" stroke="var(--tally)" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </div>
-        <span class="board__no">Кадр 3</span>
-        <h3>Приходи</h3>
-        <p>Удобная форма, вода, капа. <span data-placeholder="gear">Перчатки на первое занятие дадут в зале. <span class="ph">[заглушка]</span></span></p>
-      </li>
-    </ol>
-    <p class="board__tip"><span class="board__tip-label">При записи скажи:</span> «Хочу на ММА к Аркадию Осипяну».</p>
-  </div>
-</section>
-
-<!-- ================= ФИЛЬМОТЕКА (материалы и курсы, всё — заглушки) ================= -->
-<section class="films cine" id="films" data-scene aria-labelledby="films-title">
-  <div class="wrap">
-    <header class="films__head">
-      <h2 class="display" id="films-title">Фильмо&shy;тека</h2>
-      <p class="lead" data-placeholder="films-intro">Техника, которой Аркадий заканчивал бои. Смотри дома, отрабатывай в&nbsp;зале. Пока всё в&nbsp;монтаже. <span class="ph">[заглушка]</span></p>
+<!-- ================= 5б · МЕСТО (v11) ================= -->
+<section class="place-s cine" id="place" data-scene aria-labelledby="place-title">
+  <p class="kicker"><span data-i18n="place_t">Место</span></p>
+  <div class="wrap place-s__grid">
+    <header class="place-s__head">
+      <p class="place-s__pre" data-i18n="pl_pre">Здесь проходят тренировки</p>
+      <h2 class="place-s__title" id="place-title"><span translate="no">The One Gym</span></h2>
+      <p class="place-s__city"><span data-i18n="pl_city">Ереван</span><i aria-hidden="true"></i><span data-i18n="pl_country">Армения</span></p>
     </header>
-
-    <article class="lm" data-placeholder="lm-4weeks" aria-labelledby="lm-title">
-      <div class="lm__cover film-edge"><img src="assets/img/m-start-900.webp" width="900" height="1125" alt="Аркадий Осипян в зале, облокотился на канаты ринга" loading="lazy" decoding="async"><span class="stamp">в&nbsp;прокате</span></div>
-      <div class="lm__body">
-        <p class="lm__kicker">Трейлер, бесплатно <span class="ph">[заглушка]</span></p>
-        <h3 class="lm__title" id="lm-title">Первые 4&nbsp;недели</h3>
-        <p class="lm__text">Что делать дома между первыми тренировками: стойка, шаги, дыхание, восстановление. Короткий PDF и&nbsp;видео к&nbsp;каждой неделе.</p>
-        <p class="spec"><span>PDF, 12&nbsp;страниц</span><span>4&nbsp;видео по&nbsp;6&nbsp;минут</span></p>
-        <a class="btn btn--ghost" href="https://wa.me/37400000000?text=%D0%A5%D0%BE%D1%87%D1%83%20%C2%AB%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B5%204%20%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8%C2%BB" target="_blank" rel="noopener">Получить в&nbsp;WhatsApp</a>
-      </div>
-    </article>
-
-    <ul class="reels" aria-label="Курсы-ролики, готовятся">
-      <li class="reelcard" data-placeholder="course-back">
-        <div class="reelcard__cover film-edge"><img src="assets/img/m-back-900.webp" width="900" height="674" alt="Борьба в партере в клетке ACA: контроль сверху" loading="lazy" decoding="async"><span class="stamp">в&nbsp;монтаже</span></div>
-        <div class="reelcard__body">
-          <p class="reelcard__no">Ролик 01</p>
-          <h3 class="reelcard__title">Спина и&nbsp;удушение сзади</h3>
-          <p class="reelcard__text">Как забирать спину и&nbsp;доводить до&nbsp;сдачи. Тем же&nbsp;удушением Аркадий взял пояс.</p>
-          <p class="spec"><span>8&nbsp;частей</span><span>≈&nbsp;1&nbsp;ч 40&nbsp;мин</span></p>
-          <p class="price-note">Цена уточняется <span class="ph">[заглушка]</span></p>
-          <a class="reelcard__cta" href="https://wa.me/37400000000?text=%D0%97%D0%B0%D0%BF%D0%B8%D1%88%D0%B8%D1%82%D0%B5%20%D0%B2%20%D0%BB%D0%B8%D1%81%D1%82%20%D0%BE%D0%B6%D0%B8%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F%3A%20%C2%AB%D0%A1%D0%BF%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D1%83%D0%B4%D1%83%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%20%D1%81%D0%B7%D0%B0%D0%B4%D0%B8%C2%BB" target="_blank" rel="noopener">В&nbsp;лист ожидания в&nbsp;WhatsApp</a>
-        </div>
-      </li>
-      <li class="reelcard" data-placeholder="course-anaconda">
-        <div class="reelcard__cover film-edge"><img src="assets/img/m-anaconda-900.webp" width="900" height="675" alt="Удушение в партере на турнире ACA, рядом рефери" loading="lazy" decoding="async"><span class="stamp">в&nbsp;монтаже</span></div>
-        <div class="reelcard__body">
-          <p class="reelcard__no">Ролик 02</p>
-          <h3 class="reelcard__title">Анаконда против прохода в&nbsp;ноги</h3>
-          <p class="reelcard__text">Мини-курс: поймать проход, закрыть «анаконду», перекатить. Приём с&nbsp;ACA&nbsp;119.</p>
-          <p class="spec"><span>3&nbsp;части</span><span>≈&nbsp;20&nbsp;мин</span></p>
-          <p class="price-note">Цена уточняется <span class="ph">[заглушка]</span></p>
-          <a class="reelcard__cta" href="https://wa.me/37400000000?text=%D0%97%D0%B0%D0%BF%D0%B8%D1%88%D0%B8%D1%82%D0%B5%20%D0%B2%20%D0%BB%D0%B8%D1%81%D1%82%20%D0%BE%D0%B6%D0%B8%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F%3A%20%C2%AB%D0%90%D0%BD%D0%B0%D0%BA%D0%BE%D0%BD%D0%B4%D0%B0%20%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2%20%D0%BF%D1%80%D0%BE%D1%85%D0%BE%D0%B4%D0%B0%20%D0%B2%20%D0%BD%D0%BE%D0%B3%D0%B8%C2%BB" target="_blank" rel="noopener">В&nbsp;лист ожидания в&nbsp;WhatsApp</a>
-        </div>
-      </li>
-      <li class="reelcard" data-placeholder="course-wrestling">
-        <div class="reelcard__cover film-edge"><img src="assets/img/m-wrestle-900.webp" width="900" height="675" alt="Клинч у сетки в клетке ACA" loading="lazy" decoding="async"><span class="stamp">в&nbsp;монтаже</span></div>
-        <div class="reelcard__body">
-          <p class="reelcard__no">Ролик 03</p>
-          <h3 class="reelcard__title">Борьба для ударника</h3>
-          <p class="reelcard__text">Клинч, защита от&nbsp;проходов, как встать у&nbsp;сетки. Для тех, кто пришёл из&nbsp;бокса или кикбоксинга.</p>
-          <p class="spec"><span>6&nbsp;частей</span><span>≈&nbsp;1&nbsp;ч 10&nbsp;мин</span></p>
-          <p class="price-note">Цена уточняется <span class="ph">[заглушка]</span></p>
-          <a class="reelcard__cta" href="https://wa.me/37400000000?text=%D0%97%D0%B0%D0%BF%D0%B8%D1%88%D0%B8%D1%82%D0%B5%20%D0%B2%20%D0%BB%D0%B8%D1%81%D1%82%20%D0%BE%D0%B6%D0%B8%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F%3A%20%C2%AB%D0%91%D0%BE%D1%80%D1%8C%D0%B1%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%83%D0%B4%D0%B0%D1%80%D0%BD%D0%B8%D0%BA%D0%B0%C2%BB" target="_blank" rel="noopener">В&nbsp;лист ожидания в&nbsp;WhatsApp</a>
-        </div>
-      </li>
-    </ul>
-
-    <ul class="desks" aria-label="Разборы и ведение на расстоянии">
-      <li class="desk" data-placeholder="service-review">
-        <span class="stamp stamp--ink">по&nbsp;заявке</span>
-        <h3 class="desk__title">Разбор твоего боя</h3>
-        <p class="desk__text">Пришли запись боя или спарринга, до&nbsp;трёх раундов, и&nbsp;свой вопрос. Аркадий вернёт видеоответ на&nbsp;15–20 минут: три главные ошибки, три упражнения, пометки по&nbsp;тайм-коду.</p>
-        <div class="desk__meta">
-          <p class="spec spec--ink"><span>ответ за&nbsp;3&nbsp;дня</span></p>
-          <p class="price-note">Цена уточняется <span class="ph">[заглушка]</span></p>
-          <a class="desk__cta" href="https://wa.me/37400000000?text=%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D1%80%D0%B8%D1%81%D0%BB%D0%B0%D1%82%D1%8C%20%D0%B1%D0%BE%D0%B9%20%D0%BD%D0%B0%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80" target="_blank" rel="noopener">Прислать бой на&nbsp;разбор в&nbsp;WhatsApp</a>
-        </div>
-      </li>
-      <li class="desk" data-placeholder="service-remote">
-        <span class="stamp stamp--ink">по&nbsp;заявке</span>
-        <h3 class="desk__title">Удалённое ведение</h3>
-        <p class="desk__text">Месяц работы на&nbsp;расстоянии: план на&nbsp;неделю под твой зал, четыре разбора твоих видео, ответы в&nbsp;чате и&nbsp;один созвон.</p>
-        <div class="desk__meta">
-          <p class="spec spec--ink"><span>1&nbsp;месяц</span><span>5–10 мест</span></p>
-          <p class="price-note">Цена уточняется <span class="ph">[заглушка]</span></p>
-          <a class="desk__cta" href="https://wa.me/37400000000?text=%D0%95%D1%81%D1%82%D1%8C%20%D0%BB%D0%B8%20%D0%BC%D0%B5%D1%81%D1%82%D0%BE%20%D0%BD%D0%B0%20%D1%83%D0%B4%D0%B0%D0%BB%D1%91%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5%3F" target="_blank" rel="noopener">Спросить о&nbsp;месте в&nbsp;WhatsApp</a>
-        </div>
-      </li>
-    </ul>
+    <figure class="place-s__frame place-s__gal">
+      <img class="place-s__main" src="assets/img/gym-hall.webp" width="768" height="1024" alt="Зал The One Gym: силовые тренажёры" data-i18n-attr="alt:gym_alt" loading="lazy" decoding="async">
+      <img src="assets/img/gym-entry.webp" width="768" height="1024" alt="Вход в The One Gym с улицы" data-i18n-attr="alt:gym_alt2" loading="lazy" decoding="async">
+      <img src="assets/img/gym-logo.webp" width="1024" height="1024" alt="Логотип The One Gym на стене" data-i18n-attr="alt:gym_alt3" loading="lazy" decoding="async">
+      <figcaption data-i18n="gym_cap">The One Gym, проспект Азатутян 24/15. Фото: Яндекс Карты</figcaption>
+    </figure>
+    <div class="loc">
+      <div class="loc__map" aria-hidden="true"><svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid slice"><path d="M0 46c60 8 110-14 170-4s100 26 150 14M0 112c70-10 130 10 200 0s80-18 120-12M86 0c-8 50 10 100 0 150M232 0c10 40-8 90 6 150" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".35"/><path d="M0 80h320M160 0v150" stroke="currentColor" stroke-width=".6" opacity=".18" stroke-dasharray="3 5"/><circle cx="160" cy="80" r="26" fill="none" stroke="var(--tally)" stroke-width="1" opacity=".5"/><path d="M160 44c-11 0-19 8-19 18 0 14 19 34 19 34s19-20 19-34c0-10-8-18-19-18z" fill="var(--tally)"/><circle cx="160" cy="62" r="6" fill="#0a0d0f"/></svg></div>
+      <dl class="loc__dl">
+        <div><dt data-i18n="pl_addr_t">Адрес</dt><dd><span data-i18n="pl_addr">The One Gym, Ереван, проспект Азатутян 24/15</span></dd></div>
+        <div><dt data-i18n="pl_in_t">Вход</dt><dd><span data-i18n="pl_in">Со двора, у вывески зала. На ресепшене скажи, что к Аркадию</span> <span class="ph">[заглушка]</span></dd></div>
+        <div><dt data-i18n="pl_h_t">Часы</dt><dd><span data-i18n="pl_h">Пн–Пт 7:00–23:00, Сб–Вс 9:00–22:00. Персональные — по записи</span></dd></div>
+      </dl>
+      <a class="btn loc__btn" href="https://yandex.com/maps/org/the_one_gym/63744431703/" target="_blank" rel="noopener"><svg class="ic"><use href="#i-arrow"/></svg><span data-i18n="pl_route">Построить маршрут</span></a>
+    </div>
   </div>
 </section>
 
-<!-- ================= СЦЕНА 07 · УЧЕНИКИ ================= -->
+<!-- ================= 6 · ИСТОРИИ УЧЕНИКОВ ================= -->
 <section class="voices cine" id="voices" data-scene aria-labelledby="voices-title">
   <div class="wrap">
     <div class="voices__head">
-      <h2 class="display" id="voices-title">Голоса<br>из зала</h2>
-      <p class="banner-ph" data-placeholder="quotes"><span class="ph">[заглушка]</span> Все отзывы ниже — образец. Заменить настоящими, с разрешения учеников.</p>
+      <h2 class="display" id="voices-title" data-i18n="v_title">Голоса<br>из зала</h2>
+      <p class="banner-ph" data-placeholder="quotes"><span class="ph">[заглушка]</span> <span data-i18n="v_note2">Истории ниже — образец формата. Заменить настоящими, с разрешения учеников.</span></p>
     </div>
-    <ul class="wall">
-      <li class="quote quote--xl" data-cut data-placeholder="q1"><blockquote>«Пришёл с нуля и с лишним весом. Через три месяца отстоял полный раунд — и остался на ногах».</blockquote><p class="quote__who">Артём <span>2 года в зале</span> <span class="ph">[заглушка]</span></p></li>
-      <li class="quote" data-cut data-placeholder="q2"><blockquote>«Он видит ошибку раньше, чем ты её сделал. И объясняет одним словом».</blockquote><p class="quote__who">Лилит <span>8 месяцев</span> <span class="ph">[заглушка]</span></p></li>
-      <li class="quote" data-cut data-placeholder="q3"><blockquote>«Никакого крика. Спокойно, жёстко, по делу».</blockquote><p class="quote__who">Давид <span>готовится к первому бою</span> <span class="ph">[заглушка]</span></p></li>
-      <li class="quote" data-cut data-placeholder="q4"><blockquote>«Думал, ММА — это про драку. Оказалось — про голову».</blockquote><p class="quote__who">Карен <span>1 год</span> <span class="ph">[заглушка]</span></p></li>
-      <li class="quote quote--wide" data-cut data-placeholder="q5"><blockquote>«Хожу ради формы. Никто не тащит в спарринг, пока сама не захочу».</blockquote><p class="quote__who">Мария <span>6 месяцев</span> <span class="ph">[заглушка]</span></p></li>
+    <ul class="vstats" data-placeholder="vstats">
+      <li><b translate="no">120+</b><span data-i18n="vs1">учеников прошли через зал</span></li>
+      <li><b translate="no">4,9<small>/5</small></b><span data-i18n="vs2">средняя оценка</span></li>
+      <li><b translate="no">78%</b><span data-i18n="vs3">остаются после первого месяца</span></li>
+      <li><b translate="no">6</b><span data-i18n="vs4">лет тренирует</span></li>
+      <li class="vstats__ph"><span class="ph">[заглушка]</span></li>
     </ul>
+    <div class="reels" data-placeholder="reels">
+      <ul class="reels__row" data-reels aria-label="Истории учеников" data-i18n-attr="aria-label:rv_row"></ul>
+    </div>
+    <dialog class="rvv" data-rvv aria-label="История ученика" data-i18n-attr="aria-label:rv_dlg">
+      <button class="rvv__arrow rvv__arrow--prev" type="button" data-rvv-prev aria-label="Предыдущая история" data-i18n-attr="aria-label:rv_prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button>
+      <div class="rvv__stage" data-rvv-stage>
+        <div class="rvv__bars" data-rvv-bars aria-hidden="true"></div>
+        <div class="rvv__top"><span class="rvv__av" data-rvv-av aria-hidden="true"></span><p class="rvv__who"><b data-rvv-name></b><span data-rvv-meta></span></p>
+          <button class="rvv__close" type="button" data-rvv-close aria-label="Закрыть" data-i18n-attr="aria-label:rv_close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4"/></svg></button></div>
+        <div class="rvv__media" data-rvv-media></div>
+        <div class="rvv__tap" data-rvv-tap aria-hidden="true"></div>
+        <div class="rvv__body">
+          <p class="rvv__q" data-rvv-q></p>
+          <p class="rvv__chip" data-rvv-res></p>
+          <button class="rvv__more-btn" type="button" data-rvv-morebtn aria-expanded="false"><span data-i18n="rv_more">Подробнее</span></button>
+          <div class="rvv__more" data-rvv-more hidden></div>
+        </div>
+      </div>
+      <button class="rvv__arrow rvv__arrow--next" type="button" data-rvv-next aria-label="Следующая история" data-i18n-attr="aria-label:rv_next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button>
+    </dialog>
   </div>
 </section>
 
-<!-- ================= СЦЕНА 08 · КОНТАКТ ================= -->
+<!-- ================= 7 · ВОПРОСЫ И ЗАПИСЬ ================= -->
+<section class="faq paper paper--2" id="faq" data-scene aria-labelledby="faq-title">
+  <div class="wrap faq__grid">
+    <div>
+      <h2 class="display display--ink" id="faq-title" data-i18n="faq_title">Вопросы<br>до&nbsp;зала</h2>
+      <p class="note-ph note-ph--ink" data-placeholder="faq-note"><span class="ph">[заглушка]</span> <span data-i18n="faq_note">Ответы — черновик, сверить с Аркадием.</span></p>
+    </div>
+    <div class="faq__list" data-placeholder="faq">
+      <details class="qa"><summary data-i18n="fq1">С какого возраста можно?</summary><p data-i18n="fa1">Взрослые — с 16 лет. Подростков младше берём после разговора с родителями. Возраст сверху не ограничен: нагрузку подбираем под тебя.</p></details>
+      <details class="qa"><summary data-i18n="fq2">У меня травма. Можно тренироваться?</summary><p data-i18n="fa2">Скажи о ней в первом сообщении. Работаем в обход проблемного места, а после свежих травм — только с допуском врача.</p></details>
+      <details class="qa"><summary data-i18n="fq3">Будут бить? Спарринг обязателен?</summary><p data-i18n="fa3">Нет. Первые месяцы — техника, лапы и мешок. Спарринг только по желанию, в контролируемом темпе и с партнёром твоего уровня.</p></details>
+      <details class="qa"><summary data-i18n="fq5">Сколько стоит первое занятие?</summary><p><span data-i18n="fa5">Условия первого занятия обсуждаются при записи: напиши Аркадию, и он всё объяснит. Вход в зал оплачивается отдельно.</span> <span class="ph">[заглушка]</span></p></details>
+      <details class="qa"><summary data-i18n="fq4">Что взять, если нет формы?</summary><p><span data-i18n="bring_faq">На первое занятие: удобная спортивная форма, вода и&nbsp;полотенце. Капа понадобится позже, когда начнёте работать в&nbsp;парах.</span> <span data-i18n="gear">Перчатки на первое занятие дадут в зале.</span></p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7б · ЗАПИСЬ ================= -->
 <section class="contact cine" id="contact" data-scene aria-labelledby="contact-title">
   <div class="contact__frame">
     <picture class="contact__media" data-dolly>
       <source media="(max-width: 700px)" srcset="assets/img/contact-900.webp" type="image/webp">
-      <img src="assets/img/contact-1600.webp" width="1600" height="1654" alt="Аркадий Осипян в стойке в клетке, смотрит в камеру" loading="lazy" decoding="async">
+      <img src="assets/img/contact-1600.webp" width="1600" height="1654" alt="Аркадий Осипян в стойке в клетке, смотрит в камеру" data-i18n-attr="alt:contact_alt" loading="lazy" decoding="async">
     </picture>
     <div class="contact__shade" aria-hidden="true"></div>
     <div class="contact__body wrap">
-      <div class="slate slate--inline"><span class="clap" aria-hidden="true"></span><span class="slate__scene">Сц. 05</span><span class="slate__title">Твой выход</span><span class="slate__take">Дубль <b class="grease">1</b></span></div>
-      <h2 class="display display--xl" id="contact-title">Твой<br>первый<br>раунд</h2>
-      <p class="lead" data-placeholder="reply">Напиши, ответит Аркадий или администратор зала. <span class="ph">[заглушка]</span></p>
+      <p class="kicker kicker--inline"><span data-i18n="sl_out">Твой выход</span></p>
+      <h2 class="display display--xl" id="contact-title" data-i18n="ct_title">Твой<br>первый<br>раунд</h2>
+      <ol class="steps">
+        <li><span class="steps__no"><span data-i18n="step">Шаг</span> 1</span><b data-i18n="st1_t">Напиши</b><span data-i18n="st1">одним сообщением, куда удобно</span></li>
+        <li><span class="steps__no"><span data-i18n="step">Шаг</span> 2</span><b data-i18n="st2_t">Расскажи о себе</b><span data-i18n="st2">опыт, цель, удобное время</span></li>
+        <li><span class="steps__no"><span data-i18n="step">Шаг</span> 3</span><b data-i18n="st3_t">Приходи</b><span data-i18n="st3c">на первое занятие: форма, вода, полотенце</span></li>
+      </ol>
+      <p class="reply" data-placeholder="reply"><span class="reply__dot" aria-hidden="true"></span><span data-i18n="reply">Отвечаем в&nbsp;течение 2&nbsp;часов, с&nbsp;10:00 до&nbsp;21:00. Пишет Аркадий или администратор зала.</span> <span class="ph">[заглушка]</span></p>
 
-      <ul class="channels">
-        <li><a class="channel" href="https://wa.me/37400000000?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BD%D0%B0%20%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D1%83%20%D0%9C%D0%9C%D0%90%20%D0%BA%20%D0%90%D1%80%D0%BA%D0%B0%D0%B4%D0%B8%D1%8E%20%D0%9E%D1%81%D0%B8%D0%BF%D1%8F%D0%BD%D1%83." target="_blank" rel="noopener" data-placeholder="whatsapp"><svg class="ic ic--lg"><use href="#i-wa"/></svg><span class="channel__name">Написать в&nbsp;WhatsApp</span><span class="channel__val">+374 00 000 000 <span class="ph">[заглушка]</span></span></a></li>
-        <li><a class="channel" href="https://t.me/username" target="_blank" rel="noopener" data-placeholder="telegram"><svg class="ic ic--lg"><use href="#i-tg"/></svg><span class="channel__name">Написать в&nbsp;Telegram</span><span class="channel__val">@username <span class="ph">[заглушка]</span></span></a></li>
-        <li><a class="channel" href="https://www.instagram.com/arkadii_osipyan/" target="_blank" rel="noopener"><svg class="ic ic--lg"><use href="#i-ig"/></svg><span class="channel__name">Написать в&nbsp;Instagram</span><span class="channel__val">@arkadii_osipyan</span></a></li>
+      <ul class="channels channels--one">
+        <li><a class="channel" href="https://wa.me/79891291118" data-wa="wa_hello" target="_blank" rel="noopener"><svg class="ic ic--lg"><use href="#i-wa"/></svg><span class="channel__name" data-i18n="ch_wa">Написать в&nbsp;WhatsApp</span><span class="channel__val">+7 989 129-11-18</span></a></li>
       </ul>
+      <p class="channels__also"><span data-i18n="ch_also">Если WhatsApp неудобен:</span> <a href="https://t.me/username" target="_blank" rel="noopener" data-placeholder="telegram">Telegram</a> <span class="ph">[заглушка]</span> · <a href="https://www.instagram.com/arkadii_osipyan/" target="_blank" rel="noopener">Instagram</a> · <a href="tel:+79891291118" translate="no">+7 989 129-11-18</a></p>
 
       <div class="msg">
-        <p class="msg__label" id="msg-label">Готовое сообщение</p>
-        <p class="msg__text" aria-labelledby="msg-label" data-msg>Здравствуйте! Хочу на тренировку ММА к Аркадию Осипяну.</p>
+        <p class="msg__label" id="msg-label" data-i18n="msg_l">Готовое сообщение</p>
+        <p class="msg__text" aria-labelledby="msg-label" data-msg data-i18n="wa_hello">Здравствуйте! Хочу на тренировку ММА к Аркадию Осипяну.</p>
         <button class="msg__copy" type="button" data-copy>Скопировать</button>
       </div>
 
@@ -491,42 +521,42 @@ if(location.protocol!=='file:'){var l=document.createElement('link');l.rel='prel
           <path class="sign__path" pathLength="1" d="M34 70c-6-22 6-44 24-46 16-2 22 16 15 34-8 20-30 26-39 12-6-10 6-22 22-24M92 52c-8-6-20 2-14 9 6 6 16 4 10 13-4 6-12 6-16 2M110 50c-3 8-6 18-6 26 4-10 8-20 14-26 0 8-2 18-1 26 5-9 10-19 16-26M146 48c-4 18-10 44-14 62M146 50c8-6 20-4 20 6 0 12-14 20-22 14M180 50c-2 10 0 20 8 20 8 0 12-10 12-20 0 18-2 36-12 50-6 8-16 4-12-6M216 56c-8-4-14 4-10 12 4 6 12 4 14-4 0 6 2 12 8 12M238 74c2-8 4-16 6-24 2 6 0 18 2 24 4-10 10-20 18-22 4 6 0 16 4 22 6 4 14-2 20-8"/>
           <path class="sign__path sign__path--2" pathLength="1" d="M60 98c60-8 150-12 220-10 20 0 34 2 44-2"/>
         </svg>
-        <figcaption><span class="ph">[заглушка]</span> росчерк: эскиз, не подпись Аркадия</figcaption>
+        <figcaption><span class="ph">[заглушка]</span> <span data-i18n="sign_cap">росчерк: эскиз, не подпись Аркадия</span></figcaption>
       </figure>
     </div>
   </div>
 </section>
+
 </main>
 
 <footer class="credits cine" data-scene aria-labelledby="credits-title">
-  <h2 class="sr" id="credits-title">Титры</h2>
+  <h2 class="sr" id="credits-title" data-i18n="cr_t">О сайте</h2>
   <div class="credits__roll wrap">
     <dl class="credits__list">
-      <div class="credits__row"><dt>Тренер</dt><dd>Аркадий Осипян</dd></div>
-      <div class="credits__row"><dt>В&nbsp;ролях</dt><dd>ты</dd></div>
-      <div class="credits__row"><dt>Локация</dt><dd>Ереван</dd></div>
-      <div class="credits__row credits__row--gift" data-placeholder="credit-gift"><dt>Сайт</dt><dd>подарок от&nbsp;ученика <span class="ph">[заглушка]</span></dd></div>
-      <div class="credits__row credits__row--contact"><dt>Связь</dt><dd><a href="#contact">WhatsApp, Telegram</a> и&nbsp;<a href="https://www.instagram.com/arkadii_osipyan/" target="_blank" rel="noopener">Instagram</a></dd></div>
+      <div class="credits__row"><dt data-i18n="cr_coach">Тренер</dt><dd data-i18n="name_full">Аркадий Осипян</dd></div>
+      <div class="credits__row"><dt data-i18n="cr_cast">Ученик</dt><dd data-i18n="cr_you">ты</dd></div>
+      <div class="credits__row"><dt data-i18n="cr_loc">Город</dt><dd data-i18n="cr_yer">Ереван</dd></div>
+      <div class="credits__row credits__row--gift" data-placeholder="credit-gift"><dt data-i18n="cr_site">Сайт</dt><dd><span data-i18n="cr_gift">подарок от&nbsp;ученика</span> <span class="ph">[заглушка]</span></dd></div>
+      <div class="credits__row credits__row--contact"><dt data-i18n="cr_link">Связь</dt><dd><a href="#contact">WhatsApp, Telegram</a> <span data-i18n="and">и</span>&nbsp;<a href="https://www.instagram.com/arkadii_osipyan/" target="_blank" rel="noopener">Instagram</a></dd></div>
     </dl>
     <p class="credits__year"><svg class="handyear" viewBox="0 0 150 54" role="img" aria-label="2026"><path pathLength="1" d="M8 18c4-8 18-10 22-2 4 8-6 18-20 30 8-1 16-1 24 0M48 14c-8 2-10 18-6 26 4 8 14 6 16-4 2-10 0-22-10-22M74 18c4-8 18-10 22-2 4 8-6 18-20 30 8-1 16-1 24 0M128 10c-10 2-18 14-18 26 0 8 6 12 12 10 8-2 10-12 2-16-6-2-12 2-14 8"/></svg></p>
-    <p class="credits__mark"><svg class="credits__logo" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Осипян" viewBox="0 0 2016 1072"><g transform="translate(0.000000,1072.000000) scale(0.100000,-0.100000)" fill="currentColor"><path d="M19695 10544 c-33 -7 -145 -22 -250 -34 -104 -11 -224 -27 -265 -35 -68 -13 -233 -34 -383 -50 -73 -7 -112 -26 -137 -68 -19 -31 -20 -57 -14 -1367 6 -1646 3 -1727 -70 -1775 -58 -38 -234 -65 -281 -43 -64 29 -59 -77 -66 1558 -4 1113 -9 1494 -18 1522 -24 75 -77 88 -233 59 -62 -11 -194 -30 -293 -41 -99 -11 -198 -24 -220 -30 -22 -5 -123 -19 -225 -30 -268 -31 -292 -38 -327 -103 -17 -30 -18 -66 -13 -517 7 -731 5 -1093 -9 -1545 -14 -442 -9 -1475 9 -2130 8 -265 8 -404 -1 -525 -21 -296 5 -2986 29 -3028 34 -60 66 -62 282 -22 58 11 173 26 255 35 83 9 200 24 260 35 61 11 173 26 250 35 214 23 224 28 244 115 7 30 11 559 11 1586 0 974 4 1560 10 1593 20 108 70 141 225 148 118 7 146 -4 166 -65 10 -29 13 -380 15 -1587 1 -1013 5 -1561 12 -1581 30 -95 67 -112 194 -90 51 8 167 22 258 31 200 18 303 32 393 51 37 7 140 21 230 30 92 9 174 22 190 31 58 30 55 -76 58 1893 5 2365 5 2409 0 3955 -2 978 0 1358 9 1466 19 234 -4 422 -59 482 -54 59 -113 69 -236 41z"/><path d="M16205 10074 c-16 -3 -124 -16 -240 -30 -115 -14 -239 -32 -275 -40 -36 -8 -164 -23 -285 -33 -121 -11 -258 -29 -305 -40 -95 -22 -209 -36 -415 -51 -77 -6 -185 -21 -240 -34 -55 -13 -140 -31 -188 -40 -177 -33 -403 -142 -488 -234 -104 -114 -151 -251 -169 -503 -6 -79 -15 -175 -21 -214 -13 -93 -13 -2451 0 -2645 10 -152 43 -306 83 -388 51 -108 170 -198 313 -241 122 -36 140 -70 107 -201 -53 -209 -132 -564 -146 -660 -9 -58 -25 -145 -36 -195 -11 -49 -29 -151 -41 -225 -11 -74 -29 -171 -40 -215 -10 -44 -23 -116 -29 -160 -11 -85 -65 -380 -107 -580 -13 -66 -31 -167 -39 -225 -8 -58 -26 -163 -40 -235 -14 -71 -35 -186 -45 -255 -11 -69 -28 -156 -39 -195 -25 -93 -90 -415 -90 -450 0 -44 29 -92 65 -109 44 -21 105 -20 255 4 69 12 284 41 478 65 226 28 365 50 387 61 60 28 76 61 96 207 11 73 26 155 34 183 8 28 23 111 34 185 11 74 31 184 45 244 13 61 30 155 36 210 6 55 22 150 35 210 32 151 33 153 49 300 9 72 24 168 35 215 11 47 28 135 37 195 9 61 26 151 39 200 13 50 31 147 40 215 9 69 31 188 49 265 19 77 39 165 45 196 20 96 51 116 66 42 4 -21 7 -623 6 -1339 -2 -899 1 -1313 8 -1341 17 -61 51 -87 114 -87 110 1 925 101 1021 126 133 34 152 175 113 843 -14 252 -15 394 -4 1375 13 1206 14 1686 2 2190 -11 511 -5 2531 10 2935 10 284 -17 435 -88 479 -22 14 -176 27 -232 20z m-1044 -1350 c56 -28 59 -46 70 -501 16 -601 8 -1366 -13 -1415 -36 -81 -167 -122 -235 -72 -82 60 -86 110 -81 1029 5 832 8 867 64 935 40 47 128 58 195 24z"/><path d="M12595 9580 c-151 -17 -384 -49 -505 -70 -30 -5 -107 -14 -170 -20 -63 -5 -171 -21 -240 -34 -72 -14 -199 -29 -300 -35 -104 -6 -226 -21 -300 -35 -69 -14 -188 -32 -265 -41 -77 -8 -162 -20 -190 -25 -27 -5 -104 -19 -170 -30 -75 -12 -129 -27 -145 -38 -53 -39 -52 -34 -49 -591 2 -284 3 -608 2 -721 -5 -545 -5 -4170 0 -4795 4 -422 2 -836 -4 -1021 -18 -541 -5 -638 93 -665 46 -12 298 10 473 41 61 11 191 29 290 40 360 40 422 56 462 117 20 31 21 69 15 1278 -9 1631 -3 5136 8 5189 22 107 72 150 175 151 69 0 109 -20 127 -63 20 -49 27 -961 20 -2662 -4 -905 -4 -1737 1 -1850 4 -113 6 -479 5 -815 -5 -1113 -5 -1116 15 -1152 29 -54 58 -67 135 -60 137 12 508 58 547 67 22 5 123 19 225 30 271 31 312 43 350 105 45 73 47 141 20 610 -6 113 -6 457 2 1025 9 630 9 1404 1 2940 -5 1147 -7 2186 -4 2310 11 454 9 546 -18 640 -28 98 -77 159 -146 180 -67 20 -284 21 -460 0z"/><path d="M9600 9180 c-58 -4 -195 -21 -305 -39 -238 -37 -440 -67 -514 -76 -151 -17 -181 -55 -212 -267 -11 -79 -29 -181 -39 -228 -10 -47 -26 -143 -34 -215 -16 -129 -37 -269 -101 -670 -19 -115 -39 -257 -45 -315 -6 -58 -24 -177 -40 -265 -16 -88 -36 -225 -45 -305 -9 -80 -24 -199 -35 -265 -10 -66 -23 -156 -29 -200 -17 -135 -39 -167 -60 -87 -18 70 -23 688 -12 1627 6 520 6 960 2 984 -15 74 -47 96 -139 95 -42 -1 -115 -9 -162 -17 -47 -9 -140 -21 -208 -27 -123 -10 -257 -28 -407 -55 -44 -7 -111 -17 -150 -20 -85 -8 -129 -26 -146 -57 -16 -29 -23 -5990 -8 -7033 11 -767 4 -717 90 -744 52 -17 305 5 441 38 43 11 144 24 225 30 196 15 286 27 373 52 141 39 156 56 171 190 5 52 21 148 34 214 13 66 32 176 40 245 9 69 29 193 45 275 15 83 31 184 35 225 3 41 19 158 35 260 67 428 111 714 130 845 69 458 111 612 146 538 15 -31 16 -677 4 -1665 -12 -1018 -14 -974 39 -999 35 -16 239 -13 343 6 255 45 326 56 453 65 146 10 293 40 333 66 53 35 50 -196 50 3804 0 3950 1 3867 -45 3928 -47 64 -87 73 -253 62z"/><path d="M5685 8660 c-82 -10 -190 -25 -240 -33 -49 -9 -124 -19 -165 -22 -162 -14 -369 -37 -450 -50 -47 -8 -159 -24 -250 -35 -91 -11 -194 -29 -230 -40 -36 -10 -103 -26 -150 -35 -136 -27 -273 -99 -369 -194 -160 -158 -206 -297 -222 -676 -26 -614 -26 -6130 0 -6345 43 -349 107 -470 305 -570 87 -44 87 -44 219 -48 103 -4 174 1 327 21 107 15 305 38 439 52 133 14 273 32 310 40 36 7 152 23 256 34 105 12 246 32 315 45 69 14 155 29 191 35 81 13 242 87 320 147 118 90 194 218 231 389 28 132 39 581 41 1635 1 698 -2 896 -12 937 -15 62 -52 99 -109 109 -32 6 -252 -17 -437 -46 -33 -5 -116 -16 -185 -25 -521 -62 -526 -64 -524 -290 11 -1079 2 -1582 -30 -1643 -55 -107 -204 -120 -261 -22 -36 64 -41 505 -34 3295 4 1563 7 1916 18 1945 52 135 217 164 277 49 25 -50 35 -291 34 -874 0 -302 -1 -599 -3 -660 -4 -192 37 -234 211 -214 43 5 129 14 192 20 63 5 135 15 159 20 24 5 160 23 303 39 278 32 310 40 351 89 48 58 48 54 48 1064 0 524 0 963 1 977 5 93 -23 454 -41 521 -49 192 -178 320 -363 364 -84 20 -284 18 -473 -5z"/><path d="M2290 8204 c-102 -8 -257 -27 -345 -44 -88 -17 -227 -37 -310 -45 -82 -8 -172 -20 -200 -25 -27 -5 -147 -21 -265 -35 -140 -17 -241 -34 -290 -50 -41 -13 -106 -31 -144 -40 -191 -43 -371 -186 -451 -359 -75 -162 -78 -196 -94 -986 -5 -256 -14 -629 -21 -830 -13 -376 -9 -793 10 -1200 8 -166 8 -390 -1 -855 -32 -1592 -8 -3032 52 -3225 76 -241 342 -382 644 -341 44 6 145 18 225 26 485 50 1035 121 1160 150 58 13 162 31 231 39 351 41 615 245 690 533 46 176 60 879 62 3123 2 1979 -6 3294 -21 3560 -19 322 -74 443 -247 547 -39 23 -90 47 -115 53 -71 18 -367 20 -570 4z m-500 -1309 c99 -51 102 -147 97 -2960 -5 -2167 -7 -2261 -48 -2337 -63 -114 -212 -116 -272 -4 -22 41 -22 41 -28 1406 -7 1821 6 3695 26 3766 32 113 139 174 225 129z"/></g></svg></p>
-    <p class="credits__end">Конец первой части</p>
+    <p class="credits__mark"><svg class="credits__logo" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Осипян" data-i18n-attr="aria-label:name_2" viewBox="0 0 2016 1072"><g transform="translate(0.000000,1072.000000) scale(0.100000,-0.100000)" fill="currentColor"><path d="M19695 10544 c-33 -7 -145 -22 -250 -34 -104 -11 -224 -27 -265 -35 -68 -13 -233 -34 -383 -50 -73 -7 -112 -26 -137 -68 -19 -31 -20 -57 -14 -1367 6 -1646 3 -1727 -70 -1775 -58 -38 -234 -65 -281 -43 -64 29 -59 -77 -66 1558 -4 1113 -9 1494 -18 1522 -24 75 -77 88 -233 59 -62 -11 -194 -30 -293 -41 -99 -11 -198 -24 -220 -30 -22 -5 -123 -19 -225 -30 -268 -31 -292 -38 -327 -103 -17 -30 -18 -66 -13 -517 7 -731 5 -1093 -9 -1545 -14 -442 -9 -1475 9 -2130 8 -265 8 -404 -1 -525 -21 -296 5 -2986 29 -3028 34 -60 66 -62 282 -22 58 11 173 26 255 35 83 9 200 24 260 35 61 11 173 26 250 35 214 23 224 28 244 115 7 30 11 559 11 1586 0 974 4 1560 10 1593 20 108 70 141 225 148 118 7 146 -4 166 -65 10 -29 13 -380 15 -1587 1 -1013 5 -1561 12 -1581 30 -95 67 -112 194 -90 51 8 167 22 258 31 200 18 303 32 393 51 37 7 140 21 230 30 92 9 174 22 190 31 58 30 55 -76 58 1893 5 2365 5 2409 0 3955 -2 978 0 1358 9 1466 19 234 -4 422 -59 482 -54 59 -113 69 -236 41z"/><path d="M16205 10074 c-16 -3 -124 -16 -240 -30 -115 -14 -239 -32 -275 -40 -36 -8 -164 -23 -285 -33 -121 -11 -258 -29 -305 -40 -95 -22 -209 -36 -415 -51 -77 -6 -185 -21 -240 -34 -55 -13 -140 -31 -188 -40 -177 -33 -403 -142 -488 -234 -104 -114 -151 -251 -169 -503 -6 -79 -15 -175 -21 -214 -13 -93 -13 -2451 0 -2645 10 -152 43 -306 83 -388 51 -108 170 -198 313 -241 122 -36 140 -70 107 -201 -53 -209 -132 -564 -146 -660 -9 -58 -25 -145 -36 -195 -11 -49 -29 -151 -41 -225 -11 -74 -29 -171 -40 -215 -10 -44 -23 -116 -29 -160 -11 -85 -65 -380 -107 -580 -13 -66 -31 -167 -39 -225 -8 -58 -26 -163 -40 -235 -14 -71 -35 -186 -45 -255 -11 -69 -28 -156 -39 -195 -25 -93 -90 -415 -90 -450 0 -44 29 -92 65 -109 44 -21 105 -20 255 4 69 12 284 41 478 65 226 28 365 50 387 61 60 28 76 61 96 207 11 73 26 155 34 183 8 28 23 111 34 185 11 74 31 184 45 244 13 61 30 155 36 210 6 55 22 150 35 210 32 151 33 153 49 300 9 72 24 168 35 215 11 47 28 135 37 195 9 61 26 151 39 200 13 50 31 147 40 215 9 69 31 188 49 265 19 77 39 165 45 196 20 96 51 116 66 42 4 -21 7 -623 6 -1339 -2 -899 1 -1313 8 -1341 17 -61 51 -87 114 -87 110 1 925 101 1021 126 133 34 152 175 113 843 -14 252 -15 394 -4 1375 13 1206 14 1686 2 2190 -11 511 -5 2531 10 2935 10 284 -17 435 -88 479 -22 14 -176 27 -232 20z m-1044 -1350 c56 -28 59 -46 70 -501 16 -601 8 -1366 -13 -1415 -36 -81 -167 -122 -235 -72 -82 60 -86 110 -81 1029 5 832 8 867 64 935 40 47 128 58 195 24z"/><path d="M12595 9580 c-151 -17 -384 -49 -505 -70 -30 -5 -107 -14 -170 -20 -63 -5 -171 -21 -240 -34 -72 -14 -199 -29 -300 -35 -104 -6 -226 -21 -300 -35 -69 -14 -188 -32 -265 -41 -77 -8 -162 -20 -190 -25 -27 -5 -104 -19 -170 -30 -75 -12 -129 -27 -145 -38 -53 -39 -52 -34 -49 -591 2 -284 3 -608 2 -721 -5 -545 -5 -4170 0 -4795 4 -422 2 -836 -4 -1021 -18 -541 -5 -638 93 -665 46 -12 298 10 473 41 61 11 191 29 290 40 360 40 422 56 462 117 20 31 21 69 15 1278 -9 1631 -3 5136 8 5189 22 107 72 150 175 151 69 0 109 -20 127 -63 20 -49 27 -961 20 -2662 -4 -905 -4 -1737 1 -1850 4 -113 6 -479 5 -815 -5 -1113 -5 -1116 15 -1152 29 -54 58 -67 135 -60 137 12 508 58 547 67 22 5 123 19 225 30 271 31 312 43 350 105 45 73 47 141 20 610 -6 113 -6 457 2 1025 9 630 9 1404 1 2940 -5 1147 -7 2186 -4 2310 11 454 9 546 -18 640 -28 98 -77 159 -146 180 -67 20 -284 21 -460 0z"/><path d="M9600 9180 c-58 -4 -195 -21 -305 -39 -238 -37 -440 -67 -514 -76 -151 -17 -181 -55 -212 -267 -11 -79 -29 -181 -39 -228 -10 -47 -26 -143 -34 -215 -16 -129 -37 -269 -101 -670 -19 -115 -39 -257 -45 -315 -6 -58 -24 -177 -40 -265 -16 -88 -36 -225 -45 -305 -9 -80 -24 -199 -35 -265 -10 -66 -23 -156 -29 -200 -17 -135 -39 -167 -60 -87 -18 70 -23 688 -12 1627 6 520 6 960 2 984 -15 74 -47 96 -139 95 -42 -1 -115 -9 -162 -17 -47 -9 -140 -21 -208 -27 -123 -10 -257 -28 -407 -55 -44 -7 -111 -17 -150 -20 -85 -8 -129 -26 -146 -57 -16 -29 -23 -5990 -8 -7033 11 -767 4 -717 90 -744 52 -17 305 5 441 38 43 11 144 24 225 30 196 15 286 27 373 52 141 39 156 56 171 190 5 52 21 148 34 214 13 66 32 176 40 245 9 69 29 193 45 275 15 83 31 184 35 225 3 41 19 158 35 260 67 428 111 714 130 845 69 458 111 612 146 538 15 -31 16 -677 4 -1665 -12 -1018 -14 -974 39 -999 35 -16 239 -13 343 6 255 45 326 56 453 65 146 10 293 40 333 66 53 35 50 -196 50 3804 0 3950 1 3867 -45 3928 -47 64 -87 73 -253 62z"/><path d="M5685 8660 c-82 -10 -190 -25 -240 -33 -49 -9 -124 -19 -165 -22 -162 -14 -369 -37 -450 -50 -47 -8 -159 -24 -250 -35 -91 -11 -194 -29 -230 -40 -36 -10 -103 -26 -150 -35 -136 -27 -273 -99 -369 -194 -160 -158 -206 -297 -222 -676 -26 -614 -26 -6130 0 -6345 43 -349 107 -470 305 -570 87 -44 87 -44 219 -48 103 -4 174 1 327 21 107 15 305 38 439 52 133 14 273 32 310 40 36 7 152 23 256 34 105 12 246 32 315 45 69 14 155 29 191 35 81 13 242 87 320 147 118 90 194 218 231 389 28 132 39 581 41 1635 1 698 -2 896 -12 937 -15 62 -52 99 -109 109 -32 6 -252 -17 -437 -46 -33 -5 -116 -16 -185 -25 -521 -62 -526 -64 -524 -290 11 -1079 2 -1582 -30 -1643 -55 -107 -204 -120 -261 -22 -36 64 -41 505 -34 3295 4 1563 7 1916 18 1945 52 135 217 164 277 49 25 -50 35 -291 34 -874 0 -302 -1 -599 -3 -660 -4 -192 37 -234 211 -214 43 5 129 14 192 20 63 5 135 15 159 20 24 5 160 23 303 39 278 32 310 40 351 89 48 58 48 54 48 1064 0 524 0 963 1 977 5 93 -23 454 -41 521 -49 192 -178 320 -363 364 -84 20 -284 18 -473 -5z"/><path d="M2290 8204 c-102 -8 -257 -27 -345 -44 -88 -17 -227 -37 -310 -45 -82 -8 -172 -20 -200 -25 -27 -5 -147 -21 -265 -35 -140 -17 -241 -34 -290 -50 -41 -13 -106 -31 -144 -40 -191 -43 -371 -186 -451 -359 -75 -162 -78 -196 -94 -986 -5 -256 -14 -629 -21 -830 -13 -376 -9 -793 10 -1200 8 -166 8 -390 -1 -855 -32 -1592 -8 -3032 52 -3225 76 -241 342 -382 644 -341 44 6 145 18 225 26 485 50 1035 121 1160 150 58 13 162 31 231 39 351 41 615 245 690 533 46 176 60 879 62 3123 2 1979 -6 3294 -21 3560 -19 322 -74 443 -247 547 -39 23 -90 47 -115 53 -71 18 -367 20 -570 4z m-500 -1309 c99 -51 102 -147 97 -2960 -5 -2167 -7 -2261 -48 -2337 -63 -114 -212 -116 -272 -4 -22 41 -22 41 -28 1406 -7 1821 6 3695 26 3766 32 113 139 174 225 129z"/></g></svg></p>
+    <p class="credits__end" data-i18n="cr_end">Конец первой части</p>
   </div>
   <div class="credits__tools wrap">
     <button class="tool" type="button" data-ph-toggle aria-pressed="false">Заглушки: <b>видны</b></button>
-    <a class="tool" href="#top">Наверх</a>
+    <a class="tool" href="#top" data-i18n="to_top">Наверх</a>
   </div>
 </footer>
 
-<a class="sticky-cta" href="#contact" data-sticky inert>Написать Аркадию</a>
-<div class="tc-global" aria-hidden="true"><span class="tc-global__dot"></span>TC <span data-tc-global>00:00:00:00</span></div>
+<a class="sticky-cta" href="#contact" data-sticky inert data-i18n="cta_first">Обсудить первое занятие</a>
 
-<dialog class="player" data-player aria-label="Архивная запись тренировки: работа на лапах, 30 секунд, без звука">
+<dialog class="player" data-player aria-label="Архивная запись тренировки: работа на лапах, 30 секунд, без звука" data-i18n-attr="aria-label:player_aria">
   <div class="player__inner">
     <div class="player__top">
-      <span class="player__title">Работа на лапах. Архив, без звука</span>
+      <span class="player__title" data-i18n="player_t">Работа на лапах. Архив, без звука</span>
       <span class="player__tc" data-player-tc>00:00:00:00</span>
-      <button class="player__close" type="button" data-close-video><svg class="ic"><use href="#i-close"/></svg><span>Закрыть</span></button>
+      <button class="player__close" type="button" data-close-video><svg class="ic"><use href="#i-close"/></svg><span data-i18n="close">Закрыть</span></button>
     </div>
     <video class="player__video" data-full controls playsinline muted preload="none" poster="assets/video/pads-poster.webp">
       <source data-src="assets/video/pads-full.mp4" type="video/mp4; codecs=avc1.64001f">
@@ -535,6 +565,7 @@ if(location.protocol!=='file:'){var l=document.createElement('link');l.rel='prel
   </div>
 </dialog>
 
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>
