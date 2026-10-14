@@ -400,7 +400,7 @@
     /* v15: VHS-перемотка — заранее отрендеренный обратный ролик (NAME-rev.mp4: весь клип задом наперёд, ×3.5, ~0,87 с)
        на отдельном слое поверх. Первый кадр rev = последний кадр клипа, поэтому стык без скачка; в конце rev = первый кадр,
        основной ролик уже стоит на 0 — короткий кроссфейд и дальше play. Reduced motion: кроссфейд через тёмный кадр. */
-    var rv=document.createElement('video'); rv.className='pk-bg__v pk-bg__rv'; rv.muted=true; rv.playsInline=true; rv.setAttribute('playsinline',''); rv.preload='auto'; rv.setAttribute('aria-hidden','true');
+    var rv=document.createElement('video'); rv.className='pk-bg__v pk-bg__rv'; rv.muted=true; rv.defaultMuted=true; rv.playsInline=true; rv.setAttribute('playsinline',''); rv.preload='auto'; rv.setAttribute('aria-hidden','true');
     if(bgBox) bgBox.insertBefore(rv,bgBox.querySelector('.pk-bg__shade'));
     var rewV=null;
     function revSrc(v){ var s=v.getAttribute('src')||''; return s.replace(/\.mp4(\?.*)?$/,'-rev.mp4$1'); }
@@ -561,9 +561,20 @@
     if(mq.addEventListener) mq.addEventListener('change',sync);
     /* после проявки фото (2,4 с), чтобы не перебить анимацию героя */
     /* v17 perf: ролик героя грузим после load (не конкурирует с LCP-фото) */
-    function arm(){ setTimeout(function(){ ready=true; sync(); }, 1600); }
-    if(document.readyState==='complete') arm(); else addEventListener('load',arm);
+    /* v19: iPad Safari — свойства muted/playsInline до src, play() после canplay, запасной таймер, если load затянулся */
+    v.muted=true; v.defaultMuted=true; v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
+    v.addEventListener('canplay',function(){ if(motionOn&&vis&&ready&&v.paused){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); } });
+    var armed=false; function arm(){ if(armed) return; armed=true; setTimeout(function(){ ready=true; sync(); }, 1600); }
+    if(document.readyState==='complete') arm(); else { addEventListener('load',arm); setTimeout(arm,3500); }
     window.__aoHeroSync=sync;
+  })();
+  /* v19: если автоплей отклонён (iPad Low Power / политика) — повтор на первое касание/скролл для всех фоновых роликов */
+  (function(){
+    function kick(){ if(!motionOn) return; if(window.__aoHeroSync) window.__aoHeroSync(); if(window.__aoContactSync) window.__aoContactSync();
+      [].forEach.call(document.querySelectorAll('.pk-bg__v.is-on:not(.pk-bg__rv)'),function(v){ var r=v.getBoundingClientRect();
+        if(v.paused&&v.getAttribute('src')&&r.bottom>0&&r.top<innerHeight){ v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); } }); }
+    ['touchstart','pointerdown','scroll','keydown'].forEach(function(t){ addEventListener(t,function h(){ kick(); removeEventListener(t,h,true); },{passive:true,capture:true}); });
+    document.addEventListener('visibilitychange',function(){ if(!document.hidden) kick(); });
   })();
   /* ---------- v14: «Место» — галерея зала: большое фото с кроссфейдом + миниатюры, свайп, стрелки, лайтбокс ---------- */
   (function(){
@@ -618,6 +629,7 @@
       if(motionOn&&vis){ var s=v.getAttribute(mq.matches?'data-src-m':'data-src-d'); if(v.getAttribute('src')!==s){ v.classList.remove('is-on'); v.setAttribute('src',s); }
         v.muted=true; v.playbackRate=1; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
       else { v.pause(); if(!motionOn) v.classList.remove('is-on'); } }
+    v.muted=true; v.defaultMuted=true; v.playsInline=true; v.addEventListener('canplay',function(){ if(motionOn&&vis&&v.paused){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); } });
     v.addEventListener('playing',function(){ if(motionOn) v.classList.add('is-on'); });
     if('IntersectionObserver' in window) new IntersectionObserver(function(es){ vis=es[0].isIntersecting; sync(); },{rootMargin:'300px 0px'}).observe(v.parentNode);
     if(mq.addEventListener) mq.addEventListener('change',sync);
