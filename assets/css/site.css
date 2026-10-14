@@ -1788,14 +1788,19 @@ main img:not(.hero img),main video:not(.hero video),.stills button:hover img,.re
 /* v16: атмосфера финального блока */
 .cfx{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0;mix-blend-mode:screen;transition:opacity 1.2s ease}
 .cfx.is-live{opacity:1}
-.cfx__beam{position:absolute;inset:-10% -10% 0 20%;background:linear-gradient(200deg,rgba(255,236,214,.2) 0%,rgba(255,236,214,.07) 35%,transparent 60%);transform-origin:80% 0;clip-path:polygon(55% 0,100% 0,95% 100%,20% 100%)}
+.cfx__beam{position:absolute;inset:0;background:radial-gradient(38% 60% at 96% 0%,rgba(255,236,214,.16),rgba(255,236,214,.05) 55%,transparent 80%)}
 .cfx__dust{position:absolute;inset:0;width:100%;height:100%;opacity:.8}
 .cfx__pulse{position:absolute;inset:-15%;background:radial-gradient(55% 60% at 92% 38%,rgba(235,45,30,.7),rgba(170,20,20,.18) 45%,transparent 72%),radial-gradient(40% 40% at 12% 95%,rgba(200,30,25,.25),transparent 70%);mix-blend-mode:screen;opacity:.1}
-.cfx__flare{position:absolute;top:-30%;left:-60%;width:40%;height:160%;background:linear-gradient(90deg,transparent,rgba(255,240,225,.10) 40%,rgba(255,250,240,.22) 50%,rgba(255,240,225,.10) 60%,transparent);transform:rotate(18deg) translateX(0);mix-blend-mode:screen;filter:blur(6px);opacity:0}
+.cfx__flare{position:absolute;inset:0;opacity:0;background:
+radial-gradient(9% 7% at 97% 4%,rgba(255,232,200,.55),rgba(255,190,140,.18) 45%,transparent 75%),
+radial-gradient(40% 2.2% at 82% 4.5%,rgba(255,225,190,.22),transparent 80%),
+radial-gradient(3.2% 2.6% at 91% 17%,rgba(255,210,170,.10),rgba(255,210,170,.04) 60%,transparent 75%),
+radial-gradient(5% 4% at 94% 29%,rgba(170,200,255,.07),transparent 72%),
+radial-gradient(2% 1.6% at 89% 37%,rgba(255,200,160,.09),transparent 75%)}
 .cfx.is-live .cfx__pulse{animation:cfx-beat 2.2s ease-in-out infinite}
-.cfx.is-live .cfx__flare{animation:cfx-sweep 11s cubic-bezier(.45,0,.25,1) 2s infinite}
+.cfx.is-live .cfx__flare{animation:cfx-breathe 7s ease-in-out infinite}
 @keyframes cfx-beat{0%,100%{opacity:.18}12%{opacity:.75}24%{opacity:.3}36%{opacity:.6}60%{opacity:.2}}
-@keyframes cfx-sweep{0%,70%{opacity:0;transform:rotate(18deg) translateX(0)}74%{opacity:1}90%{opacity:.8}100%{opacity:0;transform:rotate(18deg) translateX(420%)}}
+@keyframes cfx-breathe{0%,100%{opacity:.55}50%{opacity:.95}}
 [data-motion="off"] .cfx{display:none}
 @media (prefers-reduced-motion:reduce){html:not([data-motion="on"]) .cfx{display:none}}
 
