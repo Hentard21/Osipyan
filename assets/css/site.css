@@ -1842,3 +1842,23 @@ html.js[data-motion="on"] .sign--img.is-in .sign__script{animation:sig-write 1.4
 html.js[data-motion="on"] .sign--img.is-in .sign__swash{animation:sig-swash .45s cubic-bezier(.3,.7,.2,1) 1.65s forwards}
 @keyframes sig-write{to{-webkit-mask-position:0 0;mask-position:0 0}}
 @keyframes sig-swash{to{clip-path:inset(0 0 0 0)}}
+
+/* v18: мобильный аудит */
+@media (max-width:900px){
+  .cine::after,.grain,body::after{opacity:.035 !important}
+  .sticky-cta{min-height:0 !important;padding:9px 16px !important;font-size:14px !important;bottom:10px !important}
+}
+@media (max-width:480px){
+  .pk__card--main .ph,.pk__card .ph,.pk__who,.pk__free{display:none !important}
+  .pk__card{min-width:0}.pk__card .pk__frame,.pk__card--main .pk__frame{padding:16px 16px 14px !important;gap:8px !important;min-width:0}
+  .pk__card .pk__name{font-size:clamp(24px,7.4vw,30px) !important;line-height:1 !important;margin:0 !important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pk__card .pk__price{margin:4px 0 0 !important;line-height:1}
+  .pk__card .pk__price .pk__num:not(.pk__old .pk__num){font-size:56px !important}
+  .pk__card .pk__meta,.pk__card .pk__top{margin:0 !important;font-size:12px}
+  .pk__cond{font-size:12px !important;line-height:1.3 !important;margin:2px 0 !important;padding:6px 8px !important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pk__inc{margin:4px 0 !important;font-size:14px !important;line-height:1.3 !important}
+  .pk__inc li{margin:0 0 3px !important;padding-top:0 !important;padding-bottom:0 !important}
+  .pk__inc li:nth-child(n+4){display:none}
+  .pk__card .btn{min-height:44px !important;padding-top:10px !important;padding-bottom:10px !important;margin-top:6px !important}
+  .pk__ctrl{margin-top:10px !important}
+}

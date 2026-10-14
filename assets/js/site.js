@@ -62,7 +62,7 @@
   var barCta=document.querySelector('[data-bar-cta]');
   var heroCta=document.querySelector('.hero__actions .btn');
   var contact=document.getElementById('contact');
-  var quiet=[document.getElementById('prices'),document.getElementById('faq')].filter(Boolean);
+  var quiet=[document.getElementById('prices'),document.getElementById('faq'),document.getElementById('place'),document.querySelector('.credits')].filter(Boolean);
   var films=document.getElementById('films');   // у фильмотеки свои кнопки: ни липкой, ни кнопки в шапке
   var mqMobile=window.matchMedia('(max-width: 700px)');
   var stickyOn=null;
@@ -403,7 +403,7 @@
     var rv=document.createElement('video'); rv.className='pk-bg__v pk-bg__rv'; rv.muted=true; rv.playsInline=true; rv.setAttribute('playsinline',''); rv.preload='auto'; rv.setAttribute('aria-hidden','true');
     if(bgBox) bgBox.insertBefore(rv,bgBox.querySelector('.pk-bg__shade'));
     var rewV=null;
-    function revSrc(v){ var s=v.getAttribute('src')||''; return s.replace(/\.mp4$/,'-rev.mp4'); }
+    function revSrc(v){ var s=v.getAttribute('src')||''; return s.replace(/\.mp4(\?.*)?$/,'-rev.mp4$1'); }
     function prepRev(v){ var r=revSrc(v); if(r&&rv.getAttribute('src')!==r){ rv.setAttribute('src',r); rv.load(); } }
     function rewEnd(v){ if(bgBox){ bgBox.classList.remove('is-rew'); rv.classList.remove('is-on'); } rewV=null;
       try{ v.currentTime=0; }catch(e){}
